@@ -1,0 +1,256 @@
+\chapter{Sztuczne sieci neuronowe}
+W~uczeniu maszynowym poprzez \textbf{sztuczne sieci neuronowe} rozumiana jest rodzina statystycznych modeli
+uczenia się zainspirowanych biologicznymi sieciami neuronowymi. Mechanizmy te~są wykorzystywane do~estymacji
+lub~aproksymacji funkcji, które zależą od~wielu wartości wejściowych i~są co~do~zasady nieznane.
+
+Sieć neuronowa składa się~z~wielu połączonych ze~sobą jednostek (zwanych neuronami), które wymieniają między
+sobą informacje. Połączenia między neuronami posiadają przypisane wagi, które w~trakcie uczenia sieci
+są~modyfikowane. Typowo każdy neuron na~wejściu otrzymuje zbiór wartości (pochodzący z~wyjść innych neuronów
+lub~będący danymi wejściowymi sieci). Następnie wartość każdego z~wejść jest mnożona przez~wagę przypisaną
+do~odpowiedniego wejścia. Tak otrzymana suma jest poddawana działaniu funkcji aktywacji, która jest
+charakterystyczna dla~danego typu neuronu i~nie~ulega zmianie wraz z~działaniem sieci.
+
+\section{Model neuronu}
+Przykładowym neuronem używanym powszechnie w~sieciach neuronowych jest neuron z~sigmoidalną funkcją aktywacji
+(nazywany również neuronem sigmoidalnym). Schemat takiej jednostki przedstawiono na~poniższym rysunku.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/sigmoid-neuron.png}
+\end{Figure}
+
+W~pierwszej fazie działania neuronu sumowana są wartości na wejściach neuronu pomnożone przez~odpowiadające
+im~wagi. W~drugiej fazie dla~otrzymanej sumy obliczana jest wartość funkcji sigmoidalnej
+$f(x)=\frac{1}{1+e^{-x}}$, która stanowi wartość wyjściową neuronu.
+
+Innym często stosowanym neuronem jest neuron o progowej funkcji aktywacji, tzn. dla wartości powyżej pewnego
+progu przyjmuje wartość 1, a dla pozostałych wartości przyjmuje 0 (lub -1). Wyjścia jednostek tego typu
+zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesyłane na~wejścia innych neuronów.
+
+\section{Warstwowa sieć neuronowa}
+Przy~tworzeniu sztucznej sieci neuronowej ważnym czynnikiem mającym istotny wpływ na~sposób rozwiązania
+zadanego problemu, jest dobór odpowiedniego typu sieci. Obecnie najczęściej wykorzystywane są sieci:
+\begin{itemize}
+  \item jednokierunkowe,
+  \item rekurencyjne,
+  \item komórkowe.
+\end{itemize}
+
+\subsection{Sieć jednokierunkowa}
+Jednym z~najczęściej wykorzystywanych typów sieci jest sieć jednokierunkowa. Charakterystyczną cechą takiej
+sieci jest brak sprzężeń zwrotnych, tzn. sygnały przesyłane są~od~warstwy wejściowej poprzez warstwy ukryte
+aż do~warstwy wyjściowej. Model przykładowej sieci warstwowej przedstawiono poniżej.
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{img/mgr_backprop_net.png}
+\end{Figure}
+
+\subsection{Wsteczna propagacja błędów}
+Wsteczna propagacja błędów jest podstawową metodą uczenia nadzorowanego wielowarstwowych jednokierunkowych
+sieci neuronowych. Poprzez uczenie nadzorowane należy rozumieć proces uczenia, w~którym sieć neuronowa
+otrzymuje dane wraz z~ich etykietami (spodziewanym wyjściem sieci).
+
+W~pierwszym kroku uczenia należy zdefiniować funkcję straty $Loss(w)$ przyjmującą jako~argument wektor wag
+sieci neuronowej. Funkcją tą może być średni błąd kwadratowy:\\
+$$Loss(w)=\frac{1}{2}\sum\limits_{m}(\sigma(w^{T}x^{(m)}) - y^{(m)})^2$$ gdzie:
+\begin{itemize}
+  \item w - wagi sieci neuronowej,
+  \item m - numer próbki uczącej,
+  \item x - wartości wejściowe,
+  \item y - spodziewane wartości wyjściowe.
+\end{itemize}
+
+Celem uczenia sieci jest minimalizacja funkcji $Loss(w)$. Na~początku należy określić gradient funkcji straty.
+Następnie można przystąpić do~optymalizacji tej~funkcji wykorzystując metodę
+gradientu prostego. Kroki tego algorytmu przedstawiono poniżej:
+\begin{enumerate}
+  \item zainicjuj losowo wektor wag w,
+  \item oblicz gradient funkcji straty,
+  \item $w:=w-\alpha \nabla Loss(w)$, $\alpha$ - współczynnik określający długość kroku,
+  \item wróć do kroku 2. jeśli nie~został spełniony warunek stopu.
+\end{enumerate}
+
+Zakładając, że~wartość błędu dla~danego przykładu trenującego wyraża się~wzorem
+$$Error^{(m)}=\sigma(w^{T}x^{(m)})-y^{(m)}$$
+gradient funkcji straty ma~wzór:
+$$\nabla_{w}Loss=\sum\limits_{m}Error^{(m)}\sigma'(w^{T}x^{(m)})x^{(m)}$$
+Ponieważ $\sigma(x)=\frac{1}{1+e^{-x}}$, pochodna funkcji sigmoidalnej wyraża się~wzorem:
+$$\sigma'(x)=\sigma(x)(1-\sigma(x))$$
+
+Dla uproszczenia załóżmy, że~w~sieci występuje tylko jedna warstwa ukryta. Wówczas gradient funkcji straty
+względem wag połączeń pomiędzy warstwą wyjściową, a ukrytą:
+$$\frac{\partial Loss}{\partial w_{jk}}=\frac{\partial Loss}{\partial in_k}\frac{\partial
+in_k}{\partial w_{jk}}= \delta_k \frac{\partial (\sum\limits_j w_{jk}h_j)}{\partial w_{jk}} = \delta_k h_j$$
+Poprzez $in_k$ oznaczono wektor wejść trafiających do~funkcji aktywacji poszczególnych neuronów warstwy
+wyjściowej.
+
+Gradient funkcjii straty względem wag połączeń pomiędzy warstwą wejściową a ukrytą: 
+$$ \frac{\partial Loss}{\partial w_{ij}}=\frac{\partial Loss}{\partial in_j}\frac{\partial in_j}{\partial
+w_{ij}} = \delta_j \frac{\partial (\sum\limits_j w_{ij}x_i)}{\partial w_{ij}} = \delta_j x_i $$
+
+$$ \delta_k = \frac{\partial}{\partial in_k}(\sum\limits_k \frac{1}{2}
+[\sigma(in_k)-y_k]^2)=[\sigma(\in_k)-y_k]\sigma'(in_k)$$
+
+$$ \delta_j = \sum\limits_k\frac{\partial Loss}{\partial in_k}\frac{\partial in_k}{\partial
+in_j}=\sum\limits_k \delta_k \cdot \frac{\partial}{\partial in_j}(\sum\limits_j w_{jk}\sigma(in_j))=[\sum\limits_k \delta_k
+w_{jk}]\sigma'(in_j)$$
+
+Jak widać w~ostatnim wzorze: wykorzystujemy gradient obliczony dla~warstwy wyjściowej
+do~obliczenia gradientu dla~poprzedniej warstwy. Przy~większej liczbie warstw w~sieci gradienty
+dla~kolejnych warstw są~obliczane analogicznie (na~podstawie wartości obliczanych w~następnych warstwach).
+Stąd właśnie metoda ta nosi nazwę wstecznej propagacji błędów.
+
+
+\section{Ogólna koncepcja głębokiego uczenia}
+Sama koncepcja głębokiego uczenia nie jest szczególnie nowa. Sieci
+wielowarstwowe uczone za pomocą wstecznej propagacji błędów istnieją
+już~od~ponad 40 lat. Sieciom tym~towarzyszy jednak poważna wada: przy~wielu
+warstwach w~sieci, wagi wyjść początkowych warstw są aktualizowane w~bardzo
+nieznacznym stopniu (na ogół: im~większa odległość warstwy od~wyjścia,
+tym~mniejsze korekcje wag). W literaturze problem ten nazywany jest problemem
+zanikającego gradientu (\textit{ang. vanishing gradient problem}). Z~tego
+powodu do~efektywnego uczenia metodą wstecznej propagacji błędów konieczne jest
+stosowanie niewielkiej liczby warstw (w praktyce stosowano przeważnie
+do~czterech warstw). Choć teoretycznie zastosowanie dwóch warstw
+wystarcza do aproksymacji dowolnej funkcji, to~jednak może wymagać bardzo dużej
+liczby neuronów w~warstwie ukrytej (w~niektórych problemach liczba neuronów w~warstwie ukrytej może rosnąć
+wykładniczo względem rozmiaru danych wejściowych).
+
+Rozwiązaniem problemu zanikającego gradientu jest zastosowanie dodatkowego
+etapu: tzw.~uczenia wstępnego (\textit{ang.~pre-training}). W~tym~etapie
+optymalizowaną funkcją nie~jest funkcja błędu (jak~w~przypadku metody wstecznej
+propagacji błędu), ale~funkcja prawdopodobieństwa wystąpienia danych p(v),
+gdzie v stanowi dane wejściowe sieci. Celem, do~którego dąży etap uczenia
+wstępnego jest takie uformowanie funkcji p(v), by dla danych podobnych do tych obserwowanych w~zbiorze
+uczącym wartość funkcji prawdopodobieństwa była jak największa, natomiast dla pozostałych danych:
+jak~najmniejsza.
+
+Opisana metoda uczenia wstępnego zakłada, że~po~kolei uczona jest każda
+z~warstw (nie wszystkie na raz), zaczynając od~warstwy wejściowej, kończąc
+na~wyjściowej. W~jednej iteracji algorytmu uczone są wagi tylko jednej z~warstw.
+W~pierwszym kroku algorytmu uczona jest pierwsza warstwa ukryta i~efektem
+uczenia powinno być wyodrębnienie takich cech danych, które odróżniają
+je~od~danych losowych. W~drugim etapie kolejna warstwa jest uczona w~taki
+sposób, by~była w~stanie odróżnić kombinację cech występujących w~danych
+od~losowej kombinacji cech itd. Istotną różnicą tej metody w~stosunku do~metody
+wstecznej propagacji błędu jest uczenie tylko jednej warstwy na~raz
+(po~nauczeniu danej warstwy jej wagi nie~są już modyfikowane w~etapie uczenia
+wstępnego). Tak nauczona sieć, choć jeszcze nie~nadaje się~do~przeprowadzania
+klasyfikacji, to~dobrze modeluje charakter danych, tzn.~właściwości danych,
+które często pojawiają się~w~zestawie uczącym.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.35\linewidth]{img/hierarchical-learning_cropped.jpg}
+	\caption{cs.stanford.edu}
+\end{figure}
+
+Po~etapie uczenia wstępnego następuje tzw. dostrajanie sieci
+(\textit{ang.~fine-tuning}). W~tym etapie dodawana jest warstwa wyjściowa sieci.
+Następnie cała sieć jest uczona danymi etykietowanymi (uczenie nadzorowane)
+metodą wstecznej propagacji błędu. Dzięki zastosowaniu uczenia wstępnego
+sztuczna sieć neuronowa znacznie lepiej generalizuje funkcję, którą ma~modelować
+(tzn.~jest znacznie mniej podatna na~tzw.~overfitting). Ponadto, do~dostrajania
+jest potrzebna znacznie mniejsza ilość danych niż do~pierwszego etapu. Zatem
+do~uczenia sieci wystarczy, by~tylko niewielka część danych uczących była
+etykietowana.
+
+\section{Modelowanie funkcji prawdopodobieństwa}
+Cechą wspólną wszystkich mechanizmów głębokiego uczenia badanych w~ramach tej~pracy magisterskiej jest
+wykorzystanie etapu uczenia wstępnego, którego celem jest odpowiednie zamodelowanie
+funkcji rozkładu prawdopodobieństwa, tzn.~osiągnięcie takiego rozkładu prawdopodobieństwa p(v),
+że~danym~wejściowym v, które są podobne do~danych uczących, będą odpowiadały wysokie wartości
+funkcji prawdopodobieństwa, natomiast pozostałym danym (w~szczególności danym losowym) będzie odpowiadało
+niskie prawdopodobieństwo.
+
+Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmów. W~tej~pracy omówiona zostanie
+jedynie \textbf{Ograniczona Maszyna Boltzmanna}(\textit{ang. Restricted Boltzmann
+Machine}).
+
+\subsection{RBM}
+Ograniczona Maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
+\begin{itemize}
+  \item warstwy neuronów wejściowych,
+  \item warstwy neuronow ukrytych.
+\end{itemize}
+
+\begin{Figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/RBM.png}
+\end{Figure}
+
+Cechą charakterystyczną tego mechanizmu jest jego umiejętność do~odszukiwania cech danych wejściowych
+(\textit{ang. feature extraction}). Przykładowo Ograniczona Maszyna Boltzmanna, którą uczono obrazkami, będzie
+wykrywać charakterystyczne łuki czy krawędzie.
+
+Dzięki tej właściwości mechanizm może być wykorzystywany m.in. do~korekcji danych czy~wręcz do~ich~generowania
+(np.~do~generowania pisma ręcznego).
+
+\subsubsection{Prawdopodobieństwo stanów sieci}
+W~Ograniczonej Maszynie Boltzmanna każdy stan sieci (tzn. zestaw wartości wyjść poszczególnych neuronów)
+ma~określone prawdopodobieństwo zadane wzorem:
+
+$p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
+\begin{itemize}
+  \item v to macierz wyjść neuronów wejściowych,
+  \item h to macierz wyjść neuronów ukrytych,
+  \item Z to czynnik normalizujący (tzw.~funkcja partycji),
+  \item $E(v,h)=-a^{T}v-b^{T}h-v^{T}Wh$,
+  \item a,b oraz W to macierze wag sieci.
+\end{itemize}
+
+\subsubsection{Inferencja}
+Ze~względu na~to, że~neurony nie~łączą się~ze~sobą w~obrębie tej~samej warstwy, wartość na~wyjściu każdego
+neuronu w~danej warstwie można uzyskać wyłącznie na~podstawie wartości wyjść neuronów drugiej warstwy.
+Prawdopodobieństwa wzbudzeń neuronów można efektywnie obliczyć korzystając z~wzorów:
+\begin{itemize}
+	\item $p(h_{j}=1|v)=\sigma(b_{j}+\sum\limits_{i=1}^{m}w_{i,j}v_{i})$,
+	\item $p(v_{i}=1|h)=\sigma(a_{i}+\sum\limits_{j=1}^{n}w_{i,j}h_{j})$,
+	\item gdzie: $\sigma$ to funkcja aktywacji, $i$ oraz $j$ to numery kolejnych neuronów (odpowiednio:
+	wejściowych i~ukrytych).
+\end{itemize}
+
+\subsubsection{Uczenie}
+Celem uczenia sieci jest znalezienie takich parametrów a,b i W, że~wartość funkcji prawdopodobieństwa p(v)
+dla~danych obserwowanych będzie wysoka, a~dla~pozostałych danych niska. W~praktyce zamiast maksymalizować
+funkcję prawdopodobieństwa p(v), minimalizuje się funkcję średniego ujemnego log-prawdopodobieństwa:
+$$\frac{1}{T}\sum\limits_{t}-\log{p(v^{(t)})}$$
+
+Do~minimalizacji funkcji metodami gradientowymi konieczne jest obliczenie pochodnej po~parametrach sieci
+dla tej funkcji:
+$$\frac{\partial-\log{p(v^{(t)})}}{\partial{\theta}}=\mathbb{E}_h[\frac{\partial{E(v^{(t)},h)}}{\partial{\theta}}\mid{v^{(t)}}]-\mathbb{E}_{v,h}[\frac{\partial{E(v,h)}}{\partial{\theta}}]$$
+
+Pierwszy ze~składników sumy występującej w~powyższym wzorze to~tzw. składnik pozytywny. Drugi składnik
+to~tzw.~składnik negatywny. Pierwszy z~nich odpowiada zwiększaniu wartości funkcji prawdopodobieństwa
+dla~obserwowanych danych, a drugi zmniejsza prawdopodobieństwo danych nieobserwowanych. Drugi składnik jest
+skomplikowany obliczeniowo, gdyż występuje w~nim iteracja po~wszystkich możliwych stanach sieci, których
+liczba rośnie wykładniczo względem liczby neuronów w~sieci. Z~tego powodu dokonuje się estymacji. Jedną
+z~wykorzystywanych metod jest tzw. próbkowanie Gibbsa. 
+
+\textbf{Próbkowanie Gibbsa} pozwala wyeliminować problem obliczania wartości oczekiwanej dla~wszystkich
+możliwych stanów sieci. Zamiast tego wartość ta~jest estymowana za~pomocą algorytmu, którego kroki
+przedstawiono poniżej.
+
+Próbkowanie Gibbsa (algorytm):
+\begin{enumerate}
+  \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy ukrytej na~podstawie danych wejściowych
+  (korzystając z wzorów podanych w sekcji 4.1.2).
+  \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy wejściowej na~podstawie obliczonych wartości
+  wyjściowych neuronów ukrytych (korzystając z~wzorów z sekcji 4.1.2).
+\end{enumerate}
+
+Kroki 1 i 2 mogą być powtarzane wielokrotnie, choć w~praktyce okazuje się, że wystarczy jeden
+przebieg algorytmu. Otrzymane w~punkcie drugim ,,odtworzone'' wartości wejścia oznaczane są~jako $\tilde{v}$.
+
+\paragraph{Aktualizacja parametrów sieci}
+Parametry (wagi) sieci aktualizowane są według następujących wzorów:
+\begin{itemize}
+  \item $W_t=W_{t-1}+\alpha(h(v^{(t)})v^{(t)T}-h(\tilde{v})\tilde{v}^{T})$
+  \item $b_t=b_{t-1}+\alpha(h(v^{(t)})-h(\tilde{v}))$
+  \item $a_t=a_{t-1}+\alpha(v^{(t)})-\tilde{v})$
+\end{itemize}
+\vspace{1cm}
+
+Przez $h(v)$ oznaczono wartości wyjściowe neuronów ukrytych obliczone na~podstawie wartości wyjściowych
+neuronów wejściowych.

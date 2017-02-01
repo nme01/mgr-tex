@@ -1,0 +1,182 @@
+\pdfoutput=1
+\pdfcompresslevel=9
+\pdfinfo
+{
+    /Author (Jacek Witkowski)
+    /Title (Metody głębokiego uczenia w wybranych problemach klasyfikacji.)
+    /Subject (Praca magisterska)
+    /Keywords (dcnn cnn splot rbm głębokie sieci neuronowe deep learning)
+}
+
+\documentclass[a4paper,onecolumn,oneside,12pt,wide,floatssmall]{mwrep}
+
+% basic packages
+\usepackage{float}
+\usepackage{polski}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage[utf8x]{inputenc}
+\usepackage{fullpage}
+
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+
+% bibliography and links
+\usepackage{url}
+\usepackage{cite}
+\usepackage{multicol}
+\def\UrlBreaks{\do\/\do-}
+\usepackage[hidelinks]{hyperref}
+
+% graphs
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\setlist[itemize]{label=\textbullet}
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+  
+\begin{document}
+\begin{titlepage}
+  \begin{center}
+
+    \textsc{\Large Politechnika Warszawska}\\[0.1cm]
+    \small Wydział Elektroniki i Technik Informacyjnych
+    \vfill
+
+    \textsc{\small Pracownia Dyplomowa Magisterska (PDMGR)}\\[0.1cm]
+    \Huge Metody głębokiego uczenia w~wybranych problemach klasyfikacji \\[1.5cm]
+
+    \vspace{1cm}
+    \begin{minipage}{0.8\textwidth}
+    	\paragraph{Streszczenie} \small W artykule przedstawiono rozwój metod głębokiego uczenia. Następnie
+    	zaprezentowano zastosowania w jakich wykorzystywane są~opisywane metody. W~ostatniej części artykułu
+    	przedstawiono schemat działania tych mechanizmów oraz zaprezentowano sposób uczenia sieci wykorzystujący
+    	Głęboką Sieć Splotową (DCNN).
+    \end{minipage}
+    \vfill
+
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushleft} \large
+        \emph{Autor:}\\[0.1cm]
+        Jacek \textsc{Witkowski}\\
+      \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushright} \large
+        \emph{Promotor:}\\[0.1cm]
+        mgr~inż.~Rajmund \textsc{Kożuszek}\\[1cm]
+      \end{flushright}
+    \end{minipage}
+
+    \vfill
+    {\large \today}
+
+  \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Wstęp}
+
+\input{tex/wstep}
+\input{tex/ann}
+\input{tex/cnn}
+\input{tex/podsumowanie}
+\input{tex/bibliografia}
+
+
+%
+%JWTODO od tego momentu są luźne notatki
+%
+%CNN:
+%Wstęp
+%- można powiedzieć ogólnie o filtrach splotowych: na czym polega, kilka przykładów z obrazkami,
+%Local connectivity:
+%- nie łączymy neuronów ukrytych ze wszystkimi wejściami tylko z wybranym regionem
+%  (bo tak, to by było za dużo wag do nauczenia),
+%- neuron jest połączony ze wszystkimi kanałami,
+%Parameters sharing:
+%- niektóre neurony (różne ramki) mają dokładnie te same wagi,
+%- zestawy ramek, które mają te same wagi tworzą ,,feature map'',
+%- każdy kolor ma swoją macierz wag,
+%- zmniejsza liczbę parametrów,
+%- szuka tej samej cechy w różnych miejscach,
+%- obrazek z 9.3 10:00,
+%Dyskretny splot:
+%- zero-padding: ramka dla obrazka z samych zer,
+%Pooling/subsampling hidden units:
+%- przeskalowanie obrazu: np. obraz dzielony na kwadraciki 2x2, z każdego wybierany jeden piksel
+%(max,avg,itp.); otrzymujemy obraz 4 razy mniejszy,
+%- zmniejsza liczbę wejść do następnej warstwy ukrytej,
+%Całość:
+%- obrazek z 9.6 3:00
+%
+%
+%
+%
+%
+%Deep Belief Network:
+%- można rozpatrywać jako złożenie wielu RBMów jeden na drugim,
+%- służy do generowania danych wejściowych,
+%- mechanizm uczenia tej sieci zapoczątkował deep learning,
+%- najpierw pre-training: warstwa po warstwie, modelowanie rozkładu prawdopodobieństwa,
+%- wzorki z 7.8 (pierwsza minuta);
+%
+%DBN - Variational Bound:
+%- funkcja log jest wklęsła,
+%- zawsze średnia dwóch elementów z wykresu funkcji tworzy odcinek pod wykresem log,
+%- stosujemy, gdy ciężko policzyć p(v) (estymujemy przez q(v)),
+%- q(v) <= p(v), dla każdego v,
+%- 
+% 
+%Kwantowe komputery w deep-learningu (normalnie uczenie jest trudne, bo~opiera
+%się na~skomplikowanych operacjach probabilistycznych; takie operacje są
+%wykonywane na komputerach kwantowych bardzo szybko). Wówczas każdy kubit
+%reprezentuje funkcję prawdopodobieństwa dla~danego neuronu, a~połączenia między
+%neuronami są dosłownie połączeniami pomiędzy kubitami (Google już pracuje nad
+%wykorzystaniem komputerów kwantowych w deep learningu).
+% 
+%Czym jest RBM
+%
+%Czym jest Autoencoder
+%
+%Stacked RBM/Stacked Autoencoder
+%
+%
+%
+%Tabelka z 7.4 (5:15):
+%- pretraining pomaga,
+%
+%Spis treści:
+%- podstawowe definicje, oznaczenia,
+%- trochę o deep learning,
+%- jak oceniać jakość mechanizmow,
+%- opis różnych metod,
+%- jak dobierać parametry sieci,
+%- badania:
+%  - rozpoznawanie emocji/obrazów/mowy/dźwięków \ldots,
+%  - jakie typy sieci do jakich zastosowań,
+%  - jakieś tabelki,
+%  - opracowanie wyników,
+%- podsumowanie.
+%
+%
+%
+%\begin{itemize}
+%	\item ograniczona maszyna Boltzmana (RBM),
+%	\item każda warstwa to RBM (uczymy po kolei, bez nadzoru), a na koniec
+%\end{itemize}
+%
+%
+%Metryki jakości rozpoznawania:
+%\begin{itemize}
+%  \item macierz przekłamań (słabe bo za dużo klas)
+%  \item te wskaźniki co u Piotrka jakoś dopasować
+%\end{itemize}
+\end{document}
