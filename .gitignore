@@ -1,9 +1,7 @@
-.externalToolBuilders
-.project
-.texlipse
 *.aux
 *.blg
 *.log
 *.out
 *.toc
 *.bbl
+.idea
