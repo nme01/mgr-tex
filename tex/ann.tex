@@ -46,7 +46,7 @@ aż do~warstwy wyjściowej. Model przykładowej sieci warstwowej przedstawiono p
 	\includegraphics[width=0.9\linewidth]{img/mgr_backprop_net.png}
 \end{Figure}
 
-\subsection{Wsteczna propagacja błędów}
+\subsection{Wsteczna propagacja błędów} \label{ssec:backpropagation}
 Wsteczna propagacja błędów jest podstawową metodą uczenia nadzorowanego wielowarstwowych jednokierunkowych
 sieci neuronowych. Poprzez uczenie nadzorowane należy rozumieć proces uczenia, w~którym sieć neuronowa
 otrzymuje dane wraz z~ich etykietami (spodziewanym wyjściem sieci).
@@ -245,12 +245,12 @@ stąd proces zmiany wag w~sieci zaczyna się~od~warstwy wyjściowej. Zdefiniujmy
 a wejściowymi jako $\delta_i^{(3)}$, gdzie $i$ jest numerem neuronu w~warstwie wyjściowej.
 Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
 \begin{equation}
-\begin{split}
-W'_i &= W_i + \alpha\delta^{(2)}_i \\
-\delta_i^{(2)} &= \left( \left( \sum\limits_{j=1}^{s_{2}} W^{(2)}_{ji} \delta^{(3)}_j \right)
-+ \beta \left( - \frac{\rho}{\hat\rho_i} + \frac{1-\rho}{1-\hat\rho_i} \right) \right) f'(z^{(2)}_i)
-\end{split}
-\label{eqn:wagi_autenc}
+    \begin{split}
+    W'_i &= W_i + \alpha\delta^{(2)}_i \\
+    \delta_i^{(2)} &= \left( \left( \sum\limits_{j=1}^{s_{2}} W^{(2)}_{ji} \delta^{(3)}_j \right)
+    + \beta \left( - \frac{\rho}{\hat\rho_i} + \frac{1-\rho}{1-\hat\rho_i} \right) \right) f'(z^{(2)}_i)
+    \end{split}
+    \label{eqn:wagi_autenc}
 \end{equation}
 gdzie $f'$ to pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości preaktywacji neuronów warstwy
 ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
@@ -295,12 +295,15 @@ $p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
 Ze~względu na~to, że~neurony nie~łączą się~ze~sobą w~obrębie tej~samej warstwy, wartość na~wyjściu każdego
 neuronu w~danej warstwie można uzyskać wyłącznie na~podstawie wartości wyjść neuronów drugiej warstwy.
 Prawdopodobieństwa wzbudzeń neuronów można efektywnie obliczyć korzystając z~wzorów:
-\begin{itemize}
-	\item $p(h_{j}=1|v)=\sigma(b_{j}+\sum\limits_{i=1}^{m}w_{i,j}v_{i})$,
-	\item $p(v_{i}=1|h)=\sigma(a_{i}+\sum\limits_{j=1}^{n}w_{i,j}h_{j})$,
-	\item gdzie: $\sigma$ to funkcja aktywacji, $i$ oraz $j$ to numery kolejnych neuronów (odpowiednio:
-	wejściowych i~ukrytych).
-\end{itemize}
+\begin{equation}
+    \begin{split}
+        p(h_{j}=1|v)&=\sigma(b_{j}+\sum\limits_{i=1}^{m}w_{i,j}v_{i}) \\
+        p(v_{i}=1|h)&=\sigma(a_{i}+\sum\limits_{j=1}^{n}w_{i,j}h_{j})
+    \end{split}
+	\label{eqn:rbm_inference}
+\end{equation}
+gdzie: $\sigma$ to funkcja aktywacji, $i$ oraz $j$ to numery kolejnych neuronów (odpowiednio: wejściowych i~ukrytych).
+
 
 \subsubsection{Uczenie}
 Celem uczenia sieci jest znalezienie takich parametrów a,b i W, że~wartość funkcji prawdopodobieństwa p(v)
@@ -326,9 +329,9 @@ przedstawiono poniżej.
 Próbkowanie Gibbsa (algorytm):
 \begin{enumerate}
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy ukrytej na~podstawie danych wejściowych
-  (korzystając z wzorów podanych w sekcji 4.1.2).
+  (korzystając z~wzorów \ref{eqn:rbm_inference}).
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy wejściowej na~podstawie obliczonych wartości
-  wyjściowych neuronów ukrytych (korzystając z~wzorów z sekcji 4.1.2).
+  wyjściowych neuronów ukrytych (korzystając z~wzorów \ref{eqn:rbm_inference}).
 \end{enumerate}
 
 Kroki 1 i 2 mogą być powtarzane wielokrotnie, choć w~praktyce okazuje się, że wystarczy jeden
