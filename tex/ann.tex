@@ -237,7 +237,7 @@ gdzie $W$ i $b$, to odpowiednio wagi sieci i~bias.
 Do~uczenia sieci wykorzystywana jest metoda wstecznej propagacji błędów (opisana we~wcześniejszej części pracy),
 stąd proces zmiany wag w~sieci zaczyna się~od~warstwy wyjściowej. Zdefiniujmy różnicę pomiędzy wartościami wyjściowymi
 a wejściowymi jako $\delta_i^{(3)}$, gdzie $i$ jest numerem neuronu w~warstwie wyjściowej.
-Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
+Wagi warstwy ukrytej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
 \begin{equation}
 \begin{split}
 W'_i &= W_i + \alpha\delta^{(2)}_i \\
@@ -249,7 +249,7 @@ W'_i &= W_i + \alpha\delta^{(2)}_i \\
 gdzie $f'$ to pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości pre-aktywacji neuronów warstwy
 ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
 
-Wagi wastwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
+Wagi wastwy wyjściowej odpowiadają transponowanej macierzy wag warstwy ukrytej. Jest tak~dlatego, że~jak~wcześniej
 wspomniano, warstwa wyjściowa odpowiada za~operację odwrotną do~operacji wykonywanej przez~warstwę ukrytą (odpowiednio:
 dekodowanie i kodowanie).
 
