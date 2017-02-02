@@ -1,7 +1,3 @@
-*.aux
-*.blg
 *.log
-*.out
-*.toc
-*.bbl
+out
 .idea
