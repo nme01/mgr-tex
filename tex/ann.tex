@@ -168,6 +168,33 @@ Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmó
 jedynie \textbf{Ograniczona Maszyna Boltzmanna}(\textit{ang. Restricted Boltzmann
 Machine}).
 
+\subsection{Autoenkoder}
+Autoenkoder (\cite{Autoencoder}) to~sieć neuronowa, która składa się~z~trzech warstw:
+\begin{itemize}
+	\item warstwy wejściowej,
+	\item warstwy ukrytej,
+	\item warstwy wyjściowej.
+\end{itemize}
+
+Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
+Celem uczenia takiej sieci jest osiągnięcie stanu, w~którym wartości na~wyjściu sieci są równe
+wartościom wejściowym tej sieci. Wówczas sieć ma za zadanie wykształcenie przekształcenia tożsamościowego.
+
+\subsubsection{Zastosowania}
+Zazwyczaj w~warstwie ukrytej takiej sieci umieszcza się~mniej neuronów niż~w~dwóch pozostałych warstwach.
+Neurony tej warstwy w~procesie uczenia zaczynają wykrywać różne często pojawiające się powiązania
+wśród wartości wejściowych (np.~mogą zauważyć, że gdy pierwsza z~wartości jest równa jeden,
+wówczas trzecia i czwarta są równe zero itp.).
+Pozwala to~na~kompresję danych.
+
+Innym zastosowaniem mechanizmu autoenkodera jest korekcja danych. Wówczas w~warstwie ukrytej
+może być więcej neuronów niż w~warstwie wejściowej/wyjściowej. Tak nauczona sieć, po~otrzymaniu na~wejściu
+wektora wejściowego zawierającego pewne błędy w~danych (np.~szumy), potrafi dokonać korekty danych,
+a dane poprawione pojawią się~na~wyjściu sieci.
+
+\subsubsection{Funkcja błędu}
+TODO
+
 \subsection{Ograniczona Maszyna Boltzmanna}
 Ograniczona Maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
 \begin{itemize}
