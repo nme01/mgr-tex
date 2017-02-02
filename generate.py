@@ -17,9 +17,10 @@ def generate_pdf() -> bool:
 def generate_bibliography() -> bool:
     return call(["bibtex", "out/main"]) == 0
 
-
-ret_code = create_output_dir() \
-           and generate_pdf() \
-           and generate_bibliography() \
-           and generate_pdf() \
-           and generate_pdf()
+if __name__ == '__main__':
+    ret_code = create_output_dir() \
+               and generate_pdf() \
+               and generate_bibliography() \
+               and generate_pdf() \
+               and generate_pdf()
+    print("Return status: %d".format(ret_code))
