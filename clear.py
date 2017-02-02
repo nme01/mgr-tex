@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from generate import OUT_DIRECTORY
+from constants import OUT_DIRECTORY
 
 
 def clear():

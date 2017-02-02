@@ -1,7 +1,7 @@
 import os
 from subprocess import call
 
-OUT_DIRECTORY = "out"
+from constants import OUT_DIRECTORY
 
 
 def create_output_dir() -> bool:
