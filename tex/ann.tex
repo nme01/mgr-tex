@@ -52,18 +52,24 @@ sieci neuronowych. Poprzez uczenie nadzorowane należy rozumieć proces uczenia,
 otrzymuje dane wraz z~ich etykietami (spodziewanym wyjściem sieci).
 
 W~pierwszym kroku uczenia należy zdefiniować funkcję straty $Loss(w)$ przyjmującą jako~argument wektor wag
-sieci neuronowej. Funkcją tą może być średni błąd kwadratowy:\\
-$$Loss(w)=\frac{1}{2}\sum\limits_{m}(\sigma(w^{T}x^{(m)}) - y^{(m)})^2$$ gdzie:
+sieci neuronowej. Funkcją tą może być średni błąd kwadratowy, dla danych ciągłych:\\
+$$Loss(w)=\frac{1}{2}\sum\limits_{m}(\sigma(w^{T}x^{(m)}) - y^{(m)})^2$$
+lub entropia krzyżowa, dla danych binarnych:
+$$Loss(w)=-\sum\limits_m(\sigma(w^{T}x^{(m)})\log{y^{(m)}} + (1-\sigma(w^{T}x^{(m)})\log{(1-y^{(m)})})
+$$
+gdzie:
 \begin{itemize}
   \item w - wagi sieci neuronowej,
   \item m - numer próbki uczącej,
   \item x - wartości wejściowe,
-  \item y - spodziewane wartości wyjściowe.
+  \item y - spodziewane wartości wyjściowe,
+  \item $\sigma$ - funkcja aktywacji.
 \end{itemize}
 
-Celem uczenia sieci jest minimalizacja funkcji $Loss(w)$. Na~początku należy określić gradient funkcji straty.
-Następnie można przystąpić do~optymalizacji tej~funkcji wykorzystując metodę
-gradientu prostego. Kroki tego algorytmu przedstawiono poniżej:
+Celem uczenia sieci jest minimalizacja funkcji $Loss(w)$. Na~początku należy określić gradient funkcji straty
+względem wag sieci (gradient jest taki sam dla obu wymienionych powyżej funkcji).
+Następnie można przystąpić do~optymalizacji tej~funkcji wykorzystując metodę gradientu prostego.
+Kroki tego algorytmu przedstawiono poniżej:
 \begin{enumerate}
   \item zainicjuj losowo wektor wag w,
   \item oblicz gradient funkcji straty,
@@ -169,7 +175,7 @@ jedynie \textbf{Ograniczona Maszyna Boltzmanna}(\textit{ang. Restricted Boltzman
 Machine}).
 
 \subsection{Autoenkoder}
-Autoenkoder (\cite{Autoencoder}) to~sieć neuronowa, która składa się~z~trzech warstw:
+Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się~z~trzech warstw:
 \begin{itemize}
 	\item warstwy wejściowej,
 	\item warstwy ukrytej,
@@ -192,8 +198,60 @@ może być więcej neuronów niż w~warstwie wejściowej/wyjściowej. Tak nauczo
 wektora wejściowego zawierającego pewne błędy w~danych (np.~szumy), potrafi dokonać korekty danych,
 a dane poprawione pojawią się~na~wyjściu sieci.
 
-\subsubsection{Funkcja błędu}
-TODO
+W~ogólności warstwa wejściową oraz warstwa ukryta autoenkodera tworzą razem mechanizm kodujący, a~warstwa ukryta wraz
+z~warstwą wyjściową tworzą mechanizm dekodujący.
+
+\subsubsection{Funkcja kosztu}
+Dla danych ciągłych ($x\in\mathbb{R}$) jako funkcję kosztu typowo stosuję się średni kwadrat błędu:
+\begin{equation*}
+\frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2
+\end{equation*}
+gdzie $N$ to liczba klasyfikowanych przykładów, $s_1$ to długość wektora wejściowego (jak~również wyjściowego),
+$x$ to wektor wartości wejściowych, a $\hat{x}$ to wektor wartości wyjściowych. Suma dzielona jest przez $2N$ (zamiast
+$N$) w~celu~wygodniejszego liczenia pochodnej w~procesie uczenia. Zabiego ten ma charakter czysto estetyczny.
+
+\subsubsection{Regularyzacja rozrzutu}
+W~autoenkoderze staramy się~zapewnić, by~średnia wartość na wyjściu każdego neuronu warstwy ukrytej
+(średnia liczona po~przykładach trenujących) była bliska pewnej z~góry przyjętej wartości zwanej \textbf{parametrem
+rozrzutu} (\textit{ang.~sparsity parameter})). Zwykle parametr ten przyjmuje niewielkie wartości (np. 0,05). Dzięki temu
+dla~większości danych wejściowych niewiele neuronów warstwy ukrytej będzie ,,aktywowanych'', a~więc każdy neuron będzie
+rozpoznawał jedną wybraną zależność pomiędzy danymi i~będzie stwierdzał czy~w~danym wektorze wejściowym jest ona obecna
+(wartość na~wyjściu neuronu równa 1) czy też nie (wartość na wyjściu neuronu równa 0). W~celu osiągnięcia odpowiedniego
+rozrzutu funkcja celu musi przyjmować odpowienio wyższe wartości, gdy wartość średnia dla wzbudenia neuronu warstwy
+ukrytej jest różna od~zadanego parametru rozrzutu. Założony cel można osiągnąć poprzez zastosowanie funkcji kosztu
+w~postaci dyvergencji Kullbacka-Leiblera:
+\begin{equation*}
+\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j}) = \sum\limits_{j=1}^{s_2}\rho \log\frac{\rho}{\hat{\rho_j}} +
+(1-\rho)\log\frac{1-\rho}{1-\hat{\rho_j}}
+\end{equation*}
+gdzie $s_2$ to liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$ to parametr rozrzutu,
+a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu wartstwy ukrytej.
+
+Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:
+\begin{equation*}
+J(W,b)=\frac{1}{N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2 + \beta\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j})
+\end{equation*}
+gdzie $W$ i $b$, to odpowiednio wagi sieci i~bias.
+
+\subsubsection{Uczenie}
+Do~uczenia sieci wykorzystywana jest metoda wstecznej propagacji błędów (opisana we~wcześniejszej części pracy),
+stąd proces zmiany wag w~sieci zaczyna się~od~warstwy wyjściowej. Zdefiniujmy różnicę pomiędzy wartościami wyjściowymi
+a wejściowymi jako $\delta_i^{(3)}$, gdzie $i$ jest numerem neuronu w~warstwie wyjściowej.
+Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
+\begin{equation}
+\begin{split}
+W'_i &= W_i + \alpha\delta^{(2)}_i \\
+\delta_i^{(2)} &= \left( \left( \sum\limits_{j=1}^{s_{2}} W^{(2)}_{ji} \delta^{(3)}_j \right)
++ \beta \left( - \frac{\rho}{\hat\rho_i} + \frac{1-\rho}{1-\hat\rho_i} \right) \right) f'(z^{(2)}_i)
+\end{split}
+\label{eqn:wagi_autenc}
+\end{equation}
+gdzie $f'$ to pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości pre-aktywacji neuronów warstwy
+ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
+
+Wagi wastwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
+wspomniano, warstwa wyjściowa odpowiada za~operację odwrotną do~operacji wykonywanej przez~warstwę ukrytą (odpowiednio:
+dekodowanie i kodowanie).
 
 \subsection{Ograniczona Maszyna Boltzmanna}
 Ograniczona Maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
