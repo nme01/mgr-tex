@@ -15,5 +15,25 @@ klasyfikacji.
 Do~realizacji badań wykonywanych w~ramach niniejszej pracy magisterskiej wykorzystano bibliotekę
 \textbf{Tensorflow} firmy Google.
 
-W~rozdziale opisano podstawowe zagadnienia dotyczące wybranego narzędzia. Wiedza ta~pozwoli na~lepsze rozumienie
+W~rozdziale opisano podstawowe zagadnienia dotyczące wybranego narzędzia. Wiedza ta~pozwoli na~zrozumienie
 informacji o~architekturze sieci przedstawianych w~dalszych częściach pracy.
+
+\section{Graf operacji}
+Tworzenie sztucznej sieci neuronowowej przy~użyciu wymienionej powyżej biblioteki, można podzielić na~dwa etapy:
+\begin{enumerate}
+    \item zdefiniowanie grafu operacji,
+    \item wykonanie wybranych operacji z~grafu.
+\end{enumerate}
+
+Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po to, by osiągnąć rezultat na wyjściu.
+Każda operacja może przyjmować pewne dane wejściowe. Dane wejściowe mogą być zarówno danymi wczytanymi z~dysku
+czy~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą wzajemne zależności,
+gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane poprzez tworzenie
+tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na rysunku \ref{img:tf-smpl-grf}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/tf-sample-graph.jpg}
+	\caption{Przykładowy graf operacji}
+	\label{img:tf-smpl-grf}
+\end{figure}
