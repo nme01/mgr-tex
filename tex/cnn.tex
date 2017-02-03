@@ -67,21 +67,21 @@ W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie
 szybszego uczenia, jest normalizacja danych. Operacja normalizacji może być interpretowana jako kolejna warstwa
 umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~warstwa skalująca.
 
-\textbf{Lokalna normalizacja kontrastu}\cite{HOG} (\textit{ang.~local contrast normalization}) polega na zapewnieniu,
-że~wartości pikseli o~tych samych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
+\textbf{Lokalna normalizacja kontrastu}\cite{HOG} (\textit{ang.~local contrast normalization}) polega na~zapewnieniu,
+że~wartości pikseli o~tych podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
 o~odchyleniu standardowym równym 1 i średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
-średniej (liczonej wzdłuż różnych map cech jednak dla~tych samych współrzędnych piksela) i~podzieleniu ich
-przez~odchylenie standardowe (również liczone wzdłuż rożnych map cech).
+średniej (liczonej wzdłuż różnych map cech) i~podzieleniu ich przez~odchylenie standardowe (również liczone wzdłuż
+rożnych map cech).
 
 Choć wartości odchylenia standardowego i~średniej liczone są z~uwzględnieniem wszystkich map cech, to~nie~muszą
-się ograniczać do~jednego piksela. Zamiast tego mogą dotyczyć również pewnego jego sąsiedztwa. Metoda ta~odpowiada
-mechanizmowi obecnemu w~ośrodkach wzrokowych ssaków, u~których również dla pewnego sąsiedztwa fragmentu widzianego
+się ograniczać do~jednego piksela. Zamiast tego mogą dotyczyć pewnego jego sąsiedztwa. Metoda ta~odpowiada
+mechanizmowi obecnemu w~ośrodkach wzrokowych ssaków, u~których również dla pewnego sąsiedztwa punktu widzianego
 obrazu kontrast jest normalizowany. Przykładem tego efektu jest sytuacja, w~której obiekt w~zależności od~tego,
 w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-illusion}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{img/chess-illusion.png}
+	\includegraphics[width=0.8\linewidth]{img/chess-illusion.png}
 	\caption{Pola A i B mają ten sam kolor}
 	\label{img:chess-illusion}
 \end{figure}
