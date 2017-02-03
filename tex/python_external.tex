@@ -1,0 +1,73 @@
+\usepackage{listings}
+\usepackage[framemethod=tikz]{mdframed}
+
+\lstset{
+    inputencoding=utf8x,
+    extendedchars=\true,
+    literate={ą}{{\k{a}}}1
+             {Ą}{{\k{A}}}1
+             {ę}{{\k{e}}}1
+             {Ę}{{\k{E}}}1
+             {ó}{{\'o}}1
+             {Ó}{{\'O}}1
+             {ś}{{\'s}}1
+             {Ś}{{\'S}}1
+             {ł}{{\l{}}}1
+             {Ł}{{\L{}}}1
+             {ż}{{\.z}}1
+             {Ż}{{\.Z}}1
+             {ź}{{\'z}}1
+             {Ź}{{\'Z}}1
+             {ć}{{\'c}}1
+             {Ć}{{\'C}}1
+             {ń}{{\'n}}1
+             {Ń}{{\'N}}1
+}
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{11} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{11}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{pycharm_background}{rgb}{0.17,0.17,0.17}
+\definecolor{pycharm_keywords}{rgb}{0.92,0.46,0}
+\definecolor{pycharm_code}{rgb}{0.66,0.71,0.78}
+\definecolor{pycharm_comment}{rgb}{0.6,0.6,0.6}
+
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\linespread{0.94}\ttm\color{pycharm_code},
+otherkeywords={self, as},             % Add keywords here
+keywordstyle=\linespread{0.94}\ttb\color{pycharm_keywords},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\linespread{0.94}\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=none,
+showstringspaces=false,
+%backgroundcolor = \color{pycharm_background},
+commentstyle=\linespread{0.94}\ttm\color{pycharm_comment},
+breakatwhitespace=false,
+breaklines=true
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\begin{mdframed}[backgroundcolor=pycharm_background, hidealllines=true]
+    \lstinputlisting[#1]{#2}
+\end{mdframed}
+}}
