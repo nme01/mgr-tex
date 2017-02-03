@@ -17,3 +17,6 @@ b = tf.Variable(tf.zeros([10]))
 # oraz wynik operacji dodawania wyniku operacji matmul
 # i wektora przesunięc "b"
 y = tf.nn.softmax(tf.matmul(x, W) + b)
+
+# klasyfikacja na podstawie wyjść sieci
+classes = tf.argmax(y, 1)
