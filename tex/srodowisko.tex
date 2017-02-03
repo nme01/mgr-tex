@@ -37,3 +37,24 @@ tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na rysunku
 	\caption{Przykładowy graf operacji}
 	\label{img:tf-smpl-grf}
 \end{figure}
+
+\subsection{Konstrukcja grafu}
+W pierwszym etapie tworzenia sieci neuronowej należy zdefiniować graf operacji. W~następnym kroku można wykonać
+wybrane operacje, a~silnik Tensorflow sam wykona wszystkie akcje wymagane do~poprawnego obliczenia ich rezultatu.
+
+Podczas konstrukcji grafu zamiast konkretnych danych wykorzystywane są dane symboliczne (np.~,,zmienna~x'',
+,,dana~C''). Dopiero później, w etapie wykonania operacji, za~niektóre z~owych danych podstawiane
+są~odpowiednie wartości (podczas wykonywania operacji do~silnika Tensorflow podawany jest tzw.~kontekst będący
+słownikiem odwzorowującym wybrane dane symboliczne na realne wartości).
+
+TODO przykładowy kod definiujący prosty graf
+
+\subsection{Wykonanie operacji}
+Dwoma naistotniejszymi operacjami wykonywanymi podczas konstrukcji sieci neuronowej będą:
+\begin{itemize}
+    \item operacja uczenia,
+    \item operacja klasyfikacji.
+\end{itemize}
+
+Mając już skonstruowany graf operacji, można wykonać operację uczenia. TODO
+TODO przykładowy kod wykonujący daną operację
