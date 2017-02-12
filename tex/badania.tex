@@ -1,10 +1,45 @@
-\chapter{Badania}
+\chapter{Architektura sieci neuronowej}
+Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele metaparametrów takich jak:
+\begin{itemize}
+    \item liczba warstw splotowych,
+    \item liczba jąder stosowanych do~wykonywania splotów w~każdej z~warstw splotowych,
+    \item rozkład warstw typu max-pooling (\ref{sec:inferencja}),
+    \item rozkład warstw normalizujących (\ref{sssec:normalizacja}),
+    \item współczynnik uczenia (\ref{ssec:backpropagation}),
+    \item współczynnik zmniejszania współczynnika uczenia (\ref{sssec:alpha-decay}).
+\end{itemize}
+
+Ogólne zasady dotyczące pierwszych dwóch z~wymienionych punktów zostały opisane w~artykule
+,,Rethinking the Inception Architecture for Computer Vision''(\cite{RIACV}). Posiłkując się~przytoczoną pracą można
+wymienić kilka wskazówek przydatnych przy~ustalaniu metaparametrów sieci:
+\begin{itemize}
+    \item unikanie zbyt małej liczby neuronów w~warstwach, w~sczególności w~warstwach początkowych. Warto zastosować
+          kilkukrotność/kilkunastokrotność spodziewanej liczby klas, które ma~rozpoznawać sieć
+          (w~przypadku CIFAR-10 jest to 10 klas). Warstwy końcowe mogą zawierać mniejszą liczbę neuronów, niż warstwy
+          poprzednie.
+    \item zmniejszenie rozmiaru danych wejściowych poprzez zastosowanie metod, takich jak:
+          \begin{itemize}
+              \item usunięcie brzegów, gdyż~zwykle zawierają mało istotne dane,
+              \item zmniejszenie rozmiaru obrazka poprzez zastosowanie sklaowania.
+          \end{itemize}
+    \item używanie niewielkich filtrów splotowych (np. 3x3 zamiast 5x5 czy 7x7). Lepsze efekty daje zastosowanie dwóch
+          warstw splotowych o~maskach 3x3 niż jednej maski 5x5,
+    \item warto zacząć od 2 do 5 warstw splotowych (tyle samo warstw skalujących i~normalizujących), następnie zwiększać
+          liczbę masek używanych w~warstwach splotowych na przemian ze~zwiększaniem liczby warstw.
+\end{itemize}
+% jak dobierać architekturę
+% https://arxiv.org/abs/1512.00567
+
+% architektura bazująca na Alex Net
+% https://scholar.google.com/citations?view_op=view_citation&hl=en&user=xegzhJcAAAAJ&citation_for_view=xegzhJcAAAAJ:u5HHmVD_uO8C
+
+
 TODO
-% jak estymować liczbę neuronów i liczbe warstw
 % jakie wartości dla weight decay
-% jakie wartości dla alpha decay
+% jakie wartości dla alpha decay (są algorytmy optymalizacji które same to estymują).
 % ustawienie seeda do generatora liczb losowych w tensorflow -- tf.set_random_seed(1)
 %   http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
+\chapter{Badania}
 
 \section{Plan badań}
 % sieć bez ulepszeń

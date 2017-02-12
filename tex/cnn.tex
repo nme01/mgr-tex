@@ -28,7 +28,7 @@ na~jego krawędziach. Można tego dokonać m.in. poprzez:
   \item rozszerzenie obrazka odbicia lustrzane pikseli przy krawędziach.
 \end{itemize}
 
-\section{Inferencja}
+\section{Inferencja} \label{sec:inferencja}
 W~trakcie działania sieci na~obrazie dokonywanie jest filtrowanie splotowe (przy wykorzystaniu różnych
 filtrów). Po~takim filtrowaniu otrzymywane jest $n\cdot m$ obrazów, nazywanych mapami cech
 (\textit{ang.~features maps}), gdzie n~-~liczba początkowych obrazów (tzw.~kanałów wejściowych), m~-~liczba
@@ -62,7 +62,7 @@ Alternatywnie, w drugim kroku algorytmu można wybrać medianę wartości piksel
 (\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{average-pooling}).
 
 \subsection{Możliwe ulepszenia sieci}
-\subsubsection{Lokalna normalizacja kontrastu}
+\subsubsection{Lokalna normalizacja kontrastu} \label{sssec:normalizacja}
 W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie lepszej jakości klasyfikacji jak również
 szybszego uczenia, jest normalizacja danych. Operacja normalizacji może być interpretowana jako kolejna warstwa
 umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~warstwa skalująca.
@@ -90,6 +90,8 @@ w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-ill
 TODO
 \subsubsection{Dropout}
 TODO
+\subsubsection{Zmniejszanie współczynnika uczenia} \label{sssec:alpha-decay}
+TODO opisać; są algorytmy optymalizacji, które same dobierają wsp. uczenia
 
 \section{Uczenie metodą wstecznej propagacji}
 Typową metodą uczenia sieci jest wsteczna propagacja błędów. W~tym celu należy obliczyć gradient funkcji
