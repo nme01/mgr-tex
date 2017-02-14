@@ -62,12 +62,12 @@ Alternatywnie, w drugim kroku algorytmu można wybrać medianę wartości piksel
 (\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{average-pooling}).
 
 \subsection{Możliwe ulepszenia sieci}
-\subsubsection{Lokalna normalizacja kontrastu} \label{sssec:normalizacja}
+\subsubsection{Lokalna normalizacja odpowiedzi} \label{sssec:normalizacja}
 W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie lepszej jakości klasyfikacji jak również
 szybszego uczenia, jest normalizacja danych. Operacja normalizacji może być interpretowana jako kolejna warstwa
 umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~warstwa skalująca.
 
-\textbf{Lokalna normalizacja kontrastu}\cite{HOG} (\textit{ang.~local contrast normalization}) polega na~zapewnieniu,
+\textbf{Lokalna normalizacja odpowiedzi}\cite{HOG} (\textit{ang.~local response normalization}) polega na~zapewnieniu,
 że~wartości pikseli o~tych podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
 o~odchyleniu standardowym równym 1 i średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
 średniej (liczonej wzdłuż różnych map cech) i~podzieleniu ich przez~odchylenie standardowe (również liczone wzdłuż
