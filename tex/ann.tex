@@ -27,7 +27,50 @@ Innym często stosowanym neuronem jest neuron o progowej funkcji aktywacji, tzn.
 progu przyjmuje wartość 1, a dla pozostałych wartości przyjmuje 0 (lub -1). Wyjścia jednostek tego typu
 zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesyłane na~wejścia innych neuronów.
 
-% TODO inne funkcje aktywacji (w szczególności ReLU, liniowa, softmax, softplus, sigmoidalna).
+\subsection{Funkcje aktywacji}
+W~neuronach wykorzystywane są bardzo różne funkcje aktywacji. Każda z~nich zawiera swoje zalety i wady. W~niniejszej
+podsekcji przedstawiono i omówiono wybrane funkcje.
+
+\subsubsection{Funkcja liniowa}
+Najprostsza z~możliwych funkcji aktywacji. Dokonuje lioniowego przekształcenia na~wartości wejściowej. Jest rzadko
+stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca się~z~neuronów o~liniowej~funkcji
+aktywacji nie~może modelować nieliniowych funkcji.
+
+TODO wykres i odnośnik
+
+\subsubsection{Funkcja progowa}
+Funkcja nieliniowa, a~więc nadająca się~do~zadań klasyfikacji. Posiada jednak wadę przeszkadzającą w~uczeniu sieci
+z~wykorzystaniem metod gradientowych: nie~ma~ciągłej pierwszej pochodniej.
+
+TODO wykres i odnośnik
+
+\subsubsection{Funkcja sigmoidalna}
+Również jest to~funkcja nieliniowa. W~przeciwieństwie do~funkcji poprzedniej jest gładka. Jednakże również nie~jest
+pozbawiona wad~--~przyczynia się~ona~do~powstawania problemu zanikającego gradientu (TODO cytat), co~wynika z~tego,
+że~dla~wysokich wartości wejściowych tej funkcji aktywacji jej gradient jest bliski zera.
+
+TODO wykres i odnośnik
+
+\subsubsection{Poprawiona jednostka liniowa (\textit{ang. Rectified Linear Unit, ReLU})}
+Funkcja ta~jest jedną z~najczęściej wykorzystywanych funkcji aktywacji w~nowoczesnych rozbudowanych sieciach
+neuronowych. Jej wady, to~brak pochodnej dla~wartości 0~oraz potencjalny problem zanikającego gradientu~--~gdy~wagi
+wejść neuronu przyjmą takie wartości, że~do~funkcji aktywacji będą trafiać wartości ujemne, wówczas neuron
+będzie ciągle generować wartość wyjściową równą zero. Wówczas potocznie mówi się~o~,,śmierci'' neuronu.
+
+TODO wykres i odnośnik
+
+\subsubsection{Funkcja softplus}
+Jest to~wartiant funkcji ReLU, który jest jej ,,wygładzoną'' wersją. Posiada ciągłą pierwszą pochodną będącą funkcją
+sigmoidalną.
+
+TODO wykres i odnośnik
+
+\subsubsection{Funkcja softmax}
+Funkcja ta~najczęściej stosowana jest w~warstwie wyjściowej sieci. Bywa nazywana \textbf{znormalizowaną funkcją
+eksponencjalną}, gdyż~jej wartość to~wartość funkcji eksponencjalnej podzielona przez~sumę wartości wyjściowych innych
+neuronów składających się~na~daną warstwę.
+
+TODO wykres i odnośnik
 
 \section{Warstwowa sieć neuronowa}
 Przy~tworzeniu sztucznej sieci neuronowej ważnym czynnikiem mającym istotny wpływ na~sposób rozwiązania
