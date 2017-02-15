@@ -31,6 +31,8 @@ zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesy�
 W~neuronach wykorzystywane są bardzo różne funkcje aktywacji. Każda z~nich zawiera swoje zalety i wady. W~niniejszej
 podsekcji przedstawiono i omówiono wybrane funkcje.
 
+TODO odnośniki do źródeł przy każdej funkcji aktywacji
+
 \subsubsection{Funkcja liniowa}
 Najprostsza z~możliwych funkcji aktywacji. Dokonuje lioniowego przekształcenia na~wartości wejściowej. Jest rzadko
 stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca się~z~neuronów o~liniowej~funkcji
@@ -84,7 +86,7 @@ z~wykorzystaniem metod gradientowych: nie~ma~ciągłej pierwszej pochodniej.
             axis x line=center,
             axis y line=center,
             xtick={-3,3},
-            ytick={0,1},
+            ytick={-1, -0.5, 0 , 0.5, 1},
             xlabel=$x$,
             ylabel=$f(x)$]
             \addplot[red, samples=1000] {(x>=0)};
@@ -98,7 +100,30 @@ Również jest to~funkcja nieliniowa. W~przeciwieństwie do~funkcji poprzedniej 
 pozbawiona wad~--~przyczynia się~ona~do~powstawania problemu zanikającego gradientu (TODO cytat), co~wynika z~tego,
 że~dla~wysokich wartości wejściowych tej funkcji aktywacji jej gradient jest bliski zera.
 
-TODO wykres i odnośnik
+\begin{equation}
+	f(x) = \frac{1}{1+e^{-x}}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            scale only axis, % The height and width argument only apply to the actual axis
+            height=5cm,
+            width=\textwidth,
+            xmin=-10,xmax=10,
+            ymin=-1.1,ymax=1.5,
+            axis x line=center,
+            axis y line=center,
+            xtick={-10,10},
+            ytick={-1, -0.5, 0 , 0.5, 1},
+            xlabel=$x$,
+            ylabel=$f(x)$]
+            \addplot[red, domain=-10:10] {1/(1+e^(-x))};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Funkcja sigmoidalna}
+\end{figure}
 
 \subsubsection{Poprawiona jednostka liniowa (\textit{ang. Rectified Linear Unit, ReLU})}
 Funkcja ta~jest jedną z~najczęściej wykorzystywanych funkcji aktywacji w~nowoczesnych rozbudowanych sieciach
