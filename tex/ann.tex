@@ -36,25 +36,25 @@ Najprostsza z~możliwych funkcji aktywacji. Dokonuje lioniowego przekształcenia
 stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca się~z~neuronów o~liniowej~funkcji
 aktywacji nie~może modelować nieliniowych funkcji.
 
-\begin{equation*}
+\begin{equation}
 f(x)=x
-\end{equation*}
+\end{equation}
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-        scale only axis, % The height and width argument only apply to the actual axis
-        height=5cm,
-        xtick={-1,1},
-        width=\textwidth,
-        axis x line=center, axis y line=center,
-        xlabel=$x$,
-        ylabel=$f(x)$
-        ]
-        \addplot [
-            domain=-1.1:1.1,
-            color=red
-        ]{x};
+            scale only axis, % The height and width argument only apply to the actual axis
+            height=5cm,
+            width=\textwidth,
+            xtick={-1,1},
+            axis x line=center, axis y line=center,
+            xlabel=$x$,
+            ylabel=$f(x)$
+            ]
+            \addplot [
+                domain=-1.1:1.1,
+                color=red
+            ]{x};
         \end{axis}
     \end{tikzpicture}
     \caption{Funkcja liniowa}
@@ -64,7 +64,34 @@ f(x)=x
 Funkcja nieliniowa, a~więc nadająca się~do~zadań klasyfikacji. Posiada jednak wadę przeszkadzającą w~uczeniu sieci
 z~wykorzystaniem metod gradientowych: nie~ma~ciągłej pierwszej pochodniej.
 
-TODO wykres i odnośnik
+\begin{equation}
+	f(x) =
+	\begin{cases}
+	0 & x<0, \\
+	1 & \textrm{w p.p.}
+	\end{cases}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            scale only axis, % The height and width argument only apply to the actual axis
+            height=5cm,
+            width=\textwidth,
+            xmin=-3,xmax=3,
+            ymin=-1.1,ymax=1.5,
+            axis x line=center,
+            axis y line=center,
+            xtick={-3,3},
+            ytick={0,1},
+            xlabel=$x$,
+            ylabel=$f(x)$]
+            \addplot[red, samples=1000] {(x>=0)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Funkcja progowa}
+\end{figure}
 
 \subsubsection{Funkcja sigmoidalna}
 Również jest to~funkcja nieliniowa. W~przeciwieństwie do~funkcji poprzedniej jest gładka. Jednakże również nie~jest
