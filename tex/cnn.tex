@@ -94,11 +94,21 @@ się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \
 \subsubsection{Regularyzacja L2}
 Jest~to~najprawdopodobniej naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
 jest człon $\frac{1}{2}\lambda w^2$, a~gradient tego członu to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
-z~nich są zmniejszane w~liniowy sposób ($W *= (1 -\lambda)$). $\lambda$ to~tzw.~współczynnik regularyzacji, który
-im~jest większy, tym~bardziej sieć dąży do~tego, by~mieć równe wartości wszystkich wag.
+z~nich są zmniejszane w~liniowy sposób ($W *= (1 -\lambda)$). $\lambda$~to~tzw.~współczynnik regularyzacji, który
+im~jest większy, tym~bardziej sieć dąży do~tego, by~mieć równe wartości wszystkich wag (\cite{L2-regularization}).
 
 \subsubsection{Dropout}
-TODO
+Jest to~niezwykle efektywna, a~zarazem prosta technika pozwalająca na~zapobieganie zbytniemu dopasowaniu sieci
+do~danych przy~jednoczesnym zapobieganiu \textbf{koadaptacji} neuronów, czyli~sytuacji, w~której różne neurony
+przyjmują podobne wagi, przez co~nie~są od~siebie niezależne. Dropout polega na~losowym usuwaniu neuronów z~sieci
+podczas procesu uczenia. Dzięki temu w~każdej iteracji uczony jest jedynie pewien podzbiór sieci (\cite{dropout}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/dropout.jpeg}
+	\caption{rys. Dropout. Po~lewej: pełna sieć. Po~prawej: sieć po~dokonaniu operacji usuwania losowych neuronów.
+	         Źródło: \cite{dropout}}
+\end{figure}
 
 \section{Uczenie metodą wstecznej propagacji}
 Typową metodą uczenia sieci jest wsteczna propagacja błędów. W~tym celu należy obliczyć gradient funkcji
