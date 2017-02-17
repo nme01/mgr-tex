@@ -36,10 +36,10 @@ Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sie
     \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość x szerokość x liczba objętych kanałów).
           Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym)
     \item Warstwy normalizującej (lokalna normalizacja odpowiedzi).
-    \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x64 (wysokość x szerokość x liczba objętych kanałów).
+    \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x64 (wysokość~x~szerokość~x~liczba objętych kanałów).
           Maska przesuwana jest zawsze o~1 piksel (niezależnie od~kierunku przesuwania maski).
     \item Warstwy normalizującej (lokalna normalizacja odpowiedzi).
-    \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość x szerokość x liczba objętych kanałów).
+    \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość~x~szerokość~x~liczba objętych kanałów).
           Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym).
     \item Warstwy w~pełni połączonej (standardowa warstwa w~sieciach neuronowych) z~384 neuronami i~funkcją aktywacji
           typu ReLU.
@@ -49,9 +49,16 @@ Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sie
           Warstwa wyjściowa zawiera funkcję aktywacji typu softmax.
 \end{enumerate}
 
-TODO opisać że badany będzie weight decay i rozmiar batcha (artykuł od Maćka)
-TODO dodać obrazek przedstawiający graf operacji
-% jakie wartości dla weight decay
-% jakie wartości dla alpha decay (są algorytmy optymalizacji które same to estymują).
-% ustawienie seeda do generatora liczb losowych w tensorflow -- tf.set_random_seed(1)
-%   http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
+\subsubsection{Przetwarzanie wstępne}
+Dane wejściowe przed~tym, jak~trafią do~sieci neuronowej, poddawane są~przetwarzaniu wstępnemu. Sprowadza się~ono
+do~przycięcia obrazka, tak~by~jego rozdzielczość wyniosła 24x24 piksele (oryginalna: 32x32 piksele). W~procesie
+uczenia obrazek przycinany jest losowo, a~w~przypadku obrazka klasyfikowanego~--~wybieany jest środkowy fragment.
+Dodatkowo, jeśli obrazek ma~być wykorzystywany w~procesie uczenia, poddawany jest on~zniekształceniu.
+
+Po~wczytaniu i~przycięciu obrazka (w~przypadku uczenia: również po~zastosowaniu zniekształcenia) każdy z~obrazów jest
+normalizowany (niezależnie od~innych). Normalizacja polega na~zapewnieniu, że~subpiksele w~każdym kanale
+przyciętego obrazka (czerwonym, zielonym i~niebieskim) mają średnią wartość równą zero i~odchylenie standardowe równe~1.
+
+% TODO dodać obrazek przedstawiający graf operacji
+% TODO ustawienie seeda do generatora liczb losowych w tensorflow -- tf.set_random_seed(1)
+%      http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
