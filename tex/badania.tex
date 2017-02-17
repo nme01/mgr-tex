@@ -22,7 +22,7 @@ Dla~parametru decydującego o~wpływie normalizacji lokalnej odpowiedzi (tzw.~pa
 przyjęto początkowo wartość~0.001, a~jako ograniczenie dolne wartość~0. Usprawiedliwienie dla~tych decyzji było
 takie samo, jak~dla~wyborów dokonanych przy~hiperparametrze regularyzacji~L2.
 
-Dla~każdej pary parametrów sieć była uczona 100 tysiącami mini-zestawów danych (tzw.~\textbf{mini-batch}), z~których
+Dla~każdej pary parametrów sieć była uczona 100,000 mini-zestawów danych (tzw.~\textbf{minibatch}), z~których
 każdy zawierał 128 przykładów uczących. Po~każdym kroku uczenia pojedynczym mini-zestawem danych, sprawdzano
 dokładność sieci na~zbiorze testowym. Po~wykonaniu wszystkich kroków uczenia dla~danej pary hiperparametrów
 brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabelce

@@ -67,8 +67,8 @@ szybszego uczenia, jest normalizacja danych. Operacja normalizacji może być in
 umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~warstwa skalująca.
 
 \subsubsection{Lokalna normalizacja odpowiedzi} \label{sssec:normalizacja_odpowiedzi}
-\textbf{Lokalna normalizacja odpowiedzi}\cite{HOG} (\textit{ang.~local response normalization}) polega na~zapewnieniu,
-że~wartości pikseli o~tych podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
+\textbf{Lokalna normalizacja odpowiedzi} (\textit{ang.~local response normalization}, \cite{HOG}) polega na~zapewnieniu,
+że~wartości pikseli o~podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
 o~odchyleniu standardowym równym 1 i średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
 średniej (liczonej wzdłuż różnych map cech) i~podzieleniu ich przez~odchylenie standardowe (również liczone wzdłuż
 rożnych map cech).
@@ -86,6 +86,9 @@ w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-ill
 	\label{img:chess-illusion}
 \end{figure}
 
+\subsubsection{Normalizacja wsadowa}
+TODO batch normalization %https://arxiv.org/abs/1502.03167
+
 \subsection{Regularyzacja sieci}
 W~przypadku rozpoznawania danych, w~których występować może wiele różnych wzorców, konieczne jest umieszczenie w~sieci
 neuronowej dużej liczby neuronów. Jednakże może to~przynieść nieporządany efekt, przy~którym sieć zbytnio dopasuje
@@ -94,8 +97,12 @@ się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \
 \subsubsection{Regularyzacja L2} \label{sssec:reg_L2}
 Jest~to~najprawdopodobniej naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
 jest człon $\frac{1}{2}\lambda w^2$, a~gradient tego członu to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
-z~nich są zmniejszane w~liniowy sposób ($W *= (1 -\lambda)$). $\lambda$~to~tzw.~współczynnik regularyzacji, który
-im~jest większy, tym~bardziej sieć dąży do~tego, by~mieć równe wartości wszystkich wag (\cite{L2-regularization}).
+z~nich są zmniejszane w~liniowy sposób:
+\begin{equation*}
+W := W*(1 -\lambda)
+\end{equation*}
+$\lambda$~to~tzw.~współczynnik regularyzacji, który im~jest większy, tym~bardziej sieć dąży do~tego,
+by~mieć równe wartości wszystkich wag (\cite{L2-regularization}).
 
 \subsubsection{Dropout}
 Jest to~niezwykle efektywna, a~zarazem prosta technika pozwalająca na~zapobieganie zbytniemu dopasowaniu sieci
