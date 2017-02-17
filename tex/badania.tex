@@ -1,30 +1,45 @@
 \chapter{Badania}
 
 \section{Plan badań}
-% sieć bez ulepszeń
-% sieć z weight decay
-% sieć z learning rate decay
-% sieć ze weight decay i learning rate decay
-TODO opisać że badany będzie weight decay i rozmiar batcha (artykuł od Maćka)
+Celem niniejszej pracy naukowej jest sprawdzenie jak istotny wpływ na~dokładność klasyfikacji mają 2~czynniki:
+\begin{itemize}
+    \item regularyzacja typu L2 (\ref{sssec:reg_L2}),
+    \item normalizacja lokalnej odpowiedzi (\ref{sssec:normalizacja_odpowiedzi}).
+\end{itemize}
+
+W~artykule ,,Practical Recommendations for Gradient-Based Training of Deep Architectures''
+(\cite{practical-gradient-based}) skrótowo omówiono problem doboru hiperparametrów sieci. Jednym ze~sposobów
+przedstawionych w~opracowaniu jest określenie wartości brzegowych dla~optymalizowanych hiperparametrów,
+a~następnie zbadanie przestrzeni między. Po~zbadaniu zachowania sieci dla~tej przestrzeni hiperparametrów, można podjąć
+decyzję o~przyjęciu jednego z~zestawów hiperparametrów dla~sieci lub~rozszerzyć pole poszukiwań o~kolejne obszary.
+
+Dla~parametru regularyzacji~L2 (tzw.~\textbf{weight decay}) jako~górne ograniczenie przyjęto początkowo wartość~0.05.
+Wybór bazował na~tym, że~w~podobnych sieciach, tj.~przeznaczonych do~identyfikacji obiektów przedstawianych na~obrazkach
+z~bazy ImageNet (\cite{imagenet}), wartość tego hiperparametru nie~przekraczała~0.03. Badanie miało sprawdzić
+również jak~sieć zachowywałaby~się~bez regularyzacji wag. Stąd jako dolne ograniczenie przyjęto wartość~0.
+
+Dla~parametru decydującego o~wpływie normalizacji lokalnej odpowiedzi (tzw.~parametr $\alpha$) jako ograniczenie górne
+przyjęto początkowo wartość~0.001, a~jako ograniczenie dolne wartość~0. Usprawiedliwienie dla~tych decyzji było
+takie samo, jak~dla~wyborów dokonanych przy~hiperparametrze regularyzacji~L2.
+
+Dla~każdej pary parametrów sieć była uczona 100 tysiącami mini-zestawów danych (tzw.~\textbf{mini-batch}), z~których
+każdy zawierał 128 przykładów uczących. Po~każdym kroku uczenia pojedynczym mini-zestawem danych, sprawdzano
+dokładność sieci na~zbiorze testowym. Po~wykonaniu wszystkich kroków uczenia dla~danej pary hiperparametrów
+brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabelce
+ TODO (odwołanie).
+
+ TODO tabelka z wynikami
 
 \section{Środowisko sprzętowe}
 Wszystkie badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego:
 \begin{itemize}
-    \item \textbf{procesor}~--~TODO,
+    \item \textbf{procesor}~--~Intel Core i7-4771 3,5Ghz (8 rdzeni),
     \item \textbf{płyta główna}~--~TODO,
-    \item \textbf{karta graficzna}~--~TODO,
+    \item \textbf{karta graficzna}~--~MSI GeForce GTX 780 Ti,
     \item \textbf{pamięć RAM}~--~TODO.
 \end{itemize}
 
-\section{Wyniki badań}
-TODO
-% accuracy na zbiorze ewaluacyjnym
-%    dla różnych weight decay
-%    dla różnych learning rate decay
-%    dla sieci z weight decay i learning rate decay (razem) o najlepszych parametrach spośród badanych
-% accuracy na zbiorze ewaluacyjnym i testowym dla sieci w finalnej wersji (weight decay i learning rate decay)
-
-\subsection{Omówienie wyników}
+\section{Omówienie wyników badań}
 TODO
 % dlaczego weight decay pomaga
-% dlaczego learning rate decay pomaga
+% dlaczego local response normalization pomaga

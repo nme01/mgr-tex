@@ -4,7 +4,7 @@ Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele metaparametr
     \item liczba warstw splotowych,
     \item liczba jąder stosowanych do~wykonywania splotów w~każdej z~warstw splotowych,
     \item rozkład warstw typu max-pooling (\ref{sec:inferencja}),
-    \item rozkład warstw normalizujących (\ref{sssec:normalizacja}),
+    \item rozkład warstw normalizujących (\ref{sssec:normalizacja_odpowiedzi}),
     \item współczynnik uczenia (\ref{ssec:backpropagation}).
 \end{itemize}
 
@@ -35,10 +35,10 @@ Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sie
           Maska przesuwana jest zawsze o~1~piksel (w~kierunku pionowym i~poziomym).
     \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość x szerokość x liczba objętych kanałów).
           Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym)
-    \item Warstwy normalizującej (lokalna normalizacja odpowiedzi).
+    \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
     \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x64 (wysokość~x~szerokość~x~liczba objętych kanałów).
           Maska przesuwana jest zawsze o~1 piksel (niezależnie od~kierunku przesuwania maski).
-    \item Warstwy normalizującej (lokalna normalizacja odpowiedzi).
+    \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
     \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość~x~szerokość~x~liczba objętych kanałów).
           Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym).
     \item Warstwy w~pełni połączonej (standardowa warstwa w~sieciach neuronowych) z~384 neuronami i~funkcją aktywacji

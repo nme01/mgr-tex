@@ -66,7 +66,7 @@ W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie
 szybszego uczenia, jest normalizacja danych. Operacja normalizacji może być interpretowana jako kolejna warstwa
 umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~warstwa skalująca.
 
-\subsubsection{Lokalna normalizacja odpowiedzi} \label{sssec:normalizacja}
+\subsubsection{Lokalna normalizacja odpowiedzi} \label{sssec:normalizacja_odpowiedzi}
 \textbf{Lokalna normalizacja odpowiedzi}\cite{HOG} (\textit{ang.~local response normalization}) polega na~zapewnieniu,
 że~wartości pikseli o~tych podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
 o~odchyleniu standardowym równym 1 i średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
@@ -91,7 +91,7 @@ W~przypadku rozpoznawania danych, w~których występować może wiele różnych 
 neuronowej dużej liczby neuronów. Jednakże może to~przynieść nieporządany efekt, przy~którym sieć zbytnio dopasuje
 się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \textbf{regularyzacja} sieci.
 
-\subsubsection{Regularyzacja L2}
+\subsubsection{Regularyzacja L2} \label{sssec:reg_L2}
 Jest~to~najprawdopodobniej naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
 jest człon $\frac{1}{2}\lambda w^2$, a~gradient tego członu to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
 z~nich są zmniejszane w~liniowy sposób ($W *= (1 -\lambda)$). $\lambda$~to~tzw.~współczynnik regularyzacji, który
