@@ -87,7 +87,26 @@ w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-ill
 \end{figure}
 
 \subsubsection{Normalizacja wsadowa}
-TODO batch normalization %https://arxiv.org/abs/1502.03167
+Jedną z~często stosowanych obecnie metod normalizacji jest tzw.~normalizacja wsadowa (\textit{ang.~batch normalization}).
+Jest stosunkowo nową metodą, opublikowaną w~2015 roku (\cite{batch-norm}). Stosuje się~ją jako
+dodatkową warstwę umieszczaną za~każdą z~warstw w~pełni połączonych. Warstwa BatchNorm dokonuje normalizacji danych
+w~ramach całego wsadu danych (tzw.~batch). Odejmuje~ona od~każdej wartości wejściowej średnią (liczoną dla~przykładów
+w~obrębie całego wsadu, dla~każdego z~wejść z~osobna), a~następnie dzieli uzyskane wartości przez~odchylenie standardowe
+(liczone analogicznie jak~średnia).
+\begin{equation*}
+ \widehat{x} = \frac{x - E[x]}{\sqrt{Var(x)}}
+\end{equation*}
+
+Tak~znormalizowane dane są~następnie poddawane przekształceniu liniowemu:
+\begin{equation*}
+y = \gamma\widehat{x} + \beta
+\end{equation*}
+$\gamma$ oraz $\beta$ są~parametrami, których wartość ustalana jest w~procesie uczenia. Warto zwrócić uwagę, że~jeśli
+$\beta=E[x]$ i $\gamma=\sqrt{Var(x)}$ warstwa BatchNorm będzie dokonywała przekształcenia identycznościowego.
+
+Dla~każdej z~operacji wykonywanych przez~tę~warstwę normalizującą można policzyć gradient funkcji kosztu względem
+parametrów. Dzięki temu sieć z~warstwami BatchNorm może być uczona metodami gradientowymi, podobnie jak~większość
+standardowych sieci.
 
 \subsection{Regularyzacja sieci}
 W~przypadku rozpoznawania danych, w~których występować może wiele różnych wzorców, konieczne jest umieszczenie w~sieci
