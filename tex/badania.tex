@@ -47,7 +47,7 @@ brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków
       $\alpha=0.001$   & 0.84 & 0.84 & 0.82 & 0.78 & 0.76 \\
       \hline
     \end{tabular}
-    \caption{Wpływ regularyzacji L2 (wd) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji sieci
+    \caption{Wpływ regularyzacji L2 ($wd$) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji sieci
     neuronowej}
     \label{table:wyniki1}
 \end{table}
@@ -55,7 +55,7 @@ brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków
 Całkowity czas badania wyniósł: 40 godzin 10 minut i 58 sekund.
 
 \section{Środowisko sprzętowe}
-Wszystkie badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego:
+Badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego:
 \begin{itemize}
     \item \textbf{procesor}~--~Intel Core i7-4771 3,5Ghz (8 rdzeni),
     \item \textbf{płyta główna}~--~TODO,
@@ -64,6 +64,21 @@ Wszystkie badania zostały wykonane z wykorzystaniem następującego zestawu kom
 \end{itemize}
 
 \section{Omówienie wyników badań}
-TODO
-% dlaczego weight decay pomaga
-% dlaczego local response normalization pomaga
+Wyniki uzysakne w~badaniu wskazują, że~wzraz ze~wzrostem wpływu regularyzacji~L2 na~sieć neuronową, dokładność
+klasyfikacji ulegała pogorszeniu. Jednocześnie najlepsze wyniki osiągane były dla~wartości $\alpha$ w~okolicach 0.0005.
+
+W~przypadku wpływu normalizacji lokalnego kontrastu wyniki są~zgodne z~oczekiwaniami, tj.~dla~odpowiednio dobranych
+parametrów normalizacja ta~przynosi poprawę rezultatów. Sprzeczne z~przewidywaniami okazały się~zmiany wartości
+dokładności dla~różnych wartości parametru $wd$. Spodziewano się, że~regularyzacja zapobiegając overfittingowi polepszy
+dokładność klasyfikacji.
+
+Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska overfittingu, z~dwóch powodów:
+\begin{itemize}
+    \item zbyt mała liczba neuronów w~sieci, a~przez~to~niska szansa na~zbytnie dopasowanie się~sieci do~danych
+          wejściowych (overfitting),
+    \item zbyt niska liczba iteracji podczas uczenia sieci.
+\end{itemize}
+Regularyzacja~L2 choć~zapobiega wystąpieniu overfittingu, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
+przez~co~potrzebna jest większa liczba iteracji w~procesie uczenia, aby~osiągnąć zadowalający poziom dokładności.
+
+TODO badanie dla większej liczby iteracji (lepsze) lub dla większej liczby neuronów.
