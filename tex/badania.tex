@@ -1,6 +1,97 @@
 \chapter{Badania}
-\section{Miary jakości klasyfikatora}
-TODO opisać accuracy, precision itp.
+\section{Wykorzystywana miara jakości klasyfikatora}
+Podstawowymi miarami stosowanymi w~ocenie jakości sieci neuronowych są:
+\begin{itemize}
+    \item dokładność (\textit{ang.~accuracy}),
+    \item średnia precyzja (\textit{ang.~average precision}).
+\end{itemize}
+
+\paragraph{Dokładność} wskazuje jaka część przykładów ze~zbioru ewaluacyjnego została sklasyfikowana poprawnie.
+\begin{equation*}
+    ACC = \frac{CP}{T}
+\end{equation*}
+gdzie $CP$ to~liczba poprawnie sklasyfikowanych przykładów, a~$T$ to~całkowita liczba przykładów.
+
+Jeśli wśród przykładów istnieje spora nadreprezentacja przykładów jednej klasy wówczas wskaźnik ten~może być
+niemiarodajny. Przykładowo: klasyfikator mający stwierdzać płeć wśród studentów Wydziału Elektroniki i~Technik
+Informacyjnych Politechniki Warszawskiej mógłby wsakzywać dla~każdej osoby płeć męską, a~jego dokładność byłaby
+dość wysoka. Dlatego w~takich przypadkach badając jakość sieci należy posłużyć się~również dodatkowymi miarami.
+
+\paragraph{Precyzja} to~miara, która liczona jest dla~każdej z~klas z~osobna i~wyraża ile~przykładów sklasyfikowanych
+ jako należące do~danej~klasy faktycznie należy do~tej klasy (przykładowo: jaka część obrazów sklasyfikowanych jako
+ obraz z~psem faktycznie jest obrazem przedstawiającym to~zwierzę). W~ocenie jakości sieci neuronowych rozpoznających
+ więcej niż~dwie klasy stosuje się~uśrednioną precyzję, tj.~średnią z~precyzji uzyskanych dla~każdej z~klas.
+ \begin{equation*}
+    PPV = \frac{TP}{TP+FP}
+\end{equation*}
+gdzie $TP$ to~prawidłowo rozpoznane przykłady danej klasy, a~$FP$ to~przykłady niepoprawnie sklasyfikowane jako
+ należące do~tej klasy.
+
+\section{Architektura sieci neuronowej}
+Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele metaparametrów takich jak:
+\begin{itemize}
+    \item liczba warstw splotowych,
+    \item liczba jąder stosowanych do~wykonywania splotów w~każdej z~warstw splotowych,
+    \item rozkład warstw typu max-pooling (\ref{sec:inferencja}),
+    \item rozkład warstw normalizujących (\ref{sssec:normalizacja_odpowiedzi}),
+    \item współczynnik uczenia (\ref{ssec:backpropagation}).
+\end{itemize}
+
+Ogólne zasady dotyczące pierwszych dwóch z~wymienionych punktów zostały opisane w~artykule
+,,Rethinking the Inception Architecture for Computer Vision''(\cite{RIACV}). Posiłkując się~przytoczoną pracą można
+wymienić kilka wskazówek przydatnych przy~ustalaniu metaparametrów sieci:
+\begin{itemize}
+    \item unikanie zbyt małej liczby neuronów w~warstwach, w~sczególności w~warstwach początkowych. Warto zastosować
+          kilkukrotność/kilkunastokrotność spodziewanej liczby klas, które ma~rozpoznawać sieć
+          (w~przypadku CIFAR-10 jest to 10 klas). Warstwy końcowe mogą zawierać mniejszą liczbę neuronów, niż warstwy
+          poprzednie.
+    \item zmniejszenie rozmiaru danych wejściowych poprzez zastosowanie metod, takich jak:
+          \begin{itemize}
+              \item usunięcie brzegów, gdyż~zwykle zawierają mało istotne dane,
+              \item zmniejszenie rozmiaru obrazka poprzez zastosowanie sklaowania.
+          \end{itemize}
+    \item używanie niewielkich filtrów splotowych (np. 3x3 lub 5x5 zamiast 7x7). Lepsze efekty daje zastosowanie dwóch
+          warstw splotowych o~maskach 3x3 niż jednej maski 7x7,
+    \item warto zacząć od 2 do 5 warstw splotowych (tyle samo warstw skalujących i~normalizujących), następnie zwiększać
+          liczbę masek używanych w~warstwach splotowych na przemian ze~zwiększaniem liczby warstw.
+\end{itemize}
+
+\subsection{Architektura badanej sieci}
+Badana sieć w swojej podstawowej wersji bazuje na~architekturze AlexNet przedstawionej w~artykule \cite{AlexNet}.
+Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sieć składa się~z~następujących warstw:
+\begin{enumerate}
+    \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x3 (wysokość x szerokość x liczba objętych kanałów).
+          Maska przesuwana jest zawsze o~1~piksel (w~kierunku pionowym i~poziomym).
+    \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość x szerokość x liczba objętych kanałów).
+          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym)
+    \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
+    \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x64 (wysokość~x~szerokość~x~liczba objętych kanałów).
+          Maska przesuwana jest zawsze o~1 piksel (niezależnie od~kierunku przesuwania maski).
+    \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
+    \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość~x~szerokość~x~liczba objętych kanałów).
+          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym).
+    \item Warstwy w~pełni połączonej (standardowa warstwa w~sieciach neuronowych) z~384 neuronami i~funkcją aktywacji
+          typu ReLU.
+    \item Warstwy w~pełni połączonej z~192 neuronami i~funkcją aktywacji
+          typu ReLU.
+    \item Warstwy wyjściowej (również w~pełni połączonej) z~10 neuronami (tyle samo, co~klas do~rozpoznawania).
+          Warstwa wyjściowa zawiera funkcję aktywacji typu softmax.
+\end{enumerate}
+
+\subsubsection{Przetwarzanie wstępne}
+Dane wejściowe przed~tym, jak~trafią do~sieci neuronowej, poddawane są~przetwarzaniu wstępnemu. Sprowadza się~ono
+do~przycięcia obrazka, tak~by~jego rozdzielczość wyniosła 24x24 piksele (oryginalna: 32x32 piksele). W~procesie
+uczenia obrazek przycinany jest losowo, a~w~przypadku obrazka klasyfikowanego~--~wybieany jest środkowy fragment.
+Dodatkowo, jeśli obrazek ma~być wykorzystywany w~procesie uczenia, poddawany jest on~zniekształceniu.
+
+Po~wczytaniu i~przycięciu obrazka (w~przypadku uczenia: również po~zastosowaniu zniekształcenia) każdy z~obrazów jest
+normalizowany (niezależnie od~innych). Normalizacja polega na~zapewnieniu, że~subpiksele w~każdym kanale
+przyciętego obrazka (czerwonym, zielonym i~niebieskim) mają średnią wartość równą zero i~odchylenie standardowe równe~1.
+
+% TODO dodać obrazek przedstawiający graf operacji
+% TODO ustawienie seeda do generatora liczb losowych w tensorflow -- tf.set_random_seed(1)
+%      http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
+
 
 \section{Plan badań}
 Celem niniejszej pracy naukowej jest sprawdzenie jak istotny wpływ na~dokładność klasyfikacji mają 2~czynniki:
@@ -30,7 +121,8 @@ dokładność sieci na~zbiorze testowym. Po~wykonaniu wszystkich kroków uczenia
 brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabelce
 (\ref{table:wyniki1}).
 
-\begin{table}
+\section{Wyniki badań}
+\begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
       \hline
