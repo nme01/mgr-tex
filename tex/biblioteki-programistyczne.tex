@@ -7,7 +7,7 @@ W celu uniknięcia konieczności zajmowania się niskopoziomowymi problemami, ta
     \item wczytywanie danych.
 \end{itemize}
 postanowiono skorzystać z~jednej~z~dostępnych bibliotek, która zajmuje się~owymi zagadnieniami. Pozwala to~na~skupienie
-się~na~architekturze sieci oraz na odpowiednim doborze operacji mających na~celu zapewnienie jak~najlepszej
+się~na~architekturze sieci oraz na~odpowiednim doborze operacji mających na~celu zapewnienie jak~najlepszej
 klasyfikacji.
 
 \section{Wybrana biblioteka}
@@ -24,11 +24,11 @@ Tworzenie sztucznej sieci neuronowowej przy~użyciu wymienionej powyżej bibliot
     \item wykonanie wybranych operacji z~grafu.
 \end{enumerate}
 
-Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po to, by osiągnąć rezultat na wyjściu.
+Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po to, by osiągnąć rezultat na~wyjściu.
 Każda operacja (węzeł grafu) może przyjmować pewne dane wejściowe. Dane wejściowe mogą być m.in.~danymi wczytanymi
 z~dysku lub~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą wzajemne
 zależności, gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane poprzez
-tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na rysunku \ref{img:tf-smpl-grf}.
+tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na~rysunku \ref{img:tf-smpl-grf}.
 
 \begin{figure}[H]
 	\centering
@@ -42,9 +42,9 @@ W pierwszym etapie tworzenia sieci neuronowej należy zdefiniować graf operacji
 wybrane operacje, a~silnik Tensorflow sam wykona wszystkie akcje wymagane do~poprawnego obliczenia ich rezultatu.
 
 Podczas konstrukcji grafu zamiast konkretnych danych wykorzystywane są dane symboliczne (np.~,,zmienna~x'',
-,,dana~C''). Dopiero później, w etapie wykonania operacji, za~niektóre z~owych danych podstawiane
+,,dana~C''). Dopiero później, w~etapie wykonania operacji, za~niektóre z~owych danych podstawiane
 są~odpowiednie wartości (podczas wykonywania operacji do~silnika Tensorflow podawany jest tzw.~kontekst będący
-słownikiem odwzorowującym wybrane dane symboliczne na realne wartości).
+słownikiem odwzorowującym wybrane dane symboliczne na~realne wartości).
 
 \pythonexternal{code/graph_creation.py}
 

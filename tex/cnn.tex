@@ -21,7 +21,7 @@ w~masce filtra odpowiadają wagi splotowej sieci neuronowej.
 
 \subsection{Padding}
 Przy~stosowaniu filtrów splotowych pojawia się problem: jaką wartość powinny otrzymać piksele obrazka
-znajdujące się na jego krawędzi. Jest on~rozwiązywany poprzez rozszerzanie obrazka o~dodatkowe piksele
+znajdujące się na~jego krawędzi. Jest on~rozwiązywany poprzez rozszerzanie obrazka o~dodatkowe piksele
 na~jego krawędziach. Można tego dokonać m.in. poprzez:
 \begin{itemize}
   \item rozszerzenie obrazka o~czarne piksele (tzw.~\textit{zero-padding}),
@@ -37,7 +37,7 @@ użytych filtrów.
 Po~dokonaniu filtrowania splotowego obrazy są skalowane na~mniejsze (tzw.~faza pooling/subsampling) i~znów
 stosowane są~filtry splotowe. Oba kroki (filtrowanie i~skalowanie) są~powtarzane wielokrotnie
 (zależy od~liczby warstw sieci), aż~do~osiągnięcia odpowiednio wyskokopoziomowych cech. Liczba warstw oraz
-liczba filtrów splotowych wykorzystanych w każdej z~nich jest ustalana podczas fazy projektowania sieci.
+liczba filtrów splotowych wykorzystanych w~każdej z~nich jest ustalana podczas fazy projektowania sieci.
 
 \begin{figure}[H]
 	\centering
@@ -49,7 +49,7 @@ sigmoidalne. Każdy neuron warstwy wyjściowej jest połączony ze~wszystkimi wa
 poprzedniej warstwy.
 
 \subsection{Skalowanie}
-Po zastosowaniu n różnych filtrów splotowych w~danej warstwie na m różnych mapach cech, powstaje $n\cdot m$
+Po zastosowaniu n różnych filtrów splotowych w~danej warstwie na~m~różnych mapach cech, powstaje $n\cdot m$
 kolejnych map cech. Stąd ilość przetwarzanych danych szybko rośnie wraz z~dokładaniem kolejnych warstw
 w~sieci. Aby temu przeciwdziałać stosuje się skalowanie obrazów pomiędzy warstwami dokonującymi splotu.
 Najczęściej obraz skalowany jest poprzez:
@@ -58,7 +58,7 @@ Najczęściej obraz skalowany jest poprzez:
   \item wybranie z~każdego obszaru piksela o~największej wartości (tzw.~\textit{max-pooling}). 
 \end{enumerate}
 
-Alternatywnie, w drugim kroku algorytmu można wybrać medianę wartości pikseli\\
+Alternatywnie, w~drugim kroku algorytmu można wybrać medianę wartości pikseli\\
 (\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{average-pooling}).
 
 \subsection{Normalizacja}
@@ -148,7 +148,7 @@ Obliczanie gradientu funkcji straty dla~warstw zawierających neurony sigmoidaln
 w~sekcji (\ref{ssec:backpropagation}), stąd wyjaśnienia wymaga jedynie obliczanie gradientów dla~warstw skalujących i~splotowych.
 
 \subsection{Obliczanie gradientu dla~warstw skalujących}
-Znając gradient funkcji straty $\nabla_{y_{ijk}}l$ z~warstwy kolejnej, można w prosty sposób policzyć gradient
+Znając gradient funkcji straty $\nabla_{y_{ijk}}l$ z~warstwy kolejnej, można w~prosty sposób policzyć gradient
 w~stosunku do~wejścia warstwy dla~której jest on liczony. W~przypadku, gdy~warstwa wykorzystywała algorytm
 \textit{max-pooling}, gradient względem wejść warstwy przyjme wartość:
 \begin{itemize}

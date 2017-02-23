@@ -8,16 +8,16 @@ obliczeniowej oraz złożoności pamięciowej celowo zostały pominięte w~pracy
 \section{Historia uczenia maszynowego}
 W znakomitej większości przypadków tworzenie programu komputerowego polega
 na podaniu ciągu instrukcji, które mają zostać wykonane, aby rozwiązać zadany
-problem. Co~jednak, jeśli nie wiadomo, w jaki sposób osiągnąć zamierzony cel?
+problem. Co~jednak, jeśli nie wiadomo, w~jaki sposób osiągnąć zamierzony cel?
 
 W 1956 roku Arthur Samuel postanowił napisać program komputerowy
 potrafiący grać w~warcaby lepiej niż jego autor. Stworzył więc aplikację,
-która grała sama ze~sobą, ucząc się na własnych błędach i sukcesach (\cite{checkers-samuel}).
+która grała sama ze~sobą, ucząc się na~własnych błędach i sukcesach (\cite{checkers-samuel}).
 Z czasem oprogramowanie stawało się coraz to~lepsze. W 1962 roku program był
 na~tyle dobry, że pokonał mistrza stanu Connecticut: Roberta Nealey'ego
-(obecnie istnieje algorytm, z którym nie da się wygrać w warcaby).
+(obecnie istnieje algorytm, z którym nie da się wygrać w~warcaby).
 
-Z~czasem uczenie maszynowe powoli zyskiwało na~zainteresowaniu.
+Z~czasem uczenie maszynowe zyskiwało na~zainteresowaniu.
 Wiele tworzonych mechanizmów było inspirowanych naturą (np. algorytmy
 ewolucyjne czy sztuczne sieci neuronowe). Jednak dużym ograniczeniem
 w~większości problemów wciąż pozostawała konieczność nadzorowania procesu
@@ -28,10 +28,10 @@ obrazkowi).
 W 1986 roku opracowano teoretyczny model mechanizmu potrafiącego stwierdzać
 podobieństwo różnych danych i uczyć się bez nadzoru. Była to~tzw.~Maszyna
 Boltzmanna. Potrafiła ona zauważać cechy charakterystyczne dla~różnego typu
-danych (np. w problemie rozpoznawania cyfr zauważała charakterystyczne łuki,
+danych (np. w~problemie rozpoznawania cyfr zauważała charakterystyczne łuki,
 które odróżniały jedne znaki od drugich).
 Nie istniał jednak żaden efektywny sposób uczenia mechanizmu.
-Dopiero w połowie pierwszej dekady XXI wieku zaczęły powstawać pierwsze szybkie
+Dopiero w~połowie pierwszej dekady XXI wieku zaczęły powstawać pierwsze szybkie
 algorytmy uczące. Wówczas rozwój dziedziny znacznie przyspieszył.
 Szczególne zainteresowanie zyskało podejście zwane głębokim uczeniem.
 
@@ -43,7 +43,7 @@ polegająca na~tworzeniu modelu danych o wielu warstwach, gdzie każda kolejna
 warstwa reprezentuje wyższy poziom abstrakcji niż poprzednia (warstwa wejściowa
 ma~poziom najniższy). Przykładowo dla warstwowej sieci neuronowej rozpoznającej
 twarze, w~pierwszej warstwie ukrytej zauważane są~najprostsze cechy (np. łuki,
-krawędzie), w kolejnych warstwach rozpoznawane są coraz to~większe fragmenty
+krawędzie), w~kolejnych warstwach rozpoznawane są coraz to~większe fragmenty
 obrazka, by~w~warstwie wyjściowej uzyskać rozpoznanie całej twarzy.
 
 Obecnie podejście to~jest z~powodzeniem wykorzystywane w~takich usługach jak:
@@ -60,8 +60,8 @@ Obecnie podejście to~jest z~powodzeniem wykorzystywane w~takich usługach jak:
 Szczególnie dużo projektów wykorzystujących głębokie uczenie prowadzi firma
 Google (w ramach projektu Google Brain). Między innymi jednym z~problemów,
 którym się~zajmowała było oznaczanie na~mapie adresów budynków na~podstawie
-obrazów z~systemu Google Street View. Choć~najpierw rozpoznawaniem zajmowali
-się~ludzie, to~na początku 2014 roku stworzono system, który
+obrazów z~systemu Google Street View (\cite{google-french-addresses}). Choć~najpierw rozpoznawaniem zajmowali
+się~ludzie, to~na~początku 2014 roku stworzono system, który
 samodzielnie potrafił rozpoznawać adresy. Robił to~znacznie szybciej niż ludzie
 (adresy wszystkich budynków we~Francji rozpoznał w~niespełna godzinę),
 a~przy~tym~popełniał mniej błędów.
@@ -84,7 +84,7 @@ Conference on Neural Networks) komputery poradziły sobie z~problemem
 rozpoznawania znaków drogowych lepiej od ludzi (dwukrotnie lepiej).
 
 Kolejnym przełomem w~rozpoznawaniu obrazów był~system stworzony w~ramach
-Microsoft Research w lutym 2015 roku, którego zadaniem było stwierdzenie,
+Microsoft Research w~lutym 2015 roku, którego zadaniem było stwierdzenie,
 co~znajduje się~na~obrazku, a~następnie przypisanie mu odpowiedniej kategorii spośród
 ponad 100000 dostępnych. Okazało się, że~ludzie średnio popełniali 5.1\% błędów,
 a~algorytm Microsoftu: 4.94\%.

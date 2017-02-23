@@ -380,12 +380,12 @@ $x$ to~wektor wartości wejściowych, a $\hat{x}$ to~wektor wartości wyjściowy
 $N$ w~celu~wygodniejszego liczenia pochodnej w~procesie uczenia. Zabieg ten ma charakter czysto estetyczny.
 
 \subsubsection{Regularyzacja rozrzutu}
-W~autoenkoderze staramy się~zapewnić, by~średnia wartość na wyjściu każdego neuronu warstwy ukrytej
+W~autoenkoderze staramy się~zapewnić, by~średnia wartość na~wyjściu każdego neuronu warstwy ukrytej
 (średnia liczona po~przykładach trenujących) była bliska pewnej z~góry przyjętej wartości zwanej \textbf{parametrem
 rozrzutu} (\textit{ang.~sparsity parameter})). Zwykle parametr ten przyjmuje niewielkie wartości (np. 0,05). Dzięki temu
 dla~większości danych wejściowych niewiele neuronów warstwy ukrytej będzie ,,aktywowanych'', a~więc każdy neuron będzie
 rozpoznawał jedną wybraną zależność pomiędzy danymi i~będzie stwierdzał czy~w~danym wektorze wejściowym jest ona obecna
-(wartość na~wyjściu neuronu równa 1) czy też nie (wartość na wyjściu neuronu równa 0). W~celu osiągnięcia odpowiedniego
+(wartość na~wyjściu neuronu równa 1) czy też nie (wartość na~wyjściu neuronu równa 0). W~celu osiągnięcia odpowiedniego
 rozrzutu funkcja celu musi przyjmować odpowienio wyższe wartości, gdy wartość średnia dla wzbudenia neuronu warstwy
 ukrytej jest różna od~zadanego parametru rozrzutu. Założony cel można osiągnąć poprzez zastosowanie funkcji kosztu
 w~postaci dyvergencji Kullbacka-Leiblera:
