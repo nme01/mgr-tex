@@ -19,11 +19,11 @@ Przykładowym neuronem używanym powszechnie w~sieciach neuronowych jest neuron 
 	\includegraphics[width=\linewidth]{img/sigmoid-neuron.png}
 \end{Figure}
 
-W~pierwszej fazie działania neuronu sumowana są wartości na wejściach neuronu pomnożone przez~odpowiadające
+W~pierwszej fazie działania neuronu sumowane są wartości na~wejściach neuronu pomnożone przez~odpowiadające
 im~wagi. W~drugiej fazie dla~otrzymanej sumy obliczana jest wartość funkcji sigmoidalnej
 $f(x)=\frac{1}{1+e^{-x}}$, która stanowi wartość wyjściową neuronu.
 
-Innym często stosowanym neuronem jest neuron o progowej funkcji aktywacji, tzn. dla wartości powyżej pewnego
+Innym często stosowanym neuronem jest neuron o progowej funkcji aktywacji, tzn.~dla~wartości powyżej pewnego
 progu przyjmuje wartość 1, a dla pozostałych wartości przyjmuje 0 (lub -1). Wyjścia jednostek tego typu
 zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesyłane na~wejścia innych neuronów.
 
@@ -124,7 +124,7 @@ co~wynika z~tego, że~dla~wysokich wartości wejściowych tej funkcji aktywacji 
 \end{figure}
 
 \subsubsection{Poprawiona jednostka liniowa (\textit{ang. Rectified Linear Unit, ReLU})}
-Funkcja ta,~zwana również funkcją rampy (\textit{ang.~ramp function})jest jedną z~najczęściej wykorzystywanych funkcji
+Funkcja ta,~zwana również funkcją rampy (\textit{ang.~ramp function}) jest jedną z~najczęściej wykorzystywanych funkcji
 aktywacji w~nowoczesnych rozbudowanych sieciach neuronowych. Jej wady, to~brak pochodnej dla~wartości 0~oraz potencjalny
 problem zanikającego gradientu~--~gdy~wagi wejść neuronu przyjmą takie wartości, że~do~funkcji aktywacji będą trafiać
 wartości ujemne, wówczas neuron będzie ciągle generować wartość wyjściową równą zero. Wówczas potocznie mówi
@@ -297,7 +297,7 @@ uczącym wartość funkcji prawdopodobieństwa była jak największa, natomiast 
 jak~najmniejsza.
 
 Opisana metoda uczenia wstępnego zakłada, że~po~kolei uczona jest każda
-z~warstw (nie wszystkie na raz), zaczynając od~warstwy wejściowej, kończąc
+z~warstw (nie~wszystkie na~raz), zaczynając od~warstwy wejściowej, kończąc
 na~wyjściowej. W~jednej iteracji algorytmu uczone są wagi tylko jednej z~warstw.
 W~pierwszym kroku algorytmu uczona jest pierwsza warstwa ukryta i~efektem
 uczenia powinno być wyodrębnienie takich cech danych, które odróżniają
@@ -335,8 +335,7 @@ funkcji prawdopodobieństwa, natomiast pozostałym danym (w~szczególności dany
 niskie prawdopodobieństwo.
 
 Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmów. W~tej~pracy omówiona zostanie
-jedynie \textbf{Ograniczona Maszyna Boltzmanna}(\textit{ang. Restricted Boltzmann
-Machine}).
+jedynie \textbf{Ograniczona Maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
 
 \subsection{Autoenkoder}
 Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się~z~trzech warstw:
@@ -349,7 +348,7 @@ Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się~z~trzech 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{img/autoencoder.png}
-	\caption{autoenkoder}
+	\caption{Autoenkoder}
 \end{figure}
 
 Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
@@ -368,7 +367,7 @@ może być więcej neuronów niż w~warstwie wejściowej/wyjściowej. Tak nauczo
 wektora wejściowego zawierającego pewne błędy w~danych (np.~szumy), potrafi dokonać korekty danych,
 a dane poprawione pojawią się~na~wyjściu sieci.
 
-W~ogólności warstwa wejściową oraz warstwa ukryta autoenkodera tworzą razem mechanizm kodujący, a~warstwa ukryta wraz
+W~ogólności warstwa wejściowa oraz warstwa ukryta autoenkodera tworzą razem mechanizm kodujący, a~warstwa ukryta wraz
 z~warstwą wyjściową tworzą mechanizm dekodujący.
 
 \subsubsection{Funkcja kosztu}
@@ -394,7 +393,7 @@ w~postaci dyvergencji Kullbacka-Leiblera:
 \sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j}) = \sum\limits_{j=1}^{s_2}\rho \log\frac{\rho}{\hat{\rho_j}} +
 (1-\rho)\log\frac{1-\rho}{1-\hat{\rho_j}}
 \end{equation*}
-gdzie $s_2$ to liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$ to parametr rozrzutu,
+gdzie $s_2$ to liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$~to~parametr rozrzutu,
 a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu wartstwy ukrytej.
 
 Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:

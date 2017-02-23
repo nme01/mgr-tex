@@ -69,7 +69,7 @@ umieszczana w~sieci na~tej~samej zasadzie, co~warstwa dokonująca splotu czy~war
 \subsubsection{Lokalna normalizacja odpowiedzi} \label{sssec:normalizacja_odpowiedzi}
 \textbf{Lokalna normalizacja odpowiedzi} (\textit{ang.~local response normalization}, \cite{HOG}) polega na~zapewnieniu,
 że~wartości pikseli o~podobnych współrzędnych, jednak należące do~różnych map cech, należą do~rozkładu normalnego
-o~odchyleniu standardowym równym 1 i średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
+o~odchyleniu standardowym równym 1 i~średniej równej 0. Normalizacja polega więc na~odjęciu od~wszystkich pikseli
 średniej (liczonej wzdłuż różnych map cech) i~podzieleniu ich przez~odchylenie standardowe (również liczone wzdłuż
 rożnych map cech).
 
@@ -114,7 +114,7 @@ neuronowej dużej liczby neuronów. Jednakże może to~przynieść nieporządany
 się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \textbf{regularyzacja} sieci.
 
 \subsubsection{Regularyzacja L2} \label{sssec:reg_L2}
-Jest~to~najprawdopodobniej naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
+Jest~to~prawdopodobnie naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
 jest człon $\frac{1}{2}\lambda w^2$, a~gradient tego członu to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
 z~nich są zmniejszane w~liniowy sposób:
 \begin{equation*}
@@ -132,7 +132,7 @@ podczas procesu uczenia. Dzięki temu w~każdej iteracji uczony jest jedynie pew
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{img/dropout.jpeg}
-	\caption{rys. Dropout. Po~lewej: pełna sieć. Po~prawej: sieć po~dokonaniu operacji usuwania losowych neuronów.
+	\caption{Dropout. Po~lewej: pełna sieć. Po~prawej: sieć po~dokonaniu operacji usuwania losowych neuronów.
 	         Źródło: \cite{dropout}}
 \end{figure}
 

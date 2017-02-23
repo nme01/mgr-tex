@@ -28,7 +28,7 @@ gdzie $TP$ to~prawidłowo rozpoznane przykłady danej klasy, a~$FP$ to~przykład
  należące do~tej klasy.
 
 \section{Architektura sieci neuronowej}
-Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele metaparametrów takich jak:
+Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele hiperparametrów takich jak:
 \begin{itemize}
     \item liczba warstw splotowych,
     \item liczba jąder stosowanych do~wykonywania splotów w~każdej z~warstw splotowych,
@@ -39,7 +39,7 @@ Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele metaparametr
 
 Ogólne zasady dotyczące pierwszych dwóch z~wymienionych punktów zostały opisane w~artykule
 ,,Rethinking the Inception Architecture for Computer Vision''(\cite{RIACV}). Posiłkując się~przytoczoną pracą można
-wymienić kilka wskazówek przydatnych przy~ustalaniu metaparametrów sieci:
+wymienić kilka wskazówek przydatnych przy~ustalaniu hiperparametrów sieci:
 \begin{itemize}
     \item unikanie zbyt małej liczby neuronów w~warstwach, w~sczególności w~warstwach początkowych. Warto zastosować
           kilkukrotność/kilkunastokrotność spodziewanej liczby klas, które ma~rozpoznawać sieć
@@ -53,7 +53,7 @@ wymienić kilka wskazówek przydatnych przy~ustalaniu metaparametrów sieci:
     \item używanie niewielkich filtrów splotowych (np. 3x3 lub 5x5 zamiast 7x7). Lepsze efekty daje zastosowanie dwóch
           warstw splotowych o~maskach 3x3 niż jednej maski 7x7,
     \item warto zacząć od 2 do 5 warstw splotowych (tyle samo warstw skalujących i~normalizujących), następnie zwiększać
-          liczbę masek używanych w~warstwach splotowych na przemian ze~zwiększaniem liczby warstw.
+          liczbę masek używanych w~warstwach splotowych na~przemian ze~zwiększaniem liczby warstw.
 \end{itemize}
 
 \subsection{Architektura badanej sieci}
@@ -81,7 +81,7 @@ Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sie
 \subsubsection{Przetwarzanie wstępne}
 Dane wejściowe przed~tym, jak~trafią do~sieci neuronowej, poddawane są~przetwarzaniu wstępnemu. Sprowadza się~ono
 do~przycięcia obrazka, tak~by~jego rozdzielczość wyniosła 24x24 piksele (oryginalna: 32x32 piksele). W~procesie
-uczenia obrazek przycinany jest losowo, a~w~przypadku obrazka klasyfikowanego~--~wybieany jest środkowy fragment.
+uczenia obrazek przycinany jest losowo, a~w~przypadku obrazka klasyfikowanego~--~wybierany jest środkowy fragment.
 Dodatkowo, jeśli obrazek ma~być wykorzystywany w~procesie uczenia, poddawany jest on~zniekształceniu.
 
 Po~wczytaniu i~przycięciu obrazka (w~przypadku uczenia: również po~zastosowaniu zniekształcenia) każdy z~obrazów jest
@@ -126,7 +126,7 @@ brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
       \hline
-                       & wd = 0.0005 & wd = 0.001 & wd = 0.005 & wd = 0.01 & wd = 0.05 \\
+                       & $\lambda$ = 0.0005 & $\lambda$ = 0.001 & $\lambda$ = 0.005 & $\lambda$ = 0.01 & $\lambda$ = 0.05 \\
       \hline
       $\alpha=0.00001$ & 0.83 & 0.79 & 0.76 & 0.75 & 0.78 \\
       \hline
@@ -139,8 +139,8 @@ brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków
       $\alpha=0.001$   & 0.84 & 0.84 & 0.82 & 0.78 & 0.76 \\
       \hline
     \end{tabular}
-    \caption{Wpływ regularyzacji L2 ($wd$) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji sieci
-    neuronowej}
+    \caption{Wpływ regularyzacji L2 ($\lambda$) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji
+    sieci neuronowej}
     \label{table:wyniki1}
 \end{table}
 
@@ -161,14 +161,14 @@ klasyfikacji ulegała pogorszeniu. Jednocześnie najlepsze wyniki osiągane był
 
 W~przypadku wpływu normalizacji lokalnego kontrastu wyniki są~zgodne z~oczekiwaniami, tj.~dla~odpowiednio dobranych
 parametrów normalizacja ta~przynosi poprawę rezultatów. Sprzeczne z~przewidywaniami okazały się~zmiany wartości
-dokładności dla~różnych wartości parametru $wd$. Spodziewano się, że~regularyzacja zapobiegając overfittingowi polepszy
-dokładność klasyfikacji.
+dokładności dla~różnych wartości parametru $\lambda$. Spodziewano się, że~regularyzacja zapobiegając overfittingowi
+polepszy dokładność klasyfikacji.
 
 Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska overfittingu, z~dwóch powodów:
 \begin{itemize}
     \item zbyt mała liczba neuronów w~sieci, a~przez~to~niska szansa na~zbytnie dopasowanie się~sieci do~danych
-          wejściowych (overfitting),
-    \item zbyt niska liczba iteracji podczas uczenia sieci.
+          wejściowych,
+    \item zbyt mała liczba iteracji podczas uczenia sieci.
 \end{itemize}
 Regularyzacja~L2 choć~zapobiega wystąpieniu overfittingu, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
 przez~co~potrzebna jest większa liczba iteracji w~procesie uczenia, aby~osiągnąć zadowalający poziom dokładności.

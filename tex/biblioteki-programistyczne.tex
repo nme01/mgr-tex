@@ -4,8 +4,7 @@ W celu uniknięcia konieczności zajmowania się niskopoziomowymi problemami, ta
     \item zrównoleglanie obliczeń wektorowych,
     \item wykonywanie obliczeń na~karcie graficznej,
     \item liczenie gradientów operacji wykonywanych przez sieć neuronową (takich jak~sploty, normalizacje, aktywacje),
-    \item wczytywanie danych,
-    \item itp.
+    \item wczytywanie danych.
 \end{itemize}
 postanowiono skorzystać z~jednej~z~dostępnych bibliotek, która zajmuje się~owymi zagadnieniami. Pozwala to~na~skupienie
 się~na~architekturze sieci oraz na odpowiednim doborze operacji mających na~celu zapewnienie jak~najlepszej
@@ -26,10 +25,10 @@ Tworzenie sztucznej sieci neuronowowej przy~użyciu wymienionej powyżej bibliot
 \end{enumerate}
 
 Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po to, by osiągnąć rezultat na wyjściu.
-Każda operacja może przyjmować pewne dane wejściowe. Dane wejściowe mogą być zarówno danymi wczytanymi z~dysku
-czy~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą wzajemne zależności,
-gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane poprzez tworzenie
-tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na rysunku \ref{img:tf-smpl-grf}.
+Każda operacja (węzeł grafu) może przyjmować pewne dane wejściowe. Dane wejściowe mogą być m.in.~danymi wczytanymi
+z~dysku lub~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą wzajemne
+zależności, gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane poprzez
+tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na rysunku \ref{img:tf-smpl-grf}.
 
 \begin{figure}[H]
 	\centering
