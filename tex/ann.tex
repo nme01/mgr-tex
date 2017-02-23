@@ -375,8 +375,8 @@ Dla danych ciągłych ($x\in\mathbb{R}$) jako funkcję kosztu typowo stosuję si
 \begin{equation*}
 \frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2
 \end{equation*}
-gdzie $N$ to liczba klasyfikowanych przykładów, $s_1$ to długość wektora wejściowego (jak~również wyjściowego),
-$x$ to wektor wartości wejściowych, a $\hat{x}$ to wektor wartości wyjściowych. Suma dzielona jest przez $2N$ zamiast
+gdzie $N$ to~liczba klasyfikowanych przykładów, $s_1$ to~długość wektora wejściowego (jak~również wyjściowego),
+$x$ to~wektor wartości wejściowych, a $\hat{x}$ to~wektor wartości wyjściowych. Suma dzielona jest przez $2N$ zamiast
 $N$ w~celu~wygodniejszego liczenia pochodnej w~procesie uczenia. Zabieg ten ma charakter czysto estetyczny.
 
 \subsubsection{Regularyzacja rozrzutu}
@@ -393,14 +393,14 @@ w~postaci dyvergencji Kullbacka-Leiblera:
 \sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j}) = \sum\limits_{j=1}^{s_2}\rho \log\frac{\rho}{\hat{\rho_j}} +
 (1-\rho)\log\frac{1-\rho}{1-\hat{\rho_j}}
 \end{equation*}
-gdzie $s_2$ to liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$~to~parametr rozrzutu,
+gdzie $s_2$ to~liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$~to~parametr rozrzutu,
 a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu wartstwy ukrytej.
 
 Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:
 \begin{equation*}
 J(W,b)=\frac{1}{N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2 + \beta\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j})
 \end{equation*}
-gdzie $W$ i $b$, to odpowiednio wagi sieci i~bias.
+gdzie $W$ i $b$, to~odpowiednio wagi sieci i~bias.
 
 \subsubsection{Uczenie}
 Do~uczenia sieci wykorzystywana jest metoda wstecznej propagacji błędów (opisana we~wcześniejszej części pracy),
@@ -415,7 +415,7 @@ Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
     \end{split}
     \label{eqn:wagi_autenc}
 \end{equation}
-gdzie $f'$ to pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości preaktywacji neuronów warstwy
+gdzie $f'$ to~pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości preaktywacji neuronów warstwy
 ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
 
 Wagi wastwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
@@ -448,11 +448,11 @@ ma~określone prawdopodobieństwo zadane wzorem:
 
 $p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
 \begin{itemize}
-  \item v to macierz wyjść neuronów wejściowych,
-  \item h to macierz wyjść neuronów ukrytych,
-  \item Z to czynnik normalizujący (tzw.~funkcja partycji),
+  \item v to~macierz wyjść neuronów wejściowych,
+  \item h to~macierz wyjść neuronów ukrytych,
+  \item Z to~czynnik normalizujący (tzw.~funkcja partycji),
   \item $E(v,h)=-a^{T}v-b^{T}h-v^{T}Wh$,
-  \item a,b oraz W to macierze wag sieci.
+  \item a,b oraz W to~macierze wag sieci.
 \end{itemize}
 
 \subsubsection{Inferencja}
@@ -466,7 +466,7 @@ Prawdopodobieństwa wzbudzeń neuronów można efektywnie obliczyć korzystając
     \end{split}
 	\label{eqn:rbm_inference}
 \end{equation}
-gdzie: $\sigma$ to funkcja aktywacji, $i$ oraz $j$ to numery kolejnych neuronów (odpowiednio: wejściowych i~ukrytych).
+gdzie: $\sigma$ to~funkcja aktywacji, $i$ oraz $j$ to~numery kolejnych neuronów (odpowiednio: wejściowych i~ukrytych).
 
 
 \subsubsection{Uczenie}
