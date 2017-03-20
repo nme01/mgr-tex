@@ -130,7 +130,7 @@ Badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego
     \item \textbf{pamięć RAM}~--~2 x GoodRam 8GB 1600 MHz.
 \end{itemize}
 
-\section{Wyniki badań}
+\section{Badanie nr 1}
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -155,16 +155,16 @@ Badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego
 
 Całkowity czas badania wyniósł: 40 godzin 10 minut i 58 sekund.
 
-\section{Omówienie wyników badań}
+\subsection{Omówienie wyników badań}
 Wyniki uzysakne w~badaniu wskazują, że~wzraz ze~wzrostem wpływu regularyzacji~L2 na~sieć neuronową, dokładność
 klasyfikacji ulegała pogorszeniu. Jednocześnie najlepsze wyniki osiągane były dla~wartości $\alpha$ w~okolicach 0.0005.
 
 W~przypadku wpływu normalizacji lokalnego kontrastu wyniki są~zgodne z~oczekiwaniami, tj.~dla~odpowiednio dobranych
 parametrów normalizacja ta~przynosi poprawę rezultatów. Sprzeczne z~przewidywaniami okazały się~zmiany wartości
-dokładności dla~różnych wartości parametru $\lambda$. Spodziewano się, że~regularyzacja zapobiegając overfittingowi
+dokładności dla~różnych wartości parametru $\lambda$. Spodziewano się, że~regularyzacja zapobiegając przeuczeniu
 polepszy dokładność klasyfikacji.
 
-Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska overfittingu, z~dwóch powodów:
+Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska przeuczenia, z~dwóch powodów:
 \begin{itemize}
     \item zbyt mała liczba neuronów w~sieci, a~przez~to~niska szansa na~zbytnie dopasowanie się~sieci do~danych
           wejściowych,
@@ -173,4 +173,47 @@ Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska overf
 Regularyzacja~L2 choć~zapobiega wystąpieniu overfittingu, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
 przez~co~potrzebna jest większa liczba iteracji w~procesie uczenia, aby~osiągnąć zadowalający poziom dokładności.
 
-TODO badanie dla większej liczby iteracji (lepsze) lub dla większej liczby neuronów.
+By~sprawdzić czy~występuje przeuczenie warto posłużyć się~wykresem przedstawiającym wartość funkcji
+błędu (cross-walidacja) w~zależności od~numeru iteracji uczenia. Na~wykresie (TODO nr~wykresu) zamieszczono
+błąd liczony na~zbiorze uczącym, który w~procesie uczenia jest minimalizowany, oraz błąd liczony na~zbiorze
+walidacyjnym. W~przypadku wystąpienia przeuczenia na~wykresie powinno się zaobserwować, że~dla~pewnego numeru
+iteracji pomimo zmniejszania się~błędu na~zbiorze uczącym, bład na~zbiorze walidacyjnym znacząco rośnie.
+
+TODO wykres
+TODO tabela z wynikami
+
+Jak widać na~wykresie (TODO nr wykresu) nie~obserwujemy takiej sytuacji.
+
+\section{Badanie nr 2}
+W~badaniu nr~2~powtórzono badanie nr~1 ze~zwiększoną liczbą iteracji. Spodziewano się,~że~od~pewnego numeru
+iteracji będzie obserwowany wzrost błędu na~zbiorze walidacyjnym przy~jednoczesnym spadku błędu na~zbiorze uczącym.
+Jednakże również nie~udało się~zaobserwować zaistniałej sytuacji. Wyniki przedstawiono na~wykresie (TODO nr wykresu).
+
+TODO wykres
+TODO tabela z wynikami
+
+Prawdopodobnie wynika to~z~tego, że~sieć z~powodu swojej względnie prostej struktury nie~ma~możliwości przeuczenia
+się~(zbyt mała liczba neuronów w~stosunku do~liczby przykładów uczących).
+
+\section{Badanie nr 3}
+By~sprawdzić jaki wpływ na~dokładność klasyfikacji będzie miała regularyzacja, gdy~problem przeuczenia występuje,
+zaprojektowano badanie numer~3, w~którym sześciokrotnie zmniejszono liczbę przykładów w~zbiorze uczącym (przy~zachowaniu
+takiego samego rozmiaru zbioru walidacyjnego).
+
+TODO wykres
+TODO tabela z~wynikami
+
+Jak~widać na~wykresie (TODO nr~wykresu) problem przeuczenia zaczyna się~pojawiać przy~iteracji nr~(TODO nr~iteracji).
+Stąd należy się spodziewać, że regularyzacja zmniejszy występowanie tego niepożądanego zjawiska. W~tabeli
+(TODO nr~tabeli) przedstawiono dokładność klasyfikacji dla~różnych kombinacji parametrów normalizacji i~regularyzacji.
+Tak~jak~się~spodziewano regularyzacja przy~odpowiednio dobranych metaparametrach poprawia jakość klasyfikacji.
+
+\section{Badanie nr 4}
+Skoro problem przeuczenia nie~występował w~sieci o~architekturze wykorzystywanej w~badaniach 1-3, to~można stwierdzić,
+że~sieć miała zbyt niską złożoność by~problem wystąpił. Stąd, można zwiększyć jej~poziom złożoności (zwiększyć liczbę
+neuronów) i~przy zastosowaniu regularyzacji można spodziewać się,~że~jakość klasyfikacji ulegnie polepszeniu. W~sieci
+w~pierwszej i~drugiej warstwie w~pełni połączonej zwiększono liczbę neuronów do~1024. Dokładność
+sieci dla~różnych kombinacji metaparametrów normalizacji i~regularyzacji przedstawiono w~tabeli (TODO nr tabeli).
+
+Jak~widać, wyniki uzyskane w~badaniu nr~4~dla~metaparametrw (TODO wartości metaparametrów) są~najlepsze ze~wszystkich
+wykonanych badań.
