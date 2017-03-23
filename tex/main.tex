@@ -8,9 +8,28 @@
     /Keywords (dcnn cnn splot rbm głębokie sieci neuronowe deep learning)
 }
 
-\documentclass[a4paper,onecolumn,oneside,12pt,wide,floatssmall]{mwrep}
+\documentclass[12pt,a4paper,twoside]{report}
 
 \input{tex/python_external}
+
+
+
+% page numbering left on even and right on odd
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{ % pages with new chapter use always plain style...
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[LE,RO]{\thepage}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset[RL]{0pt}
+\fancyfoot[LE,RO]{\thepage}
+\setlength{\footskip}{50pt}
+
+\usepackage[top=2.5cm, bottom=4.0cm, inner=3.5cm, outer=2.5cm, heightrounded]{geometry}
+\linespread{1.25}
 
 % basic packages
 \usepackage{float}
@@ -23,7 +42,6 @@
 \usepackage{parskip}
 \usepackage{enumitem}
 \usepackage[utf8x]{inputenc}
-\usepackage{fullpage}
 
 \newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 
@@ -31,7 +49,6 @@
 % bibliography and links
 \usepackage{url}
 \usepackage[noadjust]{cite}
-\usepackage{multicol}
 \def\UrlBreaks{\do\/\do-}
 \usepackage[hidelinks]{hyperref}
 
@@ -80,10 +97,21 @@
 
   \end{center}
 \end{titlepage}
+\raggedbottom
+\thispagestyle{empty} % remove page numbering
+\section*{Streszczenie}
+TODO
+\paragraph{Słowa kluczowe} TODO
 
+\section*{Abstract}
+\paragraph{Title:} TODO\\\\
+TODO
+\paragraph{Keywords:} TODO
+
+\newpage
 \tableofcontents
+\newpage
 
-\chapter{Wstęp}
 
 \input{tex/wstep}
 \input{tex/ann}

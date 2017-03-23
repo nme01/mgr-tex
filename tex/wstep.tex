@@ -1,3 +1,4 @@
+\chapter{Wstęp}
 \section{Cel pracy}
 Celem niniejszej pracy magisterskiej jest zbadanie wpływu różnych zabiegów
 stosowanych w~splotowych sieciach neuronowych na~jakość działania owych sieci.
@@ -13,23 +14,23 @@ problem. Co~jednak, jeśli nie wiadomo, w~jaki sposób osiągnąć zamierzony ce
 W 1956 roku Arthur Samuel postanowił napisać program komputerowy
 potrafiący grać w~warcaby lepiej niż jego autor. Stworzył więc aplikację,
 która grała sama ze~sobą, ucząc się na~własnych błędach i sukcesach (\cite{checkers-samuel}).
-Z czasem oprogramowanie stawało się coraz to~lepsze. W 1962 roku program był
+Z czasem oprogramowanie stawało się coraz to~lepsze. W~1962 roku program był
 na~tyle dobry, że pokonał mistrza stanu Connecticut: Roberta Nealey'ego
-(obecnie istnieje algorytm, z którym nie da się wygrać w~warcaby).
+(obecnie istnieje algorytm, z~którym nie~da się~wygrać w~warcaby).
 
 Z~czasem uczenie maszynowe zyskiwało na~zainteresowaniu.
-Wiele tworzonych mechanizmów było inspirowanych naturą (np. algorytmy
+Wiele tworzonych mechanizmów było inspirowanych naturą (np.~algorytmy
 ewolucyjne czy sztuczne sieci neuronowe). Jednak dużym ograniczeniem
 w~większości problemów wciąż pozostawała konieczność nadzorowania procesu
 uczenia, tzn. dla~każdego zbioru wejściowego należało podać spodziewany wynik
 (np. przy rozpoznawaniu cyfr podawano rzeczywistą cyfrę odpowiadającą podanemu
 obrazkowi).
 
-W 1986 roku opracowano teoretyczny model mechanizmu potrafiącego stwierdzać
+W~1986 roku opracowano teoretyczny model mechanizmu potrafiącego stwierdzać
 podobieństwo różnych danych i uczyć się bez nadzoru. Była to~tzw.~Maszyna
 Boltzmanna. Potrafiła ona zauważać cechy charakterystyczne dla~różnego typu
 danych (np. w~problemie rozpoznawania cyfr zauważała charakterystyczne łuki,
-które odróżniały jedne znaki od drugich).
+które odróżniały jedne znaki od~drugich).
 Nie istniał jednak żaden efektywny sposób uczenia mechanizmu.
 Dopiero w~połowie pierwszej dekady XXI wieku zaczęły powstawać pierwsze szybkie
 algorytmy uczące. Wówczas rozwój dziedziny znacznie przyspieszył.
@@ -48,7 +49,7 @@ obrazka, by~w~warstwie wyjściowej uzyskać rozpoznanie całej twarzy.
 
 Obecnie podejście to~jest z~powodzeniem wykorzystywane w~takich usługach jak:
 \begin{itemize}
-  \item Google Search by Image,
+  \item Google Search by~Image,
   \item Google Voice Search,
   \item Google Now,
   \item Siri,
@@ -81,7 +82,7 @@ Choć rozpoznawanie obrazów było niegdyś dziedziną, w~której komputery wypa
 znacznie gorzej niż~ludzie, to~wraz z~rozwojem głębokiego uczenia sytuacja
 uległa zmianie. Już w~2011 roku podczas konferencji IJCNN (International Joint
 Conference on Neural Networks) komputery poradziły sobie z~problemem
-rozpoznawania znaków drogowych lepiej od ludzi (dwukrotnie lepiej).
+rozpoznawania znaków drogowych lepiej od~ludzi (dwukrotnie lepiej).
 
 Kolejnym przełomem w~rozpoznawaniu obrazów był~system stworzony w~ramach
 Microsoft Research w~lutym 2015 roku, którego zadaniem było stwierdzenie,
@@ -89,11 +90,13 @@ co~znajduje się~na~obrazku, a~następnie przypisanie mu odpowiedniej kategorii 
 ponad 100000 dostępnych. Okazało się, że~ludzie średnio popełniali 5.1\% błędów,
 a~algorytm Microsoftu: 4.94\%.
 
-Inne zastosowania głębokiego uczenia jakie są badane to~m.in:
-\begin{itemize}
-  \item rozpoznawanie niechcianych wiadomości (tzw. spamu),
-  \item automatyczne generowanie opisów w~języku naturalnym dla~obrazków (\cite{img-desc-generator}),
-  \item rozpoznawanie zmian nowotworowych,
-  \item opracowywanie nowych leków,
-  \item rozpoznawanie emocji (\textit{ang. affective computing}).
-\end{itemize}
+\begin{minipage}[t]{\textwidth}
+    Inne zastosowania głębokiego uczenia jakie są badane to~m.in:
+    \begin{itemize}
+      \item rozpoznawanie niechcianych wiadomości (tzw. spamu),
+      \item automatyczne generowanie opisów w~języku naturalnym dla~obrazków (\cite{img-desc-generator}),
+      \item rozpoznawanie zmian nowotworowych,
+      \item opracowywanie nowych leków,
+      \item rozpoznawanie emocji (\textit{ang. affective computing}).
+    \end{itemize}
+\end{minipage}

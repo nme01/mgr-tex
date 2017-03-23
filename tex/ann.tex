@@ -24,7 +24,7 @@ im~wagi. W~drugiej fazie dla~otrzymanej sumy obliczana jest wartość funkcji si
 $f(x)=\frac{1}{1+e^{-x}}$, która stanowi wartość wyjściową neuronu.
 
 Innym często stosowanym neuronem jest neuron o progowej funkcji aktywacji, tzn.~dla~wartości powyżej pewnego
-progu przyjmuje wartość 1, a dla pozostałych wartości przyjmuje 0 (lub -1). Wyjścia jednostek tego typu
+progu przyjmuje wartość 1, a~dla~pozostałych wartości przyjmuje 0 (lub -1). Wyjścia jednostek tego typu
 zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesyłane na~wejścia innych neuronów.
 
 \subsection{Funkcje aktywacji}
@@ -36,6 +36,7 @@ Najprostsza z~możliwych funkcji aktywacji. Dokonuje lioniowego przekształcenia
 stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca się~z~neuronów o~liniowej~funkcji
 aktywacji nie~może modelować nieliniowych funkcji.
 
+\begin{minipage}[t]{\textwidth}
 \begin{equation}
 f(x)=x
 \end{equation}
@@ -59,11 +60,13 @@ f(x)=x
     \end{tikzpicture}
     \caption{Funkcja liniowa}
 \end{figure}
+\end{minipage}
 
 \subsubsection{Funkcja progowa}
 Funkcja nieliniowa, a~więc nadająca się~do~zadań klasyfikacji. Posiada jednak wadę przeszkadzającą w~uczeniu sieci
 z~wykorzystaniem metod gradientowych: nie~ma~ciągłej pierwszej pochodniej.
 
+\begin{minipage}[t]{\textwidth}
 \begin{equation}
 	f(x) =
 	\begin{cases}
@@ -92,12 +95,14 @@ z~wykorzystaniem metod gradientowych: nie~ma~ciągłej pierwszej pochodniej.
     \end{tikzpicture}
     \caption{Funkcja progowa}
 \end{figure}
+\end{minipage}
 
 \subsubsection{Funkcja sigmoidalna} \label{sssec:sigmoid}
 Również jest to~funkcja nieliniowa. W~przeciwieństwie do~funkcji poprzedniej jest gładka. Jednakże również nie~jest
 pozbawiona wad~--~przyczynia się~ona~do~powstawania problemu zanikającego gradientu (\cite{vanishing-gradient}),
 co~wynika z~tego, że~dla~wysokich wartości wejściowych tej funkcji aktywacji jej gradient jest bliski zera.
 
+\begin{minipage}[t]{\textwidth}
 \begin{equation}
 	f(x) = \frac{1}{1+e^{-x}}
 \end{equation}
@@ -122,6 +127,7 @@ co~wynika z~tego, że~dla~wysokich wartości wejściowych tej funkcji aktywacji 
     \end{tikzpicture}
     \caption{Funkcja sigmoidalna}
 \end{figure}
+\end{minipage}
 
 \subsubsection{Poprawiona jednostka liniowa (\textit{ang. Rectified Linear Unit, ReLU})}
 Funkcja ta,~zwana również funkcją rampy (\textit{ang.~ramp function}) jest jedną z~najczęściej wykorzystywanych funkcji
@@ -130,6 +136,7 @@ problem zanikającego gradientu~--~gdy~wagi wejść neuronu przyjmą takie warto
 wartości ujemne, wówczas neuron będzie ciągle generować wartość wyjściową równą zero. Wówczas potocznie mówi
 się~o~,,śmierci'' neuronu.
 
+\begin{minipage}[t]{\textwidth}
 \begin{equation}
 	f(x) = max(0,x)
 \end{equation}
@@ -153,11 +160,13 @@ się~o~,,śmierci'' neuronu.
     \end{tikzpicture}
     \caption{Funkcja rampy (tzw.~ReLU)}
 \end{figure}
+\end{minipage}
 
 \subsubsection{Funkcja softplus}
 Jest to~wartiant funkcji ReLU, który jest jej ,,wygładzoną'' wersją. Posiada ciągłą pierwszą pochodną będącą funkcją
 sigmoidalną (\ref{sssec:sigmoid}).
 
+\begin{minipage}[t]{\textwidth}
 \begin{equation}
 	f(x) = ln(1 + e^x)  \hspace{1cm} f'(x) = \frac{1}{1 + e^{-x}}
 \end{equation}
@@ -181,6 +190,7 @@ sigmoidalną (\ref{sssec:sigmoid}).
     \end{tikzpicture}
     \caption{Funkcja softplus}
 \end{figure}
+\end{minipage}
 
 \subsubsection{Funkcja softmax}
 Funkcja ta~najczęściej stosowana jest w~warstwie wyjściowej sieci. Bywa nazywana \textbf{znormalizowaną funkcją
@@ -222,6 +232,7 @@ lub entropia krzyżowa, dla danych binarnych:
 $$Loss(w)=-\sum\limits_m(\sigma(w^{T}x^{(m)})\log{y^{(m)}} + (1-\sigma(w^{T}x^{(m)})\log{(1-y^{(m)})})
 $$
 gdzie:
+\begin{minipage}[t]{\textwidth}
 \begin{itemize}
   \item w - wagi sieci neuronowej,
   \item m - numer próbki uczącej,
@@ -229,6 +240,7 @@ gdzie:
   \item y - spodziewane wartości wyjściowe,
   \item $\sigma$ - funkcja aktywacji.
 \end{itemize}
+\end{minipage}
 
 Celem uczenia sieci jest minimalizacja funkcji $Loss(w)$. Na~początku należy określić gradient funkcji straty
 względem wag sieci (gradient jest taki sam dla obu wymienionych powyżej funkcji).
@@ -238,7 +250,7 @@ Kroki tego algorytmu przedstawiono poniżej:
   \item zainicjuj losowo wektor wag w,
   \item oblicz gradient funkcji straty,
   \item $w:=w-\alpha \nabla Loss(w)$, $\alpha$ - współczynnik określający długość kroku,
-  \item wróć do kroku 2. jeśli nie~został spełniony warunek stopu.
+  \item wróć do~kroku 2. jeśli nie~został spełniony warunek stopu.
 \end{enumerate}
 
 Zakładając, że~wartość błędu dla~danego przykładu trenującego wyraża się~wzorem
@@ -249,13 +261,13 @@ Ponieważ $\sigma(x)=\frac{1}{1+e^{-x}}$, pochodna funkcji sigmoidalnej wyraża 
 $$\sigma'(x)=\sigma(x)(1-\sigma(x))$$
 
 Dla uproszczenia załóżmy, że~w~sieci występuje tylko jedna warstwa ukryta. Wówczas gradient funkcji straty
-względem wag połączeń pomiędzy warstwą wyjściową, a ukrytą:
+względem wag połączeń pomiędzy warstwą wyjściową, a~ukrytą:
 $$\frac{\partial Loss}{\partial w_{jk}}=\frac{\partial Loss}{\partial in_k}\frac{\partial
 in_k}{\partial w_{jk}}= \delta_k \frac{\partial (\sum\limits_j w_{jk}h_j)}{\partial w_{jk}} = \delta_k h_j$$
 Poprzez $in_k$ oznaczono wektor wejść trafiających do~funkcji aktywacji poszczególnych neuronów warstwy
 wyjściowej.
 
-Gradient funkcjii straty względem wag połączeń pomiędzy warstwą wejściową a ukrytą: 
+Gradient funkcjii straty względem wag połączeń pomiędzy warstwą wejściową a~ukrytą:
 $$ \frac{\partial Loss}{\partial w_{ij}}=\frac{\partial Loss}{\partial in_j}\frac{\partial in_j}{\partial
 w_{ij}} = \delta_j \frac{\partial (\sum\limits_j w_{ij}x_i)}{\partial w_{ij}} = \delta_j x_i $$
 
@@ -278,12 +290,12 @@ wielowarstwowe uczone za pomocą wstecznej propagacji błędów istnieją
 już~od~ponad 40 lat. Sieciom tym~towarzyszy jednak poważna wada: przy~wielu
 warstwach w~sieci, wagi wyjść początkowych warstw są aktualizowane w~bardzo
 nieznacznym stopniu (na ogół: im~większa odległość warstwy od~wyjścia,
-tym~mniejsze korekcje wag). W literaturze problem ten nazywany jest problemem
+tym~mniejsze korekcje wag). W~literaturze problem ten nazywany jest problemem
 zanikającego gradientu (\textit{ang. vanishing gradient problem}). Z~tego
 powodu do~efektywnego uczenia metodą wstecznej propagacji błędów konieczne jest
-stosowanie niewielkiej liczby warstw (w praktyce stosowano przeważnie
+stosowanie niewielkiej liczby warstw (w~praktyce stosowano przeważnie
 do~czterech warstw). Choć teoretycznie zastosowanie dwóch warstw
-wystarcza do aproksymacji dowolnej funkcji, to~jednak może wymagać bardzo dużej
+wystarcza do~aproksymacji dowolnej funkcji, to~jednak może wymagać bardzo dużej
 liczby neuronów w~warstwie ukrytej (w~niektórych problemach liczba neuronów w~warstwie ukrytej może rosnąć
 wykładniczo względem rozmiaru danych wejściowych).
 
@@ -292,7 +304,7 @@ etapu: tzw.~uczenia wstępnego (\textit{ang.~pre-training}). W~tym~etapie
 optymalizowaną funkcją nie~jest funkcja błędu (jak~w~przypadku metody wstecznej
 propagacji błędu), ale~funkcja prawdopodobieństwa wystąpienia danych p(v),
 gdzie v stanowi dane wejściowe sieci. Celem, do~którego dąży etap uczenia
-wstępnego jest takie uformowanie funkcji p(v), by dla danych podobnych do tych obserwowanych w~zbiorze
+wstępnego jest takie uformowanie funkcji p(v), by~dla~danych podobnych do~tych obserwowanych w~zbiorze
 uczącym wartość funkcji prawdopodobieństwa była jak największa, natomiast dla pozostałych danych:
 jak~najmniejsza.
 
@@ -321,7 +333,7 @@ Po~etapie uczenia wstępnego następuje tzw. dostrajanie sieci
 Następnie cała sieć jest uczona danymi etykietowanymi (uczenie nadzorowane)
 metodą wstecznej propagacji błędu. Dzięki zastosowaniu uczenia wstępnego
 sztuczna sieć neuronowa znacznie lepiej generalizuje funkcję, którą ma~modelować
-(tzn.~jest znacznie mniej podatna na~tzw.~overfitting, czyli zbytnie dopasowanie modelu do danych).
+(tzn.~jest znacznie mniej podatna na~tzw.~overfitting, czyli zbytnie dopasowanie modelu do~danych).
 Ponadto, do~dostrajania jest potrzebna znacznie mniejsza ilość danych niż do~pierwszego etapu. Zatem
 do~uczenia sieci wystarczy, by~tylko niewielka część danych uczących była
 etykietowana.
@@ -338,7 +350,7 @@ Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmó
 jedynie \textbf{Ograniczona Maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
 
 \subsection{Autoenkoder}
-Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się~z~trzech warstw:
+Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech warstw:
 \begin{itemize}
 	\item warstwy wejściowej,
 	\item warstwy ukrytej,
@@ -376,7 +388,7 @@ Dla danych ciągłych ($x\in\mathbb{R}$) jako funkcję kosztu typowo stosuję si
 \frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2
 \end{equation*}
 gdzie $N$ to~liczba klasyfikowanych przykładów, $s_1$ to~długość wektora wejściowego (jak~również wyjściowego),
-$x$ to~wektor wartości wejściowych, a $\hat{x}$ to~wektor wartości wyjściowych. Suma dzielona jest przez $2N$ zamiast
+$x$ to~wektor wartości wejściowych, a~$\hat{x}$ to~wektor wartości wyjściowych. Suma dzielona jest przez $2N$ zamiast
 $N$ w~celu~wygodniejszego liczenia pochodnej w~procesie uczenia. Zabieg ten ma charakter czysto estetyczny.
 
 \subsubsection{Regularyzacja rozrzutu}
@@ -481,7 +493,7 @@ $$\frac{\partial-\log{p(v^{(t)})}}{\partial{\theta}}=\mathbb{E}_h[\frac{\partial
 
 Pierwszy ze~składników sumy występującej w~powyższym wzorze to~tzw. składnik pozytywny. Drugi składnik
 to~tzw.~składnik negatywny. Pierwszy z~nich odpowiada zwiększaniu wartości funkcji prawdopodobieństwa
-dla~obserwowanych danych, a drugi zmniejsza prawdopodobieństwo danych nieobserwowanych. Drugi składnik jest
+dla~obserwowanych danych, a~drugi zmniejsza prawdopodobieństwo danych nieobserwowanych. Drugi składnik jest
 skomplikowany obliczeniowo, gdyż występuje w~nim iteracja po~wszystkich możliwych stanach sieci, których
 liczba rośnie wykładniczo względem liczby neuronów w~sieci. Z~tego powodu dokonuje się estymacji. Jedną
 z~wykorzystywanych metod jest tzw. próbkowanie Gibbsa. 
