@@ -118,7 +118,7 @@ takie samo, jak~dla~wyborów dokonanych przy~hiperparametrze regularyzacji~L2.
 Dla~każdej pary parametrów sieć była uczona 100,000 mini-zestawów danych (tzw.~\textbf{minibatch}), z~których
 każdy zawierał 128 przykładów uczących. Po~każdym kroku uczenia pojedynczym mini-zestawem danych, sprawdzano
 dokładność sieci na~zbiorze testowym. Po~wykonaniu wszystkich kroków uczenia dla~danej pary hiperparametrów
-brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabelce
+brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabeli
 (\ref{table:wyniki1}).
 
 \section{Środowisko sprzętowe}
@@ -180,17 +180,39 @@ walidacyjnym. W~przypadku wystąpienia przeuczenia na~wykresie powinno się zaob
 iteracji pomimo zmniejszania się~błędu na~zbiorze uczącym, bład na~zbiorze walidacyjnym znacząco rośnie.
 
 TODO wykres
-TODO tabela z wynikami
 
 Jak widać na~wykresie (TODO nr wykresu) nie~obserwujemy takiej sytuacji.
 
 \section{Badanie nr 2}
-W~badaniu nr~2~powtórzono badanie nr~1 ze~zwiększoną liczbą iteracji. Spodziewano się,~że~od~pewnego numeru
+W~badaniu nr~2~powtórzono badanie nr~1 ze~zwiększoną liczbą iteracji (do 144000). Spodziewano się,~że~od~pewnego numeru
 iteracji będzie obserwowany wzrost błędu na~zbiorze walidacyjnym przy~jednoczesnym spadku błędu na~zbiorze uczącym.
-Jednakże również nie~udało się~zaobserwować zaistniałej sytuacji. Wyniki przedstawiono na~wykresie (TODO nr wykresu).
+Jednakże również nie~udało się~zaobserwować zaistniałej sytuacji. Wyniki przedstawiono w~tabeli \ref{table:wyniki2}.
 
 TODO wykres
-TODO tabela z wynikami
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+      \hline
+                       & $\lambda$ = 0.0005 & $\lambda$ = 0.001 & $\lambda$ = 0.005 & $\lambda$ = 0.01 & $\lambda$ = 0.05 \\
+      \hline
+      $\alpha=0.00001$ & 0.90 & 0.89 & 0.87 & 0.83 & 0.82 \\
+      \hline
+      $\alpha=0.00005$ & 0.91 & 0.88 & 0.85 & 0.83 & 0.84 \\
+      \hline
+      $\alpha=0.0001$  & 0.90 & 0.88 & 0.88 & 0.87 & 0.87 \\
+      \hline
+      $\alpha=0.0005$  & 0.92 & 0.92 & 0.89 & 0.87 & 0.86 \\
+      \hline
+      $\alpha=0.001$   & 0.89 & 0.87 & 0.87 & 0.83 & 0.83 \\
+      \hline
+    \end{tabular}
+    \caption{Wpływ regularyzacji L2 ($\lambda$) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji
+    sieci neuronowej}
+    \label{table:wyniki2}
+\end{table}
+
+Całkowity czas badania wyniósł: 64 godziny 17 minut i 23 sekundy.
 
 Prawdopodobnie wynika to~z~tego, że~sieć z~powodu swojej względnie prostej struktury nie~ma~możliwości przeuczenia
 się~(zbyt mała liczba neuronów w~stosunku do~liczby przykładów uczących).
