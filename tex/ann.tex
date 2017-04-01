@@ -466,18 +466,28 @@ Ograniczona Maszyna Boltzmanna jest sztuczną siecią neuronową składającą s
   \item warstwy neuronow ukrytych.
 \end{itemize}
 
-\begin{figure}
+Tytułowe ograniczenie mechanizmu polega na~tym, że~neurony należące do~tej~samej warstwy nie~są ze~sobą połączone,
+czyli bezpośrednio nie~wymieniają żadnych informacji (w~przeciwieństwie do~oryginalnego mechanizmu: Maszyny Boltzmanna).
+Zadaniem Ograniczonej Maszyny Boltzmanna, podobnie jak~autoenkodera, jest rekonstrukcja danych wejściowych.
+
+Mechanizm zaprezentowano na~rysunku \ref{rys:restricted-boltzmann-machine}. Górna warstwa,
+to~warstwa neuronów ukrytych. Co~ciekawe, dolna warstwa~--warstwa widoczna~--~to~zarówno warstwa wejściowa,
+jak~i~wyjściowa. Wynika to~z~natury mechanizmu, który po~przyjęciu pewnych danych wejściowych przekształca je,
+a~wartości przekształcone przedstawiane są na~wyjściach neuronów wejściowych.
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/RBM.png}
-	\caption{Ograniczona Maszyna Boltzmanna}
+	\caption{Ograniczona Maszyna Boltzmanna. Na~rysunku: górna warstwa to~warstwa ukryta, a~dolna to warstwa widoczna,
+	pełniąca rolę zarówno warstwy wejściowej, jak~i~wyjściowej.}
+	\label{rys:restricted-boltzmann-machine}
 \end{figure}
 
-Cechą charakterystyczną tego mechanizmu jest jego umiejętność do~odszukiwania cech danych wejściowych
+Cechą charakterystyczną omawianego mechanizmu jest jego umiejętność do~wyodrębniania cech danych wejściowych
 (\textit{ang. feature extraction}). Przykładowo Ograniczona Maszyna Boltzmanna, którą uczono obrazkami, będzie
 wykrywać charakterystyczne łuki czy krawędzie.
 
-Dzięki tej właściwości mechanizm może być wykorzystywany m.in. do~korekcji danych czy~wręcz do~ich~generowania
-(np.~do~generowania pisma ręcznego).
+Dzięki tej właściwości mechanizm może być wykorzystywany m.in. do~korekcji danych.
 
 \subsubsection{Prawdopodobieństwo stanów sieci}
 W~Ograniczonej Maszynie Boltzmanna każdy stan sieci (tzn. zestaw wartości wyjść poszczególnych neuronów)
@@ -485,11 +495,12 @@ ma~określone prawdopodobieństwo zadane wzorem:
 
 $p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
 \begin{itemize}
-  \item v to~macierz wyjść neuronów wejściowych,
-  \item h to~macierz wyjść neuronów ukrytych,
+  \item v to~wektor wyjść neuronów widocznych,
+  \item h to~wektor wyjść neuronów ukrytych,
   \item Z to~czynnik normalizujący (tzw.~funkcja partycji),
   \item $E(v,h)=-a^{T}v-b^{T}h-v^{T}Wh$,
-  \item a,b oraz W to~macierze wag sieci.
+  \item W to~macierz wag sieci (wagi połączeń między neuronami),
+  \item a, b to~odpowiednio wektor przesunięć (ang.~bias) dla~neuronów warstwy widocznej i~neuronów warstwy ukrytej.
 \end{itemize}
 
 \subsubsection{Inferencja}
@@ -530,7 +541,7 @@ przedstawiono poniżej.
 Próbkowanie Gibbsa (algorytm):
 \begin{enumerate}
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy ukrytej na~podstawie danych wejściowych
-  (korzystając z~wzorów \ref{eqn:rbm_inference}).
+  (korzystając ze~wzorów \ref{eqn:rbm_inference}).
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy wejściowej na~podstawie obliczonych wartości
   wyjściowych neuronów ukrytych (korzystając z~wzorów \ref{eqn:rbm_inference}).
 \end{enumerate}
