@@ -333,13 +333,9 @@ wstecznej propagacji błędu jest uczenie tylko jednej warstwy na~raz
 (po~nauczeniu danej warstwy jej wagi nie~są już modyfikowane w~etapie uczenia
 wstępnego). Tak nauczona sieć, choć jeszcze nie~nadaje się~do~przeprowadzania
 klasyfikacji, to~dobrze modeluje charakter danych, tzn.~właściwości danych,
-które często pojawiają się~w~zestawie uczącym.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.45\linewidth]{img/hierarchical-learning_cropped.jpg}
-	\caption{cs.stanford.edu}
-\end{figure}
+które często pojawiają się~w~zestawie uczącym. Na~rys.~\ref{rys:hierarchical-learning} przedstawiono wizualizację
+hierarchicznego uczenia się~sieci neuronowej (pierwsza warstwa rozpoznająca najprostsze cechy, kolejne rozpoznające
+coraz to~bardziej złożone kombinacje cech).
 
 Po~etapie uczenia wstępnego następuje tzw. dostrajanie sieci
 (\textit{ang.~fine-tuning}). W~tym etapie dodawana jest warstwa wyjściowa sieci.
@@ -350,6 +346,14 @@ sztuczna sieć neuronowa znacznie lepiej generalizuje funkcję, którą ma~model
 Ponadto, do~dostrajania jest potrzebna znacznie mniejsza ilość danych niż do~pierwszego etapu. Zatem
 do~uczenia sieci wystarczy, by~tylko niewielka część danych uczących była
 etykietowana.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.45\linewidth]{img/hierarchical-learning_cropped.jpg}
+	\caption{Wizualizacja działania neuronów w~kolejnych warswach sieci neuronowej rozpoznającej twarze.
+	Źródło:~Stanford University}
+	\label{rys:hierarchical-learning}
+\end{figure}
 
 \section{Modelowanie funkcji prawdopodobieństwa}
 Cechą wspólną wszystkich mechanizmów głębokiego uczenia badanych w~ramach tej~pracy magisterskiej jest
