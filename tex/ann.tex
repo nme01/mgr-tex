@@ -434,14 +434,15 @@ a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu wartstwy ukryt
 
 Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:
 \begin{equation*}
-J(W,b)=\frac{1}{N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2 + \beta\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j})
+J(W,b)=\frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2 + \beta\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j})
 \end{equation*}
 gdzie $W$ i $b$, to~odpowiednio wagi sieci i~bias.
 
 \subsubsection{Uczenie}
 Do~uczenia sieci wykorzystywana jest metoda wstecznej propagacji błędów (opisana we~wcześniejszej części pracy),
 stąd proces zmiany wag w~sieci zaczyna się~od~warstwy wyjściowej. Zdefiniujmy różnicę pomiędzy wartościami wyjściowymi
-a wejściowymi jako $\delta_i^{(3)}$, gdzie $i$ jest numerem neuronu w~warstwie wyjściowej.
+a wejściowymi jako $\delta_i^{(3)}$, gdzie $i$ jest numerem neuronu w~warstwie wejściowej (lub wyjściowej, bo~neurony
+wyjściowe odpowiadają, neuronom wejściowym).
 Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
 \begin{equation}
     \begin{split}
