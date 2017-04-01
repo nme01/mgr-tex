@@ -363,8 +363,12 @@ funkcji rozkładu prawdopodobieństwa, tzn.~osiągnięcie takiego rozkładu praw
 funkcji prawdopodobieństwa, natomiast pozostałym danym (w~szczególności danym losowym) będzie odpowiadało
 niskie prawdopodobieństwo.
 
-Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmów. W~tej~pracy omówiona zostanie
-jedynie \textbf{Ograniczona Maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
+Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmów. W~tej~pracy omówione zostaną
+jedynie poniższe mechanizmy:
+\begin{itemize}
+    \item \textbf{autoenkoder} (\textit{ang.~autoencoder}),
+    \item \textbf{Ograniczona Maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
+\end{itemize}
 
 \subsection{Autoenkoder}
 Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech warstw:
@@ -374,15 +378,18 @@ Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech 
 	\item warstwy wyjściowej.
 \end{itemize}
 
+Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
+Celem uczenia takiej sieci jest osiągnięcie stanu, w~którym wartości na~wyjściu sieci są równe
+wartościom wejściowym tej sieci. Inaczej mówiąc: sieć ma za zadanie wykształcenie przekształcenia tożsamościowego
+(identycznościowego).
+
+Przykładową strukturę autoenkodera zaprezentowano na~rys.~\ref{rys:autoenkoder}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/autoencoder.png}
 	\caption{Autoenkoder}
+	\label{rys:autoenkoder}
 \end{figure}
-
-Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
-Celem uczenia takiej sieci jest osiągnięcie stanu, w~którym wartości na~wyjściu sieci są równe
-wartościom wejściowym tej sieci. Wówczas sieć ma za zadanie wykształcenie przekształcenia tożsamościowego.
 
 \subsubsection{Zastosowania}
 Zazwyczaj w~warstwie ukrytej takiej sieci umieszcza się~mniej neuronów niż~w~dwóch pozostałych warstwach.
@@ -400,7 +407,7 @@ W~ogólności warstwa wejściowa oraz warstwa ukryta autoenkodera tworzą razem 
 z~warstwą wyjściową tworzą mechanizm dekodujący.
 
 \subsubsection{Funkcja kosztu}
-Dla danych ciągłych ($x\in\mathbb{R}$) jako funkcję kosztu typowo stosuję się średni kwadrat błędu:
+Dla danych ciągłych ($x\in\mathbb{R}$) jako funkcję kosztu typowo stosuje się~średni kwadrat błędu:
 \begin{equation*}
 \frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2
 \end{equation*}
