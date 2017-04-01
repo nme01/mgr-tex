@@ -224,12 +224,14 @@ zadanego problemu, jest dobór odpowiedniego typu sieci. Obecnie najczęściej w
 \subsection{Sieć jednokierunkowa}
 Jednym z~najczęściej wykorzystywanych typów sieci jest sieć jednokierunkowa. Charakterystyczną cechą takiej
 sieci jest brak sprzężeń zwrotnych, tzn. sygnały przesyłane są~od~warstwy wejściowej poprzez warstwy ukryte
-aż do~warstwy wyjściowej. Model przykładowej sieci warstwowej przedstawiono poniżej.
+aż do~warstwy wyjściowej. Model przykładowej sieci warstwowej przedstawiono poniżej na~rys.~\ref{rys.siec-feed-forward}.
 
-\begin{Figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\linewidth]{img/mgr_backprop_net.png}
-\end{Figure}
+	\caption{Wielowarstwowa sieć jednokierunkowa}
+	\label{rys.siec-feed-forward}
+\end{figure}
 
 \subsection{Wsteczna propagacja błędów} \label{ssec:backpropagation}
 Wsteczna propagacja błędów jest podstawową metodą uczenia nadzorowanego wielowarstwowych jednokierunkowych
