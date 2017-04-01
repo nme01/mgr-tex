@@ -35,7 +35,7 @@ W~neuronach wykorzystywane są bardzo różne funkcje aktywacji (\cite{activatio
 zalety i~wady. W~niniejszej podsekcji przedstawiono i~omówiono wybrane funkcje.
 
 \subsubsection{Funkcja liniowa}
-Najprostsza z~możliwych funkcji aktywacji. Dokonuje lioniowego przekształcenia na~wartości wejściowej. Jest rzadko
+Najprostsza z~możliwych funkcji aktywacji. Dokonuje liniowego przekształcenia na~wartości wejściowej. Jest rzadko
 stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca się~z~neuronów o~liniowej~funkcji
 aktywacji nie~może modelować nieliniowych funkcji.
 
@@ -256,7 +256,7 @@ Kroki tego algorytmu przedstawiono poniżej:
   \item wróć do~kroku 2. jeśli nie~został spełniony warunek stopu.
 \end{enumerate}
 
-Zakładając, że~wartość błędu dla~danego przykładu trenującego wyraża się~wzorem
+Zakładając, że~wartość błędu dla~danego przykładu uczącego wyraża się~wzorem
 $$Error^{(m)}=\sigma(w^{T}x^{(m)})-y^{(m)}$$
 gradient funkcji straty ma~wzór:
 $$\nabla_{w}Loss=\sum\limits_{m}Error^{(m)}\sigma'(w^{T}x^{(m)})x^{(m)}$$
