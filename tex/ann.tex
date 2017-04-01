@@ -518,12 +518,16 @@ gdzie: $\sigma$ to~funkcja aktywacji, $i$ oraz $j$ to~numery kolejnych neuronów
 
 
 \subsubsection{Uczenie}
-Celem uczenia sieci jest znalezienie takich parametrów a,b i W, że~wartość funkcji prawdopodobieństwa p(v)
+Celem uczenia sieci jest znalezienie takich parametrów a, b i W, że~wartość funkcji prawdopodobieństwa p(v)
 dla~danych obserwowanych będzie wysoka, a~dla~pozostałych danych niska. W~praktyce zamiast maksymalizować
-funkcję prawdopodobieństwa p(v), minimalizuje się funkcję średniego ujemnego log-prawdopodobieństwa:
-$$\frac{1}{T}\sum\limits_{t}-\log{p(v^{(t)})}$$
+funkcję prawdopodobieństwa p(v), minimalizuje się funkcję średniego ujemnego log-prawdopodobieństwa, gdzie średnia jest
+liczona po~wszystkich $T$ przykładach ze~zbioru uczącego:
+\begin{equation*}
+\frac{1}{T}\sum\limits_{t}-\log{p(v^{(t)})}
+\end{equation*}
+gdzie $t$ to~numer przykładu uczącego.
 
-Do~minimalizacji funkcji metodami gradientowymi konieczne jest obliczenie pochodnej po~parametrach sieci
+Do~minimalizacji funkcji metodami gradientowymi konieczne jest obliczenie pochodnej po~parametrach sieci ($\theta$)
 dla tej funkcji:
 $$\frac{\partial-\log{p(v^{(t)})}}{\partial{\theta}}=\mathbb{E}_h[\frac{\partial{E(v^{(t)},h)}}{\partial{\theta}}\mid{v^{(t)}}]-\mathbb{E}_{v,h}[\frac{\partial{E(v,h)}}{\partial{\theta}}]$$
 
