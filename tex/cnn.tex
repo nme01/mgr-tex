@@ -64,17 +64,33 @@ Jak~można zaobserwować, w~filtrze Gaussa na~nową wartość piksela mają czę
 i~przede~wszystkim stara wartość piksela.
 
 \subsubsection{Filtr Laplace'a}
-Zadaniem tego filtru jest wyostrzanie obrazu. Jego zadaniem jest usunięcie wpływu sąsiednich pikseli na~wartość każdego
-przekształcanego piksela. Jest to~poniekąd filtr o~działaniu odwrotnym do~filtru Gaussa. Maskę omawianego filtru
- przedstawiono na rysunku \ref{rys:maska-laplace}.
+Zadaniem tego filtru jest wyostrzanie obrazu. Efekt ten jest osiągany poprzez usunięcie wpływu sąsiednich pikseli
+na~wartość każdego przekształcanego piksela. Jest to~poniekąd filtr o~działaniu odwrotnym do~filtru Gaussa. Jądro splotu
+dla~omawianego mechanizmu przedstawiono na~rysunku \ref{rys:maska-laplace}.
 
-TODO wstawić maskę filtru Laplace'a
-TODO pokazać działanie filtru Laplace'a na prawdziwym obrazie
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\linewidth]{img/laplace-conv-kernel.png}
+	\caption{Maska filtru Laplace'a}
+	\label{rys:maska-laplace}
+\end{figure}
 
-Maski dla~wymienionych filtrów są~z~góry ustalone i~nie~ulegają zmianie w~czasie działania algorytmu. Splotowa
-sieć neuronowa zamiast wykorzystywać z~góry określone maski, ,,uczy się ich'', a~więc stara się~tak dobrać
-ich~wartości, aby~jak~najlepiej rozpoznawać wyznaczone obiekty na~obrazach. Poszczególnym wartościom
-w~masce filtra odpowiadają wagi splotowej sieci neuronowej. 
+Działanie filtru Laplace'a zaprezentowano na~rysunku \ref{rys:laplace-conv-example.jpg}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/laplace-conv-example.png}
+	\caption{Efekt działania filtru Laplace'a na~prawdziwym obrazie. Po~lewej: obraz oryginalny, po~prawej: obraz
+	przekształcony}
+	\label{rys:laplace-conv-example}
+\end{figure}
+
+Maski dla~zaprezentowanych filtrów (tj.~dla~filtru Gaussa i~filtru Laplace'a) są~z~góry ustalone i~nie~ulegają zmianie
+w~czasie działania algorytmu.
+
+Splotowa sieć neuronowa zamiast wykorzystywać z~góry określone maski, ,,uczy się ich'',
+a~więc stara się~tak dobrać ich~wagi, aby~jak~najlepiej rozpoznawać wyznaczone obiekty na~obrazach. Poszczególnym
+wartościom w~masce filtra odpowiadają wagi splotowej sieci neuronowej.
 
 \subsection{Padding}
 Przy~stosowaniu filtrów splotowych pojawia się problem: jaką wartość powinny otrzymać piksele obrazka
