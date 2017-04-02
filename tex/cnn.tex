@@ -10,11 +10,67 @@ $$ f\ast g[n]\defeq \sum\limits_{m=-\infty}^{\infty}f[m]g[n-m] = \sum\limits_{m=
 gdzie $f$ i $g$ to~ciągi splatane, a~zapis $f[n]$ to~zapis oznaczający $n$-ty wyraz ciągu $f$.
 
 W~cyfrowym przetwarzaniu obrazów filtry splotowe znajdują bardzo szerokie zastosowanie, gdyż w~zależności
-od~dobranej maski filtra, osiągane są różne rezultaty. Przykładowe filtry splotowe:
-\begin{itemize}
-  \item filtr Gaussa (wygładzanie),
-  \item filtr Laplace'a (wyostrzanie).
-\end{itemize}
+od~dobranej maski filtra, osiągane są różne rezultaty.
+
+\subsection{Przykładowe filtry splotowe}
+\subsubsection{Filtr Gaussa}
+By~lepiej zrozumieć działanie filtrów splotowych warto posłużyć się~przykładami. Jednym z~najczęściej stosowanych
+mechanizmów tego typu jest filtr Gaussa, którego zadaniem jest wygładzenie (inaczej: rozmazanie) obrazu.
+Maska tego filtru została przedstawiona na~rysunku \ref{rys:maska-gauss}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\linewidth]{img/gauss-conv-kernel.png}
+	\caption{Maska filtru Gaussa}
+	\label{rys:maska-gauss}
+\end{figure}
+
+Dla~obrazu źródłowego (patrz rys.~\ref{rys:img-src-gauss}), aby~otrzymać obraz przekształcony
+(rys.~\ref{rys:output-gauss}) należy policzyć średnią ważoną dla~otoczenia każdego przekształcanego piksela, a~więc:
+\begin{enumerate}
+    \item Przemnożyć wartość każdego piksela z~odpowiadającą mu wartością maski.
+    \item Dodać wszystkie iloczyny do~siebie.
+    \item Znormalizować uzyskaną wartość poprzez podzielenie jej przez~sumę wag tworzących maskę (krok wykonywany tylko
+    przy~wykorzystaniu niektórych filtrów).
+\end{enumerate}
+
+Tak~uzyskana wartość to~w~przekształconym obrazie nowa wartość piksela. Operacja splotu jest zwykle wykonywana
+dla~każdego piksela oryginalnego obrazu.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/gauss-conv-src-img.png}
+	\caption{Przykładowy obraz, który może zostać przekształcony przy~użyciu filtru Gaussa. Poszczególne wartości
+	w~komórkach odpowiadają wartościom pikseli w~obrazie niekolorowym (odcienie szarości)}
+	\label{rys:img-src-gauss}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/gauss-conv-output.png}
+	\caption{Obraz zawierający piksel przekształcony przy~użyciu filtru Gaussa}
+	\label{rys:output-gauss}
+\end{figure}
+
+Efekt działania filtru Gaussa na~prawdziwym obrazie przedstawiono na~rysunku \ref{rys:gauss-conv-example}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{img/gauss-conv-real-example.jpg}
+	\caption{Efekt działania filtru Gaussa na~prawdziwym obrazie. Na~górze: obraz oryginalny, na~dole: obraz
+	przekształcony}
+	\label{rys:gauss-conv-example}
+\end{figure}
+
+Jak~można zaobserwować, w~filtrze Gaussa na~nową wartość piksela mają częściowo wpływ piksele sąsiednie
+i~przede~wszystkim stara wartość piksela.
+
+\subsubsection{Filtr Laplace'a}
+Zadaniem tego filtru jest wyostrzanie obrazu. Jego zadaniem jest usunięcie wpływu sąsiednich pikseli na~wartość każdego
+przekształcanego piksela. Jest to~poniekąd filtr o~działaniu odwrotnym do~filtru Gaussa. Maskę omawianego filtru
+ przedstawiono na rysunku \ref{rys:maska-laplace}.
+
+TODO wstawić maskę filtru Laplace'a
+TODO pokazać działanie filtru Laplace'a na prawdziwym obrazie
+
 Maski dla~wymienionych filtrów są~z~góry ustalone i~nie~ulegają zmianie w~czasie działania algorytmu. Splotowa
 sieć neuronowa zamiast wykorzystywać z~góry określone maski, ,,uczy się ich'', a~więc stara się~tak dobrać
 ich~wartości, aby~jak~najlepiej rozpoznawać wyznaczone obiekty na~obrazach. Poszczególnym wartościom
