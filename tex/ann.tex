@@ -31,13 +31,15 @@ progu przyjmuje wartość 1, a~dla~pozostałych wartości przyjmuje 0 (lub -1). 
 zazwyczaj są~jednocześnie wyjściami całej sieci neuronowej i~nie~są przesyłane na~wejścia innych neuronów.
 
 \subsection{Funkcje aktywacji}
-W~neuronach wykorzystywane są bardzo różne funkcje aktywacji (\cite{activation-functions}). Każda z~nich zawiera swoje
+W~neuronach wykorzystywane są bardzo różne funkcje aktywacji (\cite{activation-functions}). Każda z~nich ma swoje
 zalety i~wady. W~niniejszej podsekcji przedstawiono i~omówiono wybrane funkcje.
 
 \subsubsection{Funkcja liniowa}
 Najprostsza z~możliwych funkcji aktywacji. Dokonuje liniowego przekształcenia na~wartości wejściowej
 (rys.~\ref{rys:f-liniowa}). Jest rzadko stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca
-się~z~neuronów o~liniowej~funkcji aktywacji nie~może modelować nieliniowych funkcji.
+się~z~neuronów o~liniowej~funkcji aktywacji nie~może modelować nieliniowych funkcji. Wynika to~z~tego, że~rezultatem
+złożenia funkcji liniowych jest również funkcja liniowa. Stąd zastosowania neuronów o~takiej funkcji aktywacji są
+mocno ograniczone.
 
 \begin{minipage}[t]{\textwidth}
 \begin{equation}
@@ -266,7 +268,7 @@ Kroki tego algorytmu przedstawiono poniżej:
   \item wróć do~kroku 2. jeśli nie~został spełniony warunek stopu.
 \end{enumerate}
 
-Zakładając, że~wartość błędu dla~danego przykładu uczącego wyraża się~wzorem
+Zakładając, że~wartość błędu dla~danego przykładu wyraża się~wzorem
 $$Error^{(m)}=\sigma(w^{T}x^{(m)})-y^{(m)}$$
 gradient funkcji straty ma~wzór:
 $$\nabla_{w}Loss=\sum\limits_{m}Error^{(m)}\sigma'(w^{T}x^{(m)})x^{(m)}$$
