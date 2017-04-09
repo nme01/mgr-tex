@@ -369,7 +369,7 @@ Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmó
 jedynie poniższe mechanizmy:
 \begin{itemize}
     \item \textbf{autoenkoder} (\textit{ang.~autoencoder}),
-    \item \textbf{Ograniczona Maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
+    \item \textbf{ograniczona maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
 \end{itemize}
 
 \subsection{Autoenkoder}
@@ -453,23 +453,23 @@ Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
     \end{split}
     \label{eqn:wagi_autenc}
 \end{equation}
-gdzie $f'$ to~pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości preaktywacji neuronów warstwy
-ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
+gdzie $f'$ to~pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości całkowitego wzbudzenia
+(\textit{ang.~preactivation}) neuronów warstwy ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
 
 Wagi wastwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
 wspomniano, warstwa wyjściowa odpowiada za~operację odwrotną do~operacji wykonywanej przez~warstwę ukrytą (odpowiednio:
 dekodowanie i kodowanie).
 
-\subsection{Ograniczona Maszyna Boltzmanna}
-Ograniczona Maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
+\subsection{Ograniczona maszyna Boltzmanna}
+Ograniczona maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
 \begin{itemize}
-  \item warstwy neuronów wejściowych,
+  \item warstwy neuronów widocznych,
   \item warstwy neuronow ukrytych.
 \end{itemize}
 
 Tytułowe ograniczenie mechanizmu polega na~tym, że~neurony należące do~tej~samej warstwy nie~są ze~sobą połączone,
-czyli bezpośrednio nie~wymieniają żadnych informacji (w~przeciwieństwie do~oryginalnego mechanizmu: Maszyny Boltzmanna).
-Zadaniem Ograniczonej Maszyny Boltzmanna, podobnie jak~autoenkodera, jest rekonstrukcja danych wejściowych.
+czyli bezpośrednio nie~wymieniają żadnych informacji (w~przeciwieństwie do~oryginalnego mechanizmu: maszyny Boltzmanna).
+Zadaniem ograniczonej maszyny Boltzmanna, podobnie jak~autoenkodera, jest rekonstrukcja danych wejściowych.
 
 Mechanizm zaprezentowano na~rysunku \ref{rys:restricted-boltzmann-machine}. Górna warstwa,
 to~warstwa neuronów ukrytych. Co~ciekawe, dolna warstwa~--warstwa widoczna~--~to~zarówno warstwa wejściowa,
@@ -479,19 +479,19 @@ a~wartości przekształcone przedstawiane są na~wyjściach neuronów wejściowy
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/RBM.png}
-	\caption{Ograniczona Maszyna Boltzmanna. Na~rysunku: górna warstwa to~warstwa ukryta, a~dolna to warstwa widoczna,
+	\caption{Ograniczona maszyna Boltzmanna. Na~rysunku: górna warstwa to~warstwa ukryta, a~dolna to warstwa widoczna,
 	pełniąca rolę zarówno warstwy wejściowej, jak~i~wyjściowej.}
 	\label{rys:restricted-boltzmann-machine}
 \end{figure}
 
 Cechą charakterystyczną omawianego mechanizmu jest jego umiejętność do~wyodrębniania cech danych wejściowych
-(\textit{ang. feature extraction}). Przykładowo Ograniczona Maszyna Boltzmanna, którą uczono obrazkami, będzie
+(\textit{ang. feature extraction}). Przykładowo: ograniczona maszyna Boltzmanna, którą uczono obrazkami, będzie
 wykrywać charakterystyczne łuki czy krawędzie.
 
 Dzięki tej właściwości mechanizm może być wykorzystywany m.in. do~korekcji danych.
 
 \subsubsection{Prawdopodobieństwo stanów sieci}
-W~Ograniczonej Maszynie Boltzmanna każdy stan sieci (tzn. zestaw wartości wyjść poszczególnych neuronów)
+W~ograniczonej maszynie Boltzmanna każdy stan sieci (tzn. zestaw wartości wyjść poszczególnych neuronów)
 ma~określone prawdopodobieństwo zadane wzorem:
 
 $p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
