@@ -192,7 +192,7 @@ się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \
 
 \subsubsection{Regularyzacja L2} \label{sssec:reg_L2}
 Jest~to~prawdopodobnie naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
-jest człon $\frac{1}{2}\lambda w^2$, a~gradient tego członu to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
+jest czynnik $\frac{1}{2}\lambda w^2$, a~jego gradient to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
 z~nich są zmniejszane w~liniowy sposób:
 \begin{equation*}
 W := W*(1 -\lambda)
