@@ -92,19 +92,19 @@ Splotowa sieć neuronowa zamiast wykorzystywać z~góry określone maski, ,,uczy
 a~więc stara się~tak dobrać ich~wagi, aby~jak~najlepiej rozpoznawać wyznaczone obiekty na~obrazach. Poszczególnym
 wartościom w~masce filtra odpowiadają wagi splotowej sieci neuronowej.
 
-\subsection{Padding}
+\subsection{Dopełnienie (\textit{ang.~padding})}
 Przy~stosowaniu filtrów splotowych pojawia się problem: jaką wartość powinny otrzymać piksele obrazka
 znajdujące się na~jego krawędzi. Jest on~rozwiązywany poprzez rozszerzanie obrazka o~dodatkowe piksele
 na~jego krawędziach. Można tego dokonać m.in. poprzez:
 \begin{itemize}
-  \item rozszerzenie obrazka o~czarne piksele (tzw.~\textit{zero-padding}),
-  \item rozszerzenie obrazka odbicia lustrzane pikseli przy krawędziach.
+  \item dopełnienie obrazka czarnymi pikselami (\textit{ang.~zero-padding}),
+  \item dopełnienie obrazka odbiciami lustrzanymi pikseli przy krawędziach.
 \end{itemize}
 
 \section{Inferencja} \label{sec:inferencja}
 W~trakcie działania sieci na~obrazie dokonywanie jest filtrowanie splotowe (przy wykorzystaniu różnych
 filtrów). Po~takim filtrowaniu otrzymywane jest $n\cdot m$ obrazów, nazywanych mapami cech
-(\textit{ang.~features maps}), gdzie n~-~liczba początkowych obrazów (tzw.~kanałów wejściowych), m~-~liczba
+(\textit{ang.~feature maps}), gdzie n~-~liczba początkowych obrazów (tzw.~kanałów wejściowych), m~-~liczba
 użytych filtrów.
 
 Po~dokonaniu filtrowania splotowego obrazy są skalowane na~mniejsze (tzw.~faza pooling/subsampling) i~znów
@@ -261,7 +261,7 @@ $$ \frac{\partial E}{\partial y_{ij}^{l-1}} =
 
 Należy zwrócić uwagę na~dwie rzeczy: po~piersze na~to, że~podczas obliczania gradientów również wykonywany
 jest splot jednak na~obrazku o~,,odwróconych'' wierszach i~kolumnach. Dodatkowo, by~móc dokonywać splotu
-na~krawędziach map cech, należy zastosować \textit{zero-padding}.
+na~krawędziach map cech, należy zastosować dopełnienie zerami (\textit{ang.~zero-padding}).
 
 \subsection{Uczenie wstępne}
 W~celu lepszego zainicjowania wag sieci należy przeprowadzić uczenie wstępne. W~tym~etapie sieć zamiast uczyć
