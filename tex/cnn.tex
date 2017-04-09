@@ -167,9 +167,9 @@ w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-ill
 Jedną z~często stosowanych obecnie metod normalizacji jest tzw.~normalizacja wsadowa (\textit{ang.~batch normalization}).
 Jest stosunkowo nową metodą, opublikowaną w~2015 roku (\cite{batch-norm}). Stosuje się~ją jako
 dodatkową warstwę umieszczaną za~każdą z~warstw w~pełni połączonych. Warstwa BatchNorm dokonuje normalizacji danych
-w~ramach całego wsadu danych (tzw.~batch). Odejmuje~ona od~każdej wartości wejściowej średnią (liczoną dla~przykładów
-w~obrębie całego wsadu, dla~każdego z~wejść z~osobna), a~następnie dzieli uzyskane wartości przez~odchylenie standardowe
-(liczone analogicznie jak~średnia).
+w~ramach całego wsadu danych (tzw.~batch). Odejmuje~ona od~każdej wartości wejściowej średnią , a~następnie dzieli
+uzyskane wartości przez~odchylenie standardowe (średnia i~odchylenie standardowe liczone w~obrębie całego wsadu,
+dla~każdego z~wejść z~osobna).
 \begin{equation*}
  \widehat{x} = \frac{x - E[x]}{\sqrt{Var(x)}}
 \end{equation*}
