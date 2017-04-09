@@ -109,12 +109,16 @@ użytych filtrów.
 
 Po~dokonaniu filtrowania splotowego obrazy są skalowane na~mniejsze (tzw.~faza pooling/subsampling) i~znów
 stosowane są~filtry splotowe. Oba kroki (filtrowanie i~skalowanie) są~powtarzane wielokrotnie
-(liczbwa powtórzeń zależy od~architektury sieci), aż~do~osiągnięcia odpowiednio wysokopoziomowych cech. Liczba warstw
-oraz liczba filtrów splotowych wykorzystanych w~każdej z~nich jest ustalana podczas fazy projektowania sieci.
+(liczbwa powtórzeń zależy od~architektury sieci), aż~do~osiągnięcia odpowiednio wysokopoziomowych cech (patrz
+rys.~\ref{rys:convnet-illustration}). Liczba warstw oraz liczba filtrów splotowych wykorzystanych w~każdej z~nich jest
+ustalana podczas fazy projektowania sieci.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{img/convnet.png}
+	\caption{Sieć splotowa, w~której naprzemiennie występują warstwy splotowe i~warstwy skalujące.
+	Źródło:~\cite{convnet-illustration}.}
+	\label{rys:convnet-illustration}
 \end{figure}
 
 Ostatnią warstwą sieci (zazwyczaj otrzymującą dużo bardzo małych obrazów) jest warstwa zawierająca neurony
@@ -128,11 +132,11 @@ w~sieci. Aby temu przeciwdziałać stosuje się skalowanie obrazów pomiędzy wa
 Najczęściej obraz skalowany jest poprzez:
 \begin{enumerate}
   \item podzielenie obrazka na~nienachodzące na~siebie kwadratowe obszary,
-  \item wybranie z~każdego obszaru piksela o~największej wartości (tzw.~\textit{max-pooling}). 
+  \item wybranie z~każdego obszaru piksela o~największej wartości (\textit{ang.~max-pooling}).
 \end{enumerate}
 
 Alternatywnie, w~drugim kroku algorytmu można wybrać medianę wartości pikseli\\
-(\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{average-pooling}).
+(\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{ang.~average-pooling}).
 
 \subsection{Normalizacja}
 W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie lepszej jakości klasyfikacji jak również
