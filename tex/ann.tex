@@ -478,9 +478,10 @@ a~wartości przekształcone przedstawiane są na~wyjściach neuronów wejściowy
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\linewidth]{img/RBM.png}
-	\caption{Ograniczona maszyna Boltzmanna. Na~rysunku: górna warstwa to~warstwa ukryta, a~dolna to warstwa widoczna,
-	pełniąca rolę zarówno warstwy wejściowej, jak~i~wyjściowej.}
+	\includegraphics[width=0.65\linewidth]{img/RBM.png}
+	\caption{Ograniczona maszyna Boltzmanna. Na~rysunku: lewa warstwa to~warstwa widoczna, a~warstwa z~prawej strony
+	to~warstwa widoczna, pełniąca rolę zarówno warstwy wejściowej, jak~i~wyjściowej. $a$~i~$b$ to~przesunięcia
+(\textit{ang.~bias}), a~$W$~to~wagi połączeń pomiędzy neuronami widocznymi i~ukrytymi.}
 	\label{rys:restricted-boltzmann-machine}
 \end{figure}
 
@@ -507,7 +508,7 @@ $p(v,h)=\frac{1}{Z}e^{-E(v,h)}$, gdzie:
 \subsubsection{Inferencja}
 Ze~względu na~to, że~neurony nie~łączą się~ze~sobą w~obrębie tej~samej warstwy, wartość na~wyjściu każdego
 neuronu w~danej warstwie można uzyskać wyłącznie na~podstawie wartości wyjść neuronów drugiej warstwy.
-Prawdopodobieństwa wzbudzeń neuronów można efektywnie obliczyć korzystając z~wzorów:
+Prawdopodobieństwa wzbudzeń neuronów można efektywnie obliczyć korzystając ze~wzorów:
 \begin{equation}
     \begin{split}
         p(h_{j}=1|v)&=\sigma(b_{j}+\sum\limits_{i=1}^{m}w_{i,j}v_{i}) \\
@@ -521,8 +522,8 @@ gdzie: $\sigma$ to~funkcja aktywacji, $i$ oraz $j$ to~numery kolejnych neuronów
 \subsubsection{Uczenie}
 Celem uczenia sieci jest znalezienie takich parametrów a, b i W, że~wartość funkcji prawdopodobieństwa p(v)
 dla~danych obserwowanych będzie wysoka, a~dla~pozostałych danych niska. W~praktyce zamiast maksymalizować
-funkcję prawdopodobieństwa p(v), minimalizuje się funkcję średniego ujemnego log-prawdopodobieństwa, gdzie średnia jest
-liczona po~wszystkich $T$ przykładach ze~zbioru uczącego:
+funkcję prawdopodobieństwa p(v), minimalizuje się funkcję średniego ujemnego logarytmu prawdopodobieństwa,
+gdzie średnia jest liczona po~wszystkich $T$ przykładach ze~zbioru uczącego:
 \begin{equation*}
 \frac{1}{T}\sum\limits_{t}-\log{p(v^{(t)})}
 \end{equation*}
