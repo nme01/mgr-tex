@@ -381,9 +381,8 @@ Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech 
 \end{itemize}
 
 Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
-Celem uczenia takiej sieci jest osiągnięcie stanu, w~którym wartości na~wyjściu sieci są równe
-wartościom wejściowym tej sieci. Inaczej mówiąc: sieć ma za zadanie wykształcenie przekształcenia tożsamościowego
-(identycznościowego).
+Celem uczenia autoenkodera jest osiągnięcie stanu, w~którym wartości na~jego wyjściu są równe
+wartościom wejściowym. Wówczas sieć realizuje przekształcenie tożsamościowe.
 
 Przykładową strukturę autoenkodera zaprezentowano na~rys.~\ref{rys:autoenkoder}.
 \begin{figure}[H]
@@ -438,7 +437,7 @@ Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:
 \begin{equation*}
 J(W,b)=\frac{1}{2N}\sum\limits_{i=1}^{s_1}(x-\hat{x})^2 + \beta\sum\limits_{j=1}^{s_2}KL(\rho||\hat{\rho_j})
 \end{equation*}
-gdzie $W$ i $b$, to~odpowiednio wagi sieci i~bias.
+gdzie $W$ i $b$, to~odpowiednio wagi sieci i~przesunięcie (\textit{ang.~bias}).
 
 \subsubsection{Uczenie}
 Do~uczenia sieci wykorzystywana jest metoda wstecznej propagacji błędów (opisana we~wcześniejszej części pracy),
