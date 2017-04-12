@@ -23,7 +23,7 @@ Typowo wykorzystywane jest to~do~uruchamiania nauczonej już~sieci w~środowisku
 do~przeprowadzenia procesu uczenia w~środowiskach takich jak~chmury obliczeniowe. Istnieją również narzędzia,
 dzięki którym możliwe jest używanie Caffee z~poziomu innych języków programowania np.~z~Matlaba.
 
-Jedną z~zalet omawianej biblioteki jest również jej~szybkość. To~co~jednak zniechęca do~jej~zastosowania, to~ograniczone
+Jedną z~zalet omawianej biblioteki jest również jej~szybkość. To~co~jednak zniechęca do~jej~użycia, to~ograniczone
 możliwości stosowania niestandardowych zmian w~architekturze.
 
 \subsection{Theano}
@@ -38,27 +38,49 @@ wypracowanych podczas tworzenia Theano (np.~przenoszenie obliczeń na~kartę gra
 symbolicznych itp.).
 
 \subsection{Tensorflow}
-TODO krótki opis Tensorflow
-krótkie porównanie Caffe vs. Tensorflow (może tabelka??)
+\textbf{Tensorflow}, podobnie jak~Theano, jest biblioteką o~otwartym kodzie źródłowym i~przetwarzającą wielowymiarowe
+tablice danych będących tensorami. Początkowo była rozwijana jedynie przez~badaczy z~zespołu Google Brain działającego
+w~ramach organizacji Google's Machine Intelligence. Narzędzie pozwala na~definiowanie sieci jako~grafu przepływu
+danych, gdzie~węzły grafu to~operacje wykonywane na~danych, a~krawędzie to~dane w~postaci tensorów.
 
-Do~realizacji badań wykonywanych w~ramach niniejszej pracy magisterskiej wykorzystano bibliotekę
-\textbf{Tensorflow}.
+Graf przepływu danych definiowany jest za~pomocą instrukcji w~języku Python. Jednakże spora część podstawowych
+operacji wykonywanych na~tensorach, takich jak~dodawanie, mnożenie czy~obliczanie splotów tensorów, wykonywana jest
+w~silniku zaimplementowanym przy~użyciu języka~C++. Podobne rozwiązanie stosowane jest również w~innych bibliotekach
+języka Python (np.~NumPy, Theano). Pozwala ono na~wykorzystanie prostej i~czytelnej składni Pythona wraz z~szybkością
+obliczeń języków kompilowanych (np.~C, C++).
 
-W~kolejnym podrozdziale opisano podstawowe zagadnienia dotyczące wybranego narzędzia. Wiedza ta~pozwoli na~zrozumienie
+Dużą zaletą biblioteki Tensorflow jest możliwość łatwego rozpraszania obliczeń, w~szczególności: na~wiele kart
+graficznych. Przyczyniło się~to~do~jej dużej popularności, szczególnie w~zastosowaniach profesjonalnych
+i~wykorzystujących rozbudowane zestawy obliczeniowe.
+
+Dodatkowe zalety Tensorflow to~dość obszerny zestaw operacji możliwych do~wykonywania na~danych jak~również
+obecność wielu mechanizmów umożliwiających zwiększanie szybkości wykonywanych operacji.
+
+Do~wad biblioteki należy zaliczyć to,~że~operuje na~niskopoziomowych pojęciach takich jak~tensory czy~operacje.
+Nie~występują tu~pojęcia takie jak~warstwa czy~sieć. Jednakże istnieją biblioteki, które opakowują bibliotekę
+Tensorflow, uzupełniając ją~o~brakujące elementy (np.~biblioteka Keras).
+
+Do~realizacji badań wykonywanych w~ramach niniejszej pracy magisterskiej wykorzystano bibliotekę \textbf{Tensorflow}.
+Decyzja ta~była podytkowana przede~wszystkim tym, że~narzędzie to~umożliwia łatwe rozpraszanie obliczeń. Dzięki temu
+sieć może być uczona przy~wykorzystaniu rozbudowanych zestawów komputerowych, które posiadają wiele kart graficznych.
+
+W~kolejnym podrozdziale opisano podstawowe zagadnienia dotyczące biblioteki Tensorflow. Wiedza ta~pozwoli na~zrozumienie
 informacji o~architekturze sieci przedstawianych w~dalszych częściach pracy.
 
 \section{Graf operacji}
-Tworzenie sztucznej sieci neuronowowej przy~użyciu wymienionej powyżej biblioteki, można podzielić na~dwa etapy:
-\begin{enumerate}
-    \item zdefiniowanie grafu operacji,
-    \item wykonanie wybranych operacji z~grafu.
-\end{enumerate}
+\begin{minipage}[t]{\textwidth}
+    Tworzenie sztucznej sieci neuronowowej przy~użyciu wymienionej powyżej biblioteki, można podzielić na~dwa etapy:
+    \begin{enumerate}
+        \item zdefiniowanie grafu operacji,
+        \item wykonanie wybranych operacji z~grafu.
+    \end{enumerate}
+\end{minipage}
 
-Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po~to,~by~osiągnąć rezultat na~wyjściu.
-Każda operacja (węzeł grafu) może przyjmować pewne dane wejściowe. Dane wejściowe mogą być m.in.~danymi wczytanymi
-z~dysku lub~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą wzajemne
-zależności, gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane poprzez
-tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na~rysunku \ref{img:tf-smpl-grf}.
+Graf operacji definiuje w~jaki sposób dane wejściowe mają być przetwarzane po~to, by~osiągnąć żądany rezultat
+na~wyjściu. Każda operacja (węzeł grafu) może przyjmować pewne dane wejściowe. Dane wejściowe mogą być m.in.~danymi
+wczytanymi z~dysku lub~z~klawiatury. Najczęściej jednak są one~wynikami innych operacji. W~ten sposób operacje tworzą
+wzajemne zależności, gdzie wyjście jednej z~nich jest jednocześnie wejściem innej. Operacje mogą być ze sobą grupowane
+poprzez tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono na~rysunku \ref{img:tf-smpl-grf}.
 
 \begin{figure}[H]
 	\centering
@@ -68,8 +90,9 @@ tworzenie tzw.~zakresów (\textit{ang.~scope}). Przykładowy graf przedstawiono 
 \end{figure}
 
 \subsection{Konstrukcja grafu}
-W pierwszym etapie tworzenia sieci neuronowej należy zdefiniować graf operacji. W~następnym kroku można wykonać
-wybrane operacje, a~silnik Tensorflow sam wykona wszystkie akcje wymagane do~poprawnego obliczenia ich rezultatu.
+W pierwszym etapie tworzenia sieci neuronowej należy zdefiniować graf operacji. W~następnym kroku można obliczyć
+wynik wybranych operacji, a~silnik Tensorflow sam wykona wszystkie akcje wymagane do~poprawnego otrzymania
+ich~rezultatu.
 
 Podczas konstrukcji grafu zamiast konkretnych danych wykorzystywane są dane symboliczne (np.~,,zmienna~x'',
 ,,dana~C''). Dopiero później, w~etapie wykonania operacji, za~niektóre z~owych danych podstawiane
