@@ -65,20 +65,20 @@ wymienić kilka wskazówek przydatnych przy~ustalaniu hiperparametrów sieci:
           liczbę masek używanych w~warstwach splotowych na~przemian ze~zwiększaniem liczby warstw.
 \end{itemize}
 
-\subsection{Architektura badanej sieci}
+\subsection{Architektura badanej sieci} \label{ssec:architektura-podstawowa}
 Badana sieć w~swojej podstawowej wersji bazuje na~architekturze AlexNet przedstawionej w~artykule \cite{AlexNet}.
 Po dokonaniu drobnych modyfikacji w~końcowych etapach przetwarzania obrazu, sieć składa się~z~następujących warstw:
 \begin{enumerate}
     \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x3 (wysokość x szerokość x liczba objętych kanałów).
-          Maska przesuwana jest zawsze o~1~piksel (w~kierunku pionowym i~poziomym).
+          Maska przesuwana jest zawsze o~1~piksel (w~kierunku pionowym lub~poziomym).
     \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość x szerokość x liczba objętych kanałów).
-          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym)
+          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym lub~poziomym)
     \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
     \item Warstwy splotowej z~64 maskami o rozmiarze 5x5x64 (wysokość~x~szerokość~x~liczba objętych kanałów).
           Maska przesuwana jest zawsze o~1 piksel (niezależnie od~kierunku przesuwania maski).
     \item Warstwy normalizującej (normalizacja lokalnej odpowiedzi).
     \item Warstwy skalującej typu max-pooling o~wielkości filtra 3x3x1 (wysokość~x~szerokość~x~liczba objętych kanałów).
-          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym i~poziomym).
+          Filtr jest przesuwany o~2~piksele (w~kierunku pionowym lub~poziomym).
     \item Warstwy w~pełni połączonej (standardowa warstwa w~sieciach neuronowych) z~384 neuronami i~funkcją aktywacji
           typu ReLU.
     \item Warstwy w~pełni połączonej z~192 neuronami i~funkcją aktywacji
@@ -124,14 +124,16 @@ Dla~parametru decydującego o~wpływie normalizacji lokalnej odpowiedzi (tzw.~pa
 przyjęto początkowo wartość~0.001, a~jako ograniczenie dolne wartość~0. Usprawiedliwienie dla~tych decyzji było
 takie samo, jak~dla~wyborów dokonanych przy~hiperparametrze regularyzacji~L2.
 
-Dla~każdej pary parametrów sieć była uczona 100,000 mini-zestawów danych (tzw.~\textbf{minibatch}), z~których
+Dla~każdej pary parametrów sieć była uczona mini-zestawami danych (\textit{ang.~minibatch}), z~których
 każdy zawierał 128 przykładów uczących. Po~każdym kroku uczenia pojedynczym mini-zestawem danych, sprawdzano
 dokładność sieci na~zbiorze testowym. Po~wykonaniu wszystkich kroków uczenia dla~danej pary hiperparametrów
-brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia. Wyniki przedstawiono w~tabeli
-(\ref{table:wyniki1}).
+brano średnią dokładność sieci na~zbiorze testowym ze~100 ostatnich kroków uczenia.
 
+\section{Badanie architektury podstawowej} \label{sec:badanie-1}
+W~pierwszym badaniu przeprowadzono proces uczenia sieci o~architekturze opisanej w~sekcji
+\ref{ssec:architektura-podstawowa}. Wykorzystano 100 tys. mini-zestawów danych (\textit{ang.~minibatch}).
+Wyniki eksperymentu przedstawiono w~tabeli \ref{table:wyniki1}.
 
-\section{Badanie nr 1}
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -174,22 +176,34 @@ Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska przeu
 Regularyzacja~L2 choć~zapobiega wystąpieniu overfittingu, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
 przez~co~potrzebna jest większa liczba iteracji w~procesie uczenia, aby~osiągnąć zadowalający poziom dokładności.
 
-By~sprawdzić czy~występuje przeuczenie warto posłużyć się~wykresem przedstawiającym wartość funkcji
-błędu (cross-walidacja) w~zależności od~numeru iteracji uczenia. Na~wykresie (TODO nr~wykresu) zamieszczono
-błąd liczony na~zbiorze uczącym, który w~procesie uczenia jest minimalizowany, oraz błąd liczony na~zbiorze
-walidacyjnym. W~przypadku wystąpienia przeuczenia na~wykresie powinno się zaobserwować, że~dla~pewnego numeru
-iteracji pomimo zmniejszania się~błędu na~zbiorze uczącym, bład na~zbiorze walidacyjnym znacząco rośnie.
+By~sprawdzić czy~występuje przeuczenie warto posłużyć się~wykresem przedstawiającym dokładność (\textit{ang.~accuracy})
+w~zależności od~numeru iteracji uczenia. Na~wykresie \ref{rys:badanie-1} zamieszczono
+dokładności liczone na~zbiorze uczącym oraz na~zbiorze walidacyjnym. W~przypadku wystąpienia przeuczenia na~wykresie
+powinno się zaobserwować, że~dla~pewnego numeru iteracji pomimo zmniejszania się~błędu na~zbiorze uczącym, bład
+na~zbiorze walidacyjnym rośnie. Na~wykresie \ref{rys:badanie-1} nie~obserwujemy takiej sytuacji.
 
-TODO wykres
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/badanie_1.png}
+	\caption{Dokładność na zbiorze walidacyjnym (górny wykres) i uczącym (dolny wykres)}
+	\label{rys:badanie-1}
+\end{figure}
 
-Jak widać na~wykresie (TODO nr wykresu) nie~obserwujemy takiej sytuacji.
+\section{Badanie sieci przy~zwiększonej liczbie iteracji}
+W~badaniu nr~2~powtórzono badanie nr~1 (\ref{sec:badanie-1}) ze~zwiększoną liczbą iteracji (do 144000).
+Spodziewano się,~że~od~pewnego numeru iteracji będzie obserwowany wzrost błędu na~zbiorze walidacyjnym przy~jednoczesnym
+spadku błędu na~zbiorze uczącym. Jednakże również nie~udało się~zaobserwować zaistniałej sytuacji (patrz
+wykres~\ref{rys:badanie-2}). Prawdopodobnie wynika to~z~tego, że~sieć z~powodu swojej względnie prostej struktury
+nie~ma~możliwości przeuczenia się~(zbyt mała liczba neuronów w~stosunku do~liczby przykładów uczących).
 
-\section{Badanie nr 2}
-W~badaniu nr~2~powtórzono badanie nr~1 ze~zwiększoną liczbą iteracji (do 144000). Spodziewano się,~że~od~pewnego numeru
-iteracji będzie obserwowany wzrost błędu na~zbiorze walidacyjnym przy~jednoczesnym spadku błędu na~zbiorze uczącym.
-Jednakże również nie~udało się~zaobserwować zaistniałej sytuacji. Wyniki przedstawiono w~tabeli \ref{table:wyniki2}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/badanie_2.png}
+	\caption{Dokładność na zbiorze walidacyjnym (górny wykres) i uczącym (dolny wykres)}
+	\label{rys:badanie-2}
+\end{figure}
 
-TODO wykres
+Wyniki przedstawiono w~tabeli \ref{table:wyniki2}.
 
 \begin{table}[H]
     \centering
@@ -215,8 +229,6 @@ TODO wykres
 
 Całkowity czas badania wyniósł: 64 godziny 17 minut i 23 sekundy.
 
-Prawdopodobnie wynika to~z~tego, że~sieć z~powodu swojej względnie prostej struktury nie~ma~możliwości przeuczenia
-się~(zbyt mała liczba neuronów w~stosunku do~liczby przykładów uczących).
 
 \section{Badanie nr 3}
 By~sprawdzić jaki wpływ na~dokładność klasyfikacji będzie miała regularyzacja, gdy~problem przeuczenia występuje,
