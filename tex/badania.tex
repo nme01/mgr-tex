@@ -36,7 +36,7 @@ Badania zostały wykonane z wykorzystaniem następującego zestawu komputerowego
     \item \textbf{pamięć RAM}~--~2 x GoodRam 8GB 1600 MHz.
 \end{itemize}
 
-\section{Architektura sieci neuronowej} \label{sec:arch-sieci-neuronowej}
+\section{Architektura sieci neuronowej}
 Podczas tworzenia splotowej sieci neuronowej, należy dobrać wiele hiperparametrów takich jak:
 \begin{itemize}
     \item liczba warstw splotowych,
@@ -102,7 +102,7 @@ przyciętego obrazka (czerwonym, zielonym i~niebieskim) mają średnią wartoś�
 %      http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
 
 
-\section{Plan badań}
+\section{Plan badań} \label{sec:plan-badan}
 Celem niniejszej pracy naukowej jest sprawdzenie jak istotny wpływ na~dokładność klasyfikacji mają 2~czynniki:
 \begin{itemize}
     \item regularyzacja typu L2 (\ref{sssec:reg_L2}),
@@ -112,7 +112,7 @@ Celem niniejszej pracy naukowej jest sprawdzenie jak istotny wpływ na~dokładno
 W~artykule ,,Practical Recommendations for Gradient-Based Training of Deep Architectures''
 (\cite{practical-gradient-based}) skrótowo omówiono problem doboru hiperparametrów sieci. Jednym ze~sposobów
 przedstawionych w~opracowaniu jest określenie wartości brzegowych dla~optymalizowanych hiperparametrów,
-a~następnie zbadanie przestrzeni między. Po~zbadaniu zachowania sieci dla~tej przestrzeni hiperparametrów, można podjąć
+a~następnie zbadanie przestrzeni między nimi. Po~zbadaniu zachowania sieci dla~tej przestrzeni hiperparametrów, można podjąć
 decyzję o~przyjęciu jednego z~zestawów hiperparametrów dla~sieci lub~rozszerzyć pole poszukiwań o~kolejne obszary.
 
 Dla~parametru regularyzacji~L2 (tzw.~\textbf{weight decay}) jako~górne ograniczenie przyjęto początkowo wartość~0.05.
@@ -303,4 +303,4 @@ na~wynik klasyfikacji, tym~,,cieplejszy'' ma kolor (patrz sekcja \ref{sec:weryfi
 Odpowiednie dobranie metaparametrów sieci nie~jest łatwe. Zwykle dobrze jest bazować na~architekturze innej sieci
 wykonującej podobne zadanie (przy~zbiorze \mbox{CIFAR-10} może to~być np.~sieć AlexNet). Następnie w~celu poprawy jakości
 klasyfikacji można wykorzystać przeszukiwanie kratowe (\textit{ang.~grid search}), które opisano
-w~sekcji~\ref{sec:arch-sieci-neuronowej}.
+w~sekcji~\ref{sec:plan-badan}.
