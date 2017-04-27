@@ -61,7 +61,7 @@ Efekt działania filtru Gaussa na~prawdziwym obrazie przedstawiono na~rysunku \r
 \end{figure}
 
 Jak~można zaobserwować, w~filtrze Gaussa na~nową wartość piksela mają częściowo wpływ piksele sąsiednie
-i~przede~wszystkim stara wartość piksela.
+i~przede~wszystkim wartość samego piksela (sprzed modyfikacji).
 
 \subsubsection{Filtr Laplace'a}
 Zadaniem tego filtru jest wyostrzanie obrazu. Efekt ten jest osiągany poprzez usunięcie wpływu sąsiednich pikseli
@@ -109,7 +109,7 @@ użytych filtrów.
 
 Po~dokonaniu filtrowania splotowego obrazy są skalowane na~mniejsze (tzw.~faza pooling/subsampling) i~znów
 stosowane są~filtry splotowe. Oba kroki (filtrowanie i~skalowanie) są~powtarzane wielokrotnie
-(liczbwa powtórzeń zależy od~architektury sieci), aż~do~osiągnięcia odpowiednio wysokopoziomowych cech (patrz
+(liczba powtórzeń zależy od~architektury sieci), aż~do~osiągnięcia odpowiednio wysokopoziomowych cech (patrz
 rys.~\ref{rys:convnet-illustration}). Liczba warstw oraz liczba filtrów splotowych wykorzystanych w~każdej z~nich jest
 ustalana podczas fazy projektowania sieci.
 
@@ -136,7 +136,7 @@ Najczęściej obraz skalowany jest poprzez:
 \end{enumerate}
 
 Alternatywnie, w~drugim kroku algorytmu można wybrać medianę wartości pikseli\\
-(\textit{ang.~mean-pooling}) lub~wartość średnią (\textit{ang.~average-pooling}).
+(\textit{ang.~median-pooling}) lub~wartość średnią (\textit{ang.~average-pooling}).
 
 \subsection{Normalizacja}
 W~sieciach splotowych często stosowanym zabiegiem, mającym na~celu zapewnienie lepszej jakości klasyfikacji jak również
@@ -179,7 +179,7 @@ Tak~znormalizowane dane są~następnie poddawane przekształceniu liniowemu:
 y = \gamma\widehat{x} + \beta
 \end{equation*}
 $\gamma$ oraz $\beta$ są~parametrami, których wartość ustalana jest w~procesie uczenia. Warto zwrócić uwagę, że~jeśli
-$\beta=E[x]$ i $\gamma=\sqrt{Var(x)}$ warstwa BatchNorm będzie dokonywała przekształcenia identycznościowego.
+$\beta=E[x]$ i $\gamma=\sqrt{Var(x)}$ warstwa BatchNorm będzie dokonywała przekształcenia tożsamościowego.
 
 Dla~każdej z~operacji wykonywanych przez~tę~warstwę normalizującą można policzyć gradient funkcji kosztu względem
 parametrów. Dzięki temu sieć z~warstwami BatchNorm może być uczona metodami gradientowymi, podobnie jak~większość
