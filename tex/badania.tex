@@ -288,8 +288,24 @@ Całkowity czas badania wyniósł: 62 godziny 43 minuty i 27 sekund.
 %wykonanych badań.
 
 \section{Weryfikacja poprawności działania sieci} \label{sec:weryfikacja-poprawnosci}
-TODO mapa ciepła - sprawdzenie czy przy rozpoznawaniu obiektów faktycznie brane są pod uwagę rozpoznawane obiekty,
-a nie tło czy inne rzeczy znajdujące się na obrazku
+Po~dobraniu hiperparametórw sieci warto wykonać badanie pomocnicze mające na celu sprawdzić czy~przy~klasyfikacji
+obrazów są~brane pod~uwagę właściwe piksele np.~czy~przy~klasyfikacji obrazu na~którym jest pies, sieć stwierdza,
+że~jest to~pies na~podstawie fragmentu obrazu przedstawiającego psa czy~na~podstawie fragmentów nieistotnych.
+
+Przy~poszukiwaniu odpowiedzi na~pytanie: "co~sieć bierze pod~uwagę przy~klasyfikacji obrazów" warto wykorzystać
+metody przedstawione w~artykule ,,Visualizing and Understanding Convolutional Networks'' (\cite{understanding-cnn}).
+Jedną z~nich~jest metoda, w~której zasłaniane są różne fragmenty klasyfikowanego obrazu i~sprawdzane jest,
+jaki ma~to~wpływ na~klasyfikację, a~dokładniej: na~wartość prawdopodobieństwa, że~na~danym obrazku znajduje
+się~określony przedmiot.
+
+Przesuwając odpowiednio łatkę (czyli fragment obrazu, który jest ,,zasłaniany'' poprzez zastąpienie go zerami),
+uzyskujemy kolejne wartości prawdopodobieństwa, że~na~obrazie znajduje się~przedmiot, który naprawdę się~na~nim
+znajduje. Następnie w~utworzonej mapie ciepła na~pozycjach pikseli istotnych z~punktu widzenia klasyfikacji wystąpią
+niskie wartości prawdopodobieństwa (co~oznacza, że~po~zasłonięciu tego fragmentu, prawdopodobieństwo poprawnej
+klasyfikacji będzie niskie). Natomiast punkty o~wysokiej wartości prawdopodobieństwa odpowiadać będą pikselom
+nieistotnym.
+
+TODO mapa ciepła - obrazek
 
 \section{Wnioski końcowe}
 Jak~pokazały przeprowadzone badania zabiegi takie jak~regularyzacja nie~zawsze mają sens. Należy je~stosować wyłącznie
