@@ -98,8 +98,6 @@ normalizowany (niezależnie od~innych). Normalizacja polega na~zapewnieniu, że~
 przyciętego obrazka (czerwonym, zielonym i~niebieskim) mają średnią wartość równą zero i~odchylenie standardowe równe~1.
 
 % TODO dodać obrazek przedstawiający graf operacji
-% TODO ustawienie seeda do generatora liczb losowych w tensorflow -- tf.set_random_seed(1)
-%      http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed
 
 
 \section{Plan badań} \label{sec:plan-badan}
@@ -276,16 +274,6 @@ i~regularyzacji. Tak~jak~się~spodziewano regularyzacja przy~odpowiednio dobrany
 \end{table}
 
 Całkowity czas badania wyniósł: 62 godziny 43 minuty i 27 sekund.
-
-%\section{Badanie sieci o~zwiększonym poziomie złożoności}
-%Skoro problem przeuczenia nie~występował w~sieci o~architekturze wykorzystywanej w~badaniach 1-3, to~można stwierdzić,
-%że~sieć miała zbyt niską złożoność by~problem wystąpił. Stąd, można zwiększyć jej~poziom złożoności (zwiększyć liczbę
-%neuronów) i~przy zastosowaniu regularyzacji można spodziewać się,~że~jakość klasyfikacji ulegnie polepszeniu. W~sieci
-%w~pierwszej i~drugiej warstwie w~pełni połączonej zwiększono liczbę neuronów do~1024. Dokładność
-%sieci dla~różnych kombinacji metaparametrów normalizacji i~regularyzacji przedstawiono w~tabeli (TODO nr tabeli).
-%
-%Jak~widać, wyniki uzyskane w~badaniu nr~4~dla~metaparametrw (TODO wartości metaparametrów) są~najlepsze ze~wszystkich
-%wykonanych badań.
 
 \section{Weryfikacja poprawności działania sieci} \label{sec:weryfikacja-poprawnosci}
 Po~dobraniu hiperparametórw sieci warto wykonać badanie pomocnicze mające na celu sprawdzić czy~przy~klasyfikacji
