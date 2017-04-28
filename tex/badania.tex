@@ -241,7 +241,7 @@ takiego samego rozmiaru zbioru walidacyjnego). Spodziewano się,~że~spowoduje t
 	\centering
 	\includegraphics[width=\linewidth]{img/badanie_3.png}
 	\caption{Dokładność na zbiorze walidacyjnym (górny wykres) i uczącym (dolny wykres) przy~sześciokrotnie
-	         zmniejszonym zbiorze uczącym}
+	         zmniejszonym zbiorze uczącym. Liczba iteracji: 144 tysiące}
 	\label{rys:badanie-3}
 \end{figure}
 
@@ -249,8 +249,8 @@ Jak~widać na~wykresie \ref{rys:badanie-3} problem przeuczenia zaczyna się~poja
 Stąd należy się spodziewać, że regularyzacja zmniejszy występowanie tego niepożądanego zjawiska.
 
 W~tabeli \ref{table:wyniki3} przedstawiono dokładność klasyfikacji dla~różnych kombinacji parametrów normalizacji
-i~regularyzacji. Tak~jak~się~spodziewano regularyzacja przy~odpowiednio dobranych metaparametrach poprawia jakość
-klasyfikacji.
+i~regularyzacji. Tak~jak~się~spodziewano regularyzacja przy~odpowiednio dobranych metaparametrach
+($\alpha=0.0005$ i~$\lambda=0.001$) poprawia jakość klasyfikacji.
 
 \begin{table}[H]
     \centering
@@ -258,23 +258,24 @@ klasyfikacji.
       \hline
                        & $\lambda$ = 0.0005 & $\lambda$ = 0.001 & $\lambda$ = 0.005 & $\lambda$ = 0.01 & $\lambda$ = 0.05 \\
       \hline
-      $\alpha=0.00001$ & TODO & TODO & TODO & TODO & TODO \\
+      $\alpha=0.00001$ & 0.76 & 0.80 & 0.74 & 0.69 & 0.69 \\
       \hline
-      $\alpha=0.00005$ & TODO & TODO & TODO & TODO & TODO \\
+      $\alpha=0.00005$ & 0.78 & 0.77 & 0.72 & 0.69 & 0.67 \\
       \hline
-      $\alpha=0.0001$  & TODO & TODO & TODO & TODO & TODO \\
+      $\alpha=0.0001$  & 0.77 & 0.78 & 0.79 & 0.78 & 0.73 \\
       \hline
-      $\alpha=0.0005$  & TODO & TODO & TODO & TODO & TODO \\
+      $\alpha=0.0005$  & 0.78 & 0.82 & 0.76 & 0.76 & 0.72 \\
       \hline
-      $\alpha=0.001$   & TODO & TODO & TODO & TODO & TODO \\
+      $\alpha=0.001$   & 0.76 & 0.79 & 0.76 & 0.69 & 0.69 \\
       \hline
     \end{tabular}
+
     \caption{Wpływ regularyzacji L2 ($\lambda$) i~normalizacji lokalnego kontrastu ($\alpha$) na~dokładność klasyfikacji
-    sieci neuronowej przy~sześciokrotnie zmniejszonym zbiorze uczącym}
+    sieci neuronowej przy~sześciokrotnie zmniejszonym zbiorze uczącym}. Liczba iteracji: 144 tysiące
     \label{table:wyniki3}
 \end{table}
 
-Całkowity czas badania wyniósł: TODO.
+Całkowity czas badania wyniósł: 62 godziny 43 minuty i 27 sekund.
 
 %\section{Badanie sieci o~zwiększonym poziomie złożoności}
 %Skoro problem przeuczenia nie~występował w~sieci o~architekturze wykorzystywanej w~badaniach 1-3, to~można stwierdzić,
