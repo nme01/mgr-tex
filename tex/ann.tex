@@ -37,7 +37,7 @@ zalety i~wady. W~niniejszej podsekcji przedstawiono i~omówiono wybrane funkcje.
 \subsubsection{Funkcja liniowa}
 Najprostsza z~możliwych funkcji aktywacji. Dokonuje liniowego przekształcenia wartości wejściowej
 (rys.~\ref{rys:f-liniowa}). Jest rzadko stosowana do~zadań klasyfikacji w~sieciach neuronowych, gdyż~sieć składająca
-się~z~neuronów o~liniowej~funkcji aktywacji nie~może modelować nieliniowych funkcji. Wynika to~z~tego, że~rezultatem
+się~z~neuronów o~liniowej~funkcji aktywacji nie~może modelować funkcji nieliniowych. Wynika to~z~tego, że~rezultatem
 złożenia funkcji liniowych jest również funkcja liniowa. Stąd zastosowania neuronów o~takiej funkcji aktywacji są
 mocno ograniczone.
 
@@ -210,8 +210,8 @@ Funkcja ta~najczęściej stosowana jest w~warstwie wyjściowej sieci. Bywa nazyw
 eksponencjalną}, gdyż~jej wartość to~wartość funkcji eksponencjalnej podzielona przez~sumę wartości wyjściowych innych
 neuronów składających się~na~daną warstwę.
 
-Niestety, funkcję softmax ciężko przdstawić na~wykresie, gdyż~jej wartość zależy od~wartości wyjściowych
-innych neuronów, przez co dziedzina funkcji jest wielowymiarowa (liczba wymiarów zależy od~liczby neuronów
+Niestety, funkcję softmax trudno przedstawić na~wykresie, gdyż~jej wartość zależy od~wartości wyjściowych
+innych neuronów, przez co~dziedzina funkcji jest wielowymiarowa (liczba wymiarów zależy od~liczby neuronów
 umieszczonych w~danej warstwie).
 
 \section{Warstwowa sieć neuronowa}
@@ -368,12 +368,12 @@ niskie prawdopodobieństwo.
 Do modelowania funkcji prawdopodobieństwa można wykorzystać wiele mechanizmów. W~tej~pracy omówione zostaną
 jedynie poniższe mechanizmy:
 \begin{itemize}
-    \item \textbf{autoenkoder} (\textit{ang.~autoencoder}),
+    \item \textbf{autokoder} (\textit{ang.~autoencoder}),
     \item \textbf{ograniczona maszyna Boltzmanna} (\textit{ang.~Restricted Boltzmann Machine}).
 \end{itemize}
 
-\subsection{Autoenkoder}
-Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech warstw:
+\subsection{Autokoder}
+Autokoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech warstw:
 \begin{itemize}
 	\item warstwy wejściowej,
 	\item warstwy ukrytej,
@@ -381,15 +381,15 @@ Autoenkoder \cite{Autoencoder} to~sieć neuronowa, która składa się z~trzech 
 \end{itemize}
 
 Dodatkowo liczba neuronów w~warstwie wyjściowej jest równa liczbie neuronów w~warstwie wejściowej.
-Celem uczenia autoenkodera jest osiągnięcie stanu, w~którym wartości na~jego wyjściu są równe
+Celem uczenia autokodera jest osiągnięcie stanu, w~którym wartości na~jego wyjściu są równe
 wartościom wejściowym. Wówczas sieć realizuje przekształcenie tożsamościowe.
 
-Przykładową strukturę autoenkodera zaprezentowano na~rys.~\ref{rys:autoenkoder}.
+Przykładową strukturę autokodera zaprezentowano na~rys.~\ref{rys:autokoder}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/autoencoder.png}
-	\caption{Autoenkoder}
-	\label{rys:autoenkoder}
+	\caption{Autokoder}
+	\label{rys:autokoder}
 \end{figure}
 
 \subsubsection{Zastosowania}
@@ -399,12 +399,12 @@ wśród wartości wejściowych (np.~mogą zauważyć, że gdy pierwsza z~wartoś
 wówczas trzecia i czwarta są równe zero itp.).
 Pozwala to~na~kompresję danych.
 
-Innym zastosowaniem mechanizmu autoenkodera jest korekcja danych. Wówczas w~warstwie ukrytej
+Innym zastosowaniem mechanizmu autokodera jest korekcja danych. Wówczas w~warstwie ukrytej
 może być więcej neuronów niż w~warstwie wejściowej/wyjściowej. Tak nauczona sieć, po~otrzymaniu na~wejściu
 wektora wejściowego zawierającego pewne błędy w~danych (np.~szumy), potrafi dokonać korekty danych,
 a dane poprawione pojawią się~na~wyjściu sieci.
 
-W~ogólności warstwa wejściowa oraz warstwa ukryta autoenkodera tworzą razem mechanizm kodujący, a~warstwa ukryta wraz
+W~ogólności warstwa wejściowa oraz warstwa ukryta autokodera tworzą razem mechanizm kodujący, a~warstwa ukryta wraz
 z~warstwą wyjściową tworzą mechanizm dekodujący.
 
 \subsubsection{Funkcja kosztu}
@@ -417,7 +417,7 @@ $x$ to~wektor wartości wejściowych, a~$\hat{x}$ to~wektor wartości wyjściowy
 $N$ w~celu~wygodniejszego liczenia pochodnej w~procesie uczenia. Zabieg ten ma charakter czysto techniczny.
 
 \subsubsection{Regularyzacja rozrzutu}
-W~autoenkoderze staramy się~zapewnić, by~średnia wartość na~wyjściu każdego neuronu warstwy ukrytej
+W~autokoderze staramy się~zapewnić, by~średnia wartość na~wyjściu każdego neuronu warstwy ukrytej
 (średnia liczona po~przykładach uczących) była bliska pewnej z~góry przyjętej wartości zwanej \textbf{parametrem
 rozrzutu} (\textit{ang.~sparsity parameter}). Zwykle parametr ten przyjmuje niewielkie wartości (np. 0,05). Dzięki temu
 dla~większości danych wejściowych niewiele neuronów warstwy ukrytej będzie ,,aktywowanych'', a~więc każdy neuron będzie
@@ -469,7 +469,7 @@ Ograniczona maszyna Boltzmanna jest sztuczną siecią neuronową składającą s
 
 Tytułowe ograniczenie mechanizmu polega na~tym, że~neurony należące do~tej~samej warstwy nie~są ze~sobą połączone,
 czyli bezpośrednio nie~wymieniają żadnych informacji (w~przeciwieństwie do~oryginalnego mechanizmu: maszyny Boltzmanna).
-Zadaniem ograniczonej maszyny Boltzmanna, podobnie jak~autoenkodera, jest rekonstrukcja danych wejściowych.
+Zadaniem ograniczonej maszyny Boltzmanna, podobnie jak~autokodera, jest rekonstrukcja danych wejściowych.
 
 Mechanizm zaprezentowano na~rysunku \ref{rys:restricted-boltzmann-machine}. Warstwa występująca po~prawej stronie,
 to~warstwa neuronów ukrytych. Co~ciekawe, warstwa występująca po~lewej stronie~--warstwa widoczna~--~to~zarówno warstwa
@@ -485,7 +485,7 @@ je, a~wartości przekształcone przedstawiane są na~wyjściach neuronów wejśc
 	\label{rys:restricted-boltzmann-machine}
 \end{figure}
 
-Cechą charakterystyczną omawianego mechanizmu jest jego umiejętność do~wyodrębniania cech danych wejściowych
+Cechą charakterystyczną omawianego mechanizmu jest jego umiejętność wyodrębniania cech danych wejściowych
 (\textit{ang. feature extraction}). Przykładowo: ograniczona maszyna Boltzmanna, którą uczono obrazkami, będzie
 wykrywać charakterystyczne łuki czy krawędzie.
 
@@ -549,7 +549,7 @@ Próbkowanie Gibbsa (algorytm):
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy ukrytej na~podstawie danych wejściowych
   (korzystając ze~wzorów \ref{eqn:rbm_inference}).
   \item Oblicz wartości wyjściowe dla~każdego neuronu z~warstwy wejściowej na~podstawie obliczonych wartości
-  wyjściowych neuronów ukrytych (korzystając z~wzorów \ref{eqn:rbm_inference}).
+  wyjściowych neuronów ukrytych (korzystając ze~wzorów \ref{eqn:rbm_inference}).
 \end{enumerate}
 
 Kroki 1 i 2 mogą być powtarzane wielokrotnie, choć w~praktyce okazuje się, że wystarczy jeden

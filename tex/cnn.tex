@@ -75,7 +75,7 @@ dla~omawianego mechanizmu przedstawiono na~rysunku \ref{rys:maska-laplace}.
 	\label{rys:maska-laplace}
 \end{figure}
 
-Działanie filtru Laplace'a zaprezentowano na~rysunku \ref{rys:laplace-conv-example.jpg}.
+Działanie filtru Laplace'a zaprezentowano na~rysunku \ref{rys:laplace-conv-example}.
 
 \begin{figure}[H]
 	\centering
@@ -104,7 +104,7 @@ na~jego krawędziach. Można tego dokonać m.in. poprzez:
 \section{Inferencja} \label{sec:inferencja}
 W~trakcie działania sieci na~obrazie dokonywanie jest filtrowanie splotowe (przy wykorzystaniu różnych
 filtrów). Po~takim filtrowaniu otrzymywane jest $n\cdot m$ obrazów, nazywanych mapami cech
-(\textit{ang.~feature maps}), gdzie n~-~liczba początkowych obrazów (tzw.~kanałów wejściowych), m~-~liczba
+(\textit{ang.~feature maps}), gdzie $n$ to~liczba początkowych obrazów (tzw.~kanałów wejściowych), a~$m$ to~liczba
 użytych filtrów.
 
 Po~dokonaniu filtrowania splotowego obrazy są skalowane na~mniejsze (tzw.~faza pooling/subsampling) i~znów
@@ -154,7 +154,7 @@ Choć wartości odchylenia standardowego i~średniej liczone są z~uwzględnieni
 się ograniczać do~jednego piksela. Zamiast tego mogą dotyczyć pewnego jego sąsiedztwa. Metoda ta~odpowiada
 mechanizmowi obecnemu w~ośrodkach wzrokowych ssaków, u~których również dla pewnego sąsiedztwa punktu widzianego
 obrazu kontrast jest normalizowany. Przykładem tego efektu jest sytuacja, w~której obiekt w~zależności od~tego,
-w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor \ref{img:chess-illusion}.
+w~jakim otoczeniu się~znajduje, wydaje się~mieć inny kolor. Efekt ten pokazuje rysunek \ref{img:chess-illusion}.
 
 \begin{figure}[H]
 	\centering
@@ -168,7 +168,7 @@ Jedną z~często stosowanych obecnie metod normalizacji jest tzw.~normalizacja w
 Jest stosunkowo nową metodą, opublikowaną w~2015 roku (\cite{batch-norm}). Stosuje się~ją jako
 dodatkową warstwę umieszczaną za~każdą z~warstw w~pełni połączonych. Warstwa BatchNorm dokonuje normalizacji danych
 w~ramach całego wsadu danych (tzw.~batch). Odejmuje~ona od~każdej wartości wejściowej średnią , a~następnie dzieli
-uzyskane wartości przez~odchylenie standardowe (średnia i~odchylenie standardowe liczone w~obrębie całego wsadu,
+uzyskane wartości przez~odchylenie standardowe (średnia i~odchylenie standardowe są liczone w~obrębie całego wsadu,
 dla~każdego z~wejść z~osobna).
 \begin{equation*}
  \widehat{x} = \frac{x - E[x]}{\sqrt{Var(x)}}
@@ -273,7 +273,7 @@ się rozpoznawania obiektów, ma~za~zadanie nauczyć się~charakteru danych wej�
 charakterystyczne cechy, podobieństwa obiektów it.p.). Do~uczenia wstępnego wykorzystuje się~mechanizmy
 uczenia nienadzorowanego, takie jak:
 \begin{itemize}
-  \item autoenkoder,
+  \item autokoder,
   \item RBM (Restricted Boltzmann Machine).
 \end{itemize}
 
