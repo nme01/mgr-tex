@@ -5,7 +5,7 @@ w~dowolnym fragmencie obrazka). Zasada ich~działania była inspirowana neurobio
 sposób przetwarzania informacji przez~ośrodek wzrokowy kota.
 
 \section{Filtry splotowe}
-Splot dyskrentny jako pojęcie matematyczne jest zdefiniowany w~następujący sposób:
+Splot dyskretny jako pojęcie matematyczne jest zdefiniowany w~następujący sposób:
 $$ f\ast g[n]\defeq \sum\limits_{m=-\infty}^{\infty}f[m]g[n-m] = \sum\limits_{m=-\infty}^{\infty}f[n-m]g[m]$$
 gdzie $f$ i $g$ to~ciągi splatane, a~zapis $f[n]$ to~zapis oznaczający $n$-ty wyraz ciągu $f$.
 
@@ -187,11 +187,11 @@ standardowych sieci.
 
 \subsection{Regularyzacja sieci}
 W~przypadku rozpoznawania danych, w~których występować może wiele różnych wzorców, konieczne jest umieszczenie w~sieci
-neuronowej dużej liczby neuronów. Jednakże może to~przynieść nieporządany efekt, przy~którym sieć zbytnio dopasuje
+neuronowej dużej liczby neuronów. Jednakże może to~przynieść niepożądany efekt, przy~którym sieć zbytnio dopasuje
 się~do~danych (tzw.~overfitting). Sposobem na~ograniczanie tego zjawiska jest \textbf{regularyzacja} sieci.
 
 \subsubsection{Regularyzacja L2} \label{sssec:reg_L2}
-Jest~to~prawdopodobnie naczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
+Jest~to~prawdopodobnie najczęściej używana forma regularyzacji. By~ją~zastosować, do~funkcji kosztu sieci dodawany
 jest czynnik $\frac{1}{2}\lambda w^2$, a~jego gradient to~$\lambda w$. W~efekcie przy~aktualizacji wag wszystkie
 z~nich są zmniejszane w~liniowy sposób:
 \begin{equation*}
@@ -227,7 +227,7 @@ w~sekcji (\ref{ssec:backpropagation}), stąd wyjaśnienia wymaga jedynie oblicza
 \subsection{Obliczanie gradientu dla~warstw skalujących}
 Znając gradient funkcji straty $\nabla_{y_{ijk}}l$ z~warstwy kolejnej, można w~prosty sposób policzyć gradient
 w~stosunku do~wejścia warstwy dla~której jest on liczony. W~przypadku, gdy~warstwa wykorzystywała algorytm
-\textit{max-pooling}, gradient względem wejść warstwy przyjme wartość:
+\textit{max-pooling}, gradient względem wejść warstwy przyjmie wartość:
 \begin{itemize}
   \item $\nabla_{x_ijk}l = \nabla_{y_{ijk}}l$, dla~pikseli, które miały maksymalną wartość w~obszarze, 
   \item $\nabla_{x_ijk}l = 0$, dla~pozostałych pikseli.
@@ -236,7 +236,7 @@ w~stosunku do~wejścia warstwy dla~której jest on liczony. W~przypadku, gdy~war
 \subsection{Obliczanie gradientu dla~warstw splotowych}
 Przy~wstecznej propagacji błędów z~warstwy kolejnej otrzymujemy gradient błędu względem wyjścia
 aktualnej warstwy $\nabla_{y_j}l$. Do~aktualizacji wag sieci konieczne jest policzenie gradientu funkcji
-straty wzlgędem wag tej warstwy.
+straty względem wag tej warstwy.
 $$ \frac{\partial E}{\partial w_{ab}} 
 = \sum\limits_{i=0}^{N-m}\sum\limits_{j=0}^{N-m}\frac{\partial E}{\partial x_{ij}^l}\frac{\partial
 x_{ij}^l}{\partial w_{ab}}
@@ -263,7 +263,7 @@ $$ \frac{\partial E}{\partial y_{ij}^{l-1}} =
 \frac{\partial x^l_{(i-a)(j-b)}}{\partial y_{ij}^{l-1}} =
 \sum\limits_{a=0}^{m-1}\sum\limits_{b=0}^{m-1} \frac{\partial E}{\partial x^l_{(i-a)(j-b)}}w_{ab}$$
 
-Należy zwrócić uwagę na~dwie rzeczy: po~piersze na~to, że~podczas obliczania gradientów również wykonywany
+Należy zwrócić uwagę na~dwie rzeczy: po~pierwsze na~to, że~podczas obliczania gradientów również wykonywany
 jest splot jednak na~obrazku o~,,odwróconych'' wierszach i~kolumnach. Dodatkowo, by~móc dokonywać splotu
 na~krawędziach map cech, należy zastosować dopełnienie zerami (\textit{ang.~zero-padding}).
 

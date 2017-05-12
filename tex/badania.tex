@@ -50,14 +50,14 @@ Ogólne zasady dotyczące pierwszych dwóch z~wymienionych punktów zostały opi
 ,,Rethinking the Inception Architecture for Computer Vision''(\cite{RIACV}). Posiłkując się~przytoczoną pracą można
 wymienić kilka wskazówek przydatnych przy~ustalaniu hiperparametrów sieci:
 \begin{itemize}
-    \item unikanie zbyt małej liczby neuronów w~warstwach, w~sczególności w~warstwach początkowych. Warto zastosować
+    \item unikanie zbyt małej liczby neuronów w~warstwach, w~szczególności w~warstwach początkowych. Warto zastosować
           kilkukrotność/kilkunastokrotność spodziewanej liczby klas, które ma~rozpoznawać sieć
           (w~przypadku CIFAR-10 jest to~10 klas). Warstwy końcowe mogą zawierać mniejszą liczbę neuronów, niż warstwy
           poprzednie.
     \item zmniejszenie rozmiaru danych wejściowych poprzez zastosowanie metod, takich jak:
           \begin{itemize}
               \item usunięcie brzegów, gdyż~zwykle zawierają mało istotne dane,
-              \item zmniejszenie rozmiaru obrazka poprzez zastosowanie sklaowania.
+              \item zmniejszenie rozmiaru obrazka poprzez zastosowanie skalowania.
           \end{itemize}
     \item używanie niewielkich filtrów splotowych (np. 3x3 lub 5x5 zamiast 7x7). Lepsze efekty daje zastosowanie dwóch
           warstw splotowych o~maskach 3x3 niż jednej maski 7x7,
@@ -166,7 +166,7 @@ Wyniki eksperymentu przedstawiono w~tabeli \ref{table:wyniki1}.
 Całkowity czas badania wyniósł: 40 godzin 10 minut i 58 sekund.
 
 \subsection{Omówienie wyników badań}
-Wyniki uzysakne w~badaniu wskazują, że~wzraz ze~wzrostem wpływu regularyzacji~L2 na~sieć neuronową, dokładność
+Wyniki uzyskane w~badaniu wskazują, że~wraz ze~wzrostem wpływu regularyzacji~L2 na~sieć neuronową, dokładność
 klasyfikacji ulegała pogorszeniu. Jednocześnie najlepsze wyniki osiągane były dla~wartości $\alpha$ w~okolicach 0.0005.
 
 W~przypadku wpływu normalizacji lokalnego kontrastu wyniki są~zgodne z~oczekiwaniami, tj.~dla~odpowiednio dobranych
@@ -180,7 +180,7 @@ Wytłumaczeniem takiego stanu rzeczy może być brak wystąpienia zjawiska przeu
           wejściowych,
     \item zbyt mała liczba iteracji podczas uczenia sieci.
 \end{itemize}
-Regularyzacja~L2 choć~zapobiega wystąpieniu overfittingu, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
+Regularyzacja~L2 choć~zapobiega wystąpieniu przeuczenia, to~jednak ma~negatywny wpływ na~szybkość uczenia się~sieci,
 przez~co~potrzebna jest większa liczba iteracji w~procesie uczenia, aby~osiągnąć zadowalający poziom dokładności.
 
 By~sprawdzić czy~występuje przeuczenie warto posłużyć się~wykresem przedstawiającym dokładność (\textit{ang.~accuracy})
@@ -305,7 +305,7 @@ nieistotnym.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/heatmap.png}
-	\caption{Mapy ciepła ilustrujące, jak istotne dla klasyfikacji sa dane piksele. Im~piksel ciemniejszy, tym~jest
+	\caption{Mapy ciepła ilustrujące, jak istotne dla klasyfikacji są dane piksele. Im~piksel ciemniejszy, tym~jest
 	ważniejszy. W~pierwszej kolumnie znajdują się~klasyfikowane obrazki, a~w~drugiej odpowiadające im~mapy ciepła}
 	\label{rys:badanie-3}
 \end{figure}

@@ -175,7 +175,7 @@ Wówczas potocznie mówi się~o~,,śmierci'' neuronu.
 \end{minipage}
 
 \subsubsection{Funkcja softplus}
-Jest to~wartiant funkcji ReLU, który jest jej ,,wygładzoną'' wersją. Posiada ciągłą pierwszą pochodną będącą funkcją
+Jest to~wariant funkcji ReLU, który jest jej ,,wygładzoną'' wersją. Posiada ciągłą pierwszą pochodną będącą funkcją
 sigmoidalną (\ref{rys:f.sigmoidalna}). Funkcję softplus przedstawiono na~rys.~\ref{rys:f.softplus}.
 
 \begin{minipage}[t]{\textwidth}
@@ -282,7 +282,7 @@ in_k}{\partial w_{jk}}= \delta_k \frac{\partial (\sum\limits_j w_{jk}h_j)}{\part
 Poprzez $in_k$ oznaczono wektor wejść trafiających do~funkcji aktywacji poszczególnych neuronów warstwy
 wyjściowej.
 
-Gradient funkcjii straty względem wag połączeń pomiędzy warstwą wejściową a~ukrytą:
+Gradient funkcji straty względem wag połączeń pomiędzy warstwą wejściową a~ukrytą:
 $$ \frac{\partial Loss}{\partial w_{ij}}=\frac{\partial Loss}{\partial in_j}\frac{\partial in_j}{\partial
 w_{ij}} = \delta_j \frac{\partial (\sum\limits_j w_{ij}x_i)}{\partial w_{ij}} = \delta_j x_i $$
 
@@ -352,7 +352,7 @@ etykietowana.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\linewidth]{img/hierarchical-learning_cropped.jpg}
-	\caption{Wizualizacja działania neuronów w~kolejnych warswach sieci neuronowej rozpoznającej twarze.
+	\caption{Wizualizacja działania neuronów w~kolejnych warstwach sieci neuronowej rozpoznającej twarze.
 	Źródło:~Stanford University}
 	\label{rys:hierarchical-learning}
 \end{figure}
@@ -423,7 +423,7 @@ rozrzutu} (\textit{ang.~sparsity parameter}). Zwykle parametr ten przyjmuje niew
 dla~większości danych wejściowych niewiele neuronów warstwy ukrytej będzie ,,aktywowanych'', a~więc każdy neuron będzie
 rozpoznawał jedną wybraną zależność pomiędzy danymi i~będzie stwierdzał czy~w~danym wektorze wejściowym jest ona obecna
 (wartość na~wyjściu neuronu równa 1) czy też nie (wartość na~wyjściu neuronu równa 0). W~celu osiągnięcia odpowiedniego
-rozrzutu funkcja celu musi przyjmować odpowienio wyższe wartości, gdy wartość średnia dla wzbudenia neuronu warstwy
+rozrzutu funkcja celu musi przyjmować odpowiednio wyższe wartości, gdy wartość średnia dla wzbudzenia neuronu warstwy
 ukrytej jest różna od~zadanego parametru rozrzutu. Założony cel można osiągnąć poprzez zastosowanie funkcji kosztu
 w~postaci dywergencji Kullbacka-Leiblera:
 \begin{equation*}
@@ -431,7 +431,7 @@ w~postaci dywergencji Kullbacka-Leiblera:
 (1-\rho)\log\frac{1-\rho}{1-\hat{\rho_j}}
 \end{equation*}
 gdzie $s_2$ to~liczba neuronów w~warstwie ukrytej, j to~numer neuronu w~warstwie ukrytej, $\rho$~to~parametr rozrzutu,
-a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu wartstwy ukrytej.
+a~$\hat{\rho_j}$ to~średnia wartość na~wyjściu j-tego neuronu warstwy ukrytej.
 
 Po~uwzględnieniu regularyzacji, funkcja kosztu przyjmie postać:
 \begin{equation*}
@@ -456,7 +456,7 @@ Wagi warstwy wyjściowej aktualizujemy wg wzoru \ref{eqn:wagi_autenc}:
 gdzie $f'$ to~pochodna funkcji aktywacji używanej w~neuronach, a~$z^{(2)}_i$, to~wartości całkowitego wzbudzenia
 (\textit{ang.~preactivation}) neuronów warstwy ukrytej (wartości, które trafiają do~funkcji aktywacji tych neuronów).
 
-Wagi wastwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
+Wagi warstwy ukrytej odpowiadają transponowanej macierzy wag warstwy wyjściowej. Jest tak~dlatego, że~jak~wcześniej
 wspomniano, warstwa wyjściowa odpowiada za~operację odwrotną do~operacji wykonywanej przez~warstwę ukrytą (odpowiednio:
 dekodowanie i kodowanie).
 
@@ -464,7 +464,7 @@ dekodowanie i kodowanie).
 Ograniczona maszyna Boltzmanna jest sztuczną siecią neuronową składającą się~z~dwóch warstw neuronów:
 \begin{itemize}
   \item warstwy neuronów widocznych,
-  \item warstwy neuronow ukrytych.
+  \item warstwy neuronów ukrytych.
 \end{itemize}
 
 Tytułowe ograniczenie mechanizmu polega na~tym, że~neurony należące do~tej~samej warstwy nie~są ze~sobą połączone,
